@@ -18,7 +18,12 @@
 	      <result name="index" >/index.jsp</result>
 	   </action>
 	   
-	    
+	    <action name="tutiao_*" class="com.guang.web.action.GTuTiaoAction" method="{1}">
+	      <result name="index" >/pages/tutiao_admin.jsp</result>
+	      <result name="add" >/pages/tutiao_add.jsp</result>
+	      <result name="update" >/pages/tutiao_update.jsp</result>
+	      <result name="tutiao" >/pages/tutiao.jsp</result>
+	   </action>
 	   
 	</package>
 </struts>    

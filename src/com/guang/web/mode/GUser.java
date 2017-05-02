@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "user",
+@Table(name = "g_user",
 uniqueConstraints={@UniqueConstraint(columnNames = {"name","password"})})
 //alter table user add constraint name UNIQUE(name,password);
 //alter table user drop index name;

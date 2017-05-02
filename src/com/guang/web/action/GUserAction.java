@@ -33,9 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.guang.web.dao.QueryResult;
 import com.guang.web.mode.GUser;
-import com.guang.web.mode.GUserStt;
 import com.guang.web.service.GUserService;
-import com.guang.web.service.GUserSttService;
 import com.guang.web.tools.GZipTool;
 import com.guang.web.tools.StringTools;
 import com.opensymphony.xwork2.ActionContext;
@@ -47,7 +45,6 @@ public class GUserAction extends ActionSupport{
 	private static final long serialVersionUID = -6570772391551890119L;
 	private final static Logger logger = LoggerFactory.getLogger(GUserAction.class);
 	@Resource private  GUserService userService;
-	@Resource private GUserSttService userSttService;
 	
 	private File source;
 	private String sourceFileName;
@@ -114,7 +111,6 @@ public class GUserAction extends ActionSupport{
 //		GSysVal sysVal = new GSysVal(0, false, 2, "", "", 0, 1.0f);
 //		sysValService.save(sysVal);
 		
-		userSttService.add(new GUserStt(0l,0l,0l, 0l, 0l, 0l));
 	}
 
 	
@@ -302,48 +298,7 @@ public class GUserAction extends ActionSupport{
 		return "uninstall";
 	}
 	
-	//更新日活
-	public synchronized void updateActive()
-	{
-		GUserStt userStt = userSttService.find();
-		Date date = new Date();		
-		if(date.getDate() != userStt.getCurrDate().getDate())
-		{
-			userStt.setCurrDate(date);
-			userStt.setYesterdayAdd(userStt.getTodayAdd());
-			userStt.setYesterdayActive(userStt.getTodayActive());
-			userStt.setYesterdayStartTimes(userStt.getTodayStartTimes());
-			userStt.setTodayActive(1l);
-			userStt.setTodayStartTimes(1l);
-		}
-		else
-		{
-			date.setHours(0);
-			date.setMinutes(0);
-			date.setSeconds(0);
-			LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();			
-			colvals.put("updatedDate >=", "'"+date.toLocaleString()+"'");
-			date.setDate(date.getDate()+1);
-			colvals.put("updatedDate <", "'"+date.toLocaleString()+"'");
-			long num = userService.find(colvals).getNum();
-			userStt.setTodayActive(num);
-			
-			userStt.setTodayStartTimes(userStt.getTodayStartTimes() + 1l);
-		}
-		date = new Date();	
-		date.setHours(0);
-		date.setMinutes(0);
-		date.setSeconds(0);
-		
-		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();			
-		colvals.put("createdDate >=", "'"+date.toLocaleString()+"'");
-		date.setDate(date.getDate()+1);
-		colvals.put("createdDate <", "'"+date.toLocaleString()+"'");
-		long num = userService.find(colvals).getNum();
-		userStt.setTodayAdd(num);
-		
-		userSttService.update(userStt);
-	}
+	
 	
 	public String debug()
 	{

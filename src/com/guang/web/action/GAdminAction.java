@@ -23,6 +23,8 @@ public class GAdminAction extends ActionSupport{
 	@Resource private GAdminService adminService;
 	@Resource private GPermissionService permissionService;
 	
+	
+	
 	public String list() {
 
 		List<GAdmin> list = adminService.findAll().getList();
@@ -73,7 +75,7 @@ public class GAdminAction extends ActionSupport{
 	public String addUser()
 	{
 		GAdmin admin = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!admin.getPermission().isAddUser())
+		if(!admin.getPermission().isModel_admin())
 		{
 			ActionContext.getContext().put("addUser","没有权限！");
 			list();
@@ -82,17 +84,12 @@ public class GAdminAction extends ActionSupport{
 		String name = ServletActionContext.getRequest().getParameter("name");
 		String password = ServletActionContext.getRequest().getParameter("password");
 		
-		String addUser = ServletActionContext.getRequest().getParameter("addUser");
-		String deleteUser = ServletActionContext.getRequest().getParameter("deleteUser");
-		String updateUser = ServletActionContext.getRequest().getParameter("updateUser");
+		
 		String model_admin = ServletActionContext.getRequest().getParameter("model_admin");
 		
 		if(name != null && !"".equals(name) && password != null && !"".equals(password))
 		{
 			GPermission permission = new GPermission();		
-			permission.setAddUser(addUser!=null);
-			permission.setDeleteUser(deleteUser!=null);
-			permission.setUpdateUser(updateUser!=null);
 			permission.setModel_admin(model_admin!=null);
 			permissionService.add(permission);
 			
@@ -111,7 +108,7 @@ public class GAdminAction extends ActionSupport{
 	public String deleteUser()
 	{
 		GAdmin user = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!user.getPermission().isDeleteUser())
+		if(!user.getPermission().isModel_admin())
 		{
 			ActionContext.getContext().put("deleteUser","没有权限！");
 			list();
@@ -145,7 +142,7 @@ public class GAdminAction extends ActionSupport{
 	public String updateUser()
 	{
 		GAdmin admin = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!admin.getPermission().isDeleteUser())
+		if(!admin.getPermission().isModel_admin())
 		{
 			ActionContext.getContext().put("updateUser","没有权限！");
 			list();
@@ -155,9 +152,7 @@ public class GAdminAction extends ActionSupport{
 		String name = ServletActionContext.getRequest().getParameter("name");
 		String password = ServletActionContext.getRequest().getParameter("password");
 		
-		String addUser = ServletActionContext.getRequest().getParameter("addUser");
-		String deleteUser = ServletActionContext.getRequest().getParameter("deleteUser");
-		String updateUser = ServletActionContext.getRequest().getParameter("updateUser");
+		
 		String model_admin = ServletActionContext.getRequest().getParameter("model_admin");
 		
 		if(name != null && !"".equals(name) && password != null && !"".equals(password))
@@ -166,9 +161,7 @@ public class GAdminAction extends ActionSupport{
 			u.setPassword(password);
 			
 			GPermission permission = permissionService.find(u.getPermissionsId());		
-			permission.setAddUser(addUser!=null);
-			permission.setDeleteUser(deleteUser!=null);
-			permission.setUpdateUser(updateUser!=null);
+			
 			permission.setModel_admin(model_admin!=null);
 			permissionService.update(permission);
 			
@@ -186,12 +179,14 @@ public class GAdminAction extends ActionSupport{
 	public void init()
 	{
 		GPermission permission = new GPermission();
-		permission.setAddUser(true);
-		permission.setDeleteUser(true);
-		permission.setUpdateUser(true);
+		
 		permission.setModel_admin(true);
 		permissionService.add(permission);
 		
-		adminService.add(new GAdmin(permission.getId(),"admin", "qiqiup"));
+		adminService.add(new GAdmin(permission.getId(),"admin", "tutiaoba"));
 	}
+	
+	
+	
+	
 }

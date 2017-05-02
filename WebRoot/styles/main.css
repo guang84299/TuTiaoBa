@@ -1,0 +1,171 @@
+* {
+  font-family: "微软雅黑";
+}
+.content{
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+.content2{
+  margin-top: 20px;
+}
+.content3{
+  width: 95%;
+  margin: 0 auto;
+}
+.fontBottom
+{
+  font-size: 10px;
+  color: #999;
+  margin-top: 5px;
+}
+.bottom{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 12px;
+  text-decoration: none;
+  color: #000;
+  background:#fff;
+  box-shadow: 0px -1px 2px 0px rgba(0,0,0,.12);
+  transition: all 0.5s ease-in-out;
+  webkit-transition:all 0.5s ease-in-out; 
+  -moz-transition:all 0.5s ease-in-out; 
+  -o-transition:all 0.5s ease-in-out; 
+}
+.bottom a:link{color:000}
+.bottom-nav {
+            transform: translate(0, 50px);
+            -webkit-transform: translate(0, 50px);
+            -moz-transform: translate(0, 50px);
+            -o-transform: translate(0, 50px);
+            -ms-transform: translate(0, 50px);} 
+
+
+.my-navbar {background:#fff;box-shadow: 0 1px 4px 0 rgba(0,0,0,.12);}  
+button.navbar-toggle {background-color:#999;}/*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/  
+button.navbar-toggle > span.icon-bar {background-color:#dedede} 
+
+/* 普通菜单项的颜色和背景  */
+.my-navbar .navbar-nav>li>a {
+    color: #000;
+}
+
+/* 普通菜单项hover时的字体颜色和背景  */
+.my-navbar .navbar-nav>li>a:hover, 
+.my-navbar .navbar-nav>li>a:focus {
+    color: #f00;
+    background-color: transparent;
+}
+.myactive
+{
+  color: #f00;
+  border-bottom: 2px solid #f85959;
+}
+.row .item-no{
+  transition: all 0.2s ease-in;
+  webkit-transition:all 0.2s ease-in; 
+  -moz-transition:all 0.2s ease-in; 
+  -o-transition:all 0.2s ease-in; 
+}
+.row .item:hover{
+  transition:scale(1.1) ; 
+  -webkit-transform:scale(1.1) ; 
+  -moz-transform:scale(1.1) ; 
+  -o-transform:scale(1.1) ; 
+  cursor:hand;
+}
+
+.navbar-brand:hover
+{
+	cursor:hand;
+}
+
+.pic-num {
+    position: absolute;
+    right: 25px;
+    margin-top: -25px;
+    padding: 0 6px;
+    height: 20px;
+    background: #000;
+    background: rgba(0,0,0,.5);
+    border-radius: 10px;
+    color: #fafafa;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.picShow:hover
+{
+  
+}
+.pic_left
+{
+  position: absolute;
+  left: 50px;
+  top: 40%;
+  background: rgba(0,0,0,.5);
+  height: 21px;
+  transition:scale(2.5) ; 
+  -webkit-transform:scale(2.5) ; 
+  -moz-transform:scale(2.5) ; 
+  -o-transform:scale(2.5) ; 
+}
+.pic_left:hover
+{
+  cursor:hand;
+}
+.pic_right
+{
+  position: absolute;
+  right:50px;
+  top: 40%;
+  background: rgba(0,0,0,.5);
+  height: 21px;
+  transition:scale(2.5) ; 
+  -webkit-transform:scale(2.5) ; 
+  -moz-transform:scale(2.5) ; 
+  -o-transform:scale(2.5) ; 
+}
+.pic_right:hover
+{
+  cursor:hand;
+}
+.abstract-index
+{
+    font-family: Georgia;
+    font-size: 18px;
+    color: #101010;
+    line-height: 36px;
+    margin-right: 8px;
+}
+.abstract-index>em {
+    font-size: 36px;
+    color: #ED4040;
+    font-weight: 400;
+    font-family: Georgia;
+}
+.panel-body>h3 {
+    position: relative;
+    font-size: 18px;
+    color: #222;
+    line-height: 18px;
+    padding-left: 12px;
+    margin-bottom: 16px;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.panel-body-d
+{
+    font-size: 18px;
+    color: #222;
+    line-height: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+
+
+
+

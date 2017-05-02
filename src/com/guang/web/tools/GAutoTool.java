@@ -1,69 +1,32 @@
-package com.guang.test;
+package com.guang.web.tools;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.hibernate.mapping.Array;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import com.guang.web.mode.GTuTiao;
 import com.guang.web.mode.GTuTiaoUnit;
-import com.guang.web.mode.GUser;
-import com.guang.web.tools.ApkTools;
-import com.guang.web.tools.GTools;
-import com.guang.web.tools.StringTools;
 
-public class GTest {
+public class GAutoTool {
 
-	public static void main(String[] args)
+	public static GTuTiao toutiao(String strUrl)
 	{
-		GTuTiao tuTiao = getPageContent("http://www.toutiao.com/a6415291820209455361/");
-		
-		System.out.println(parseTuTiao(tuTiao).toString());
+		return getTouTiaoPageContent(strUrl);
 	}
 	
-	public static GTuTiao parseTuTiao(GTuTiao tuTiao)
-	{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat formatter2 = new SimpleDateFormat("HH-mm-ss-SSS");
-		
-		List<GTuTiaoUnit> units = tuTiao.getUnits();
-		for(GTuTiaoUnit unit : units)
-		{
-			Date currentTime = new Date();
-			String dateString = formatter.format(currentTime);
-			String dateString2 = formatter2.format(currentTime);
-			String picPath = "/Users/guang/Documents/images/tutiao/"+ dateString + "/" + dateString2;
-			downloadPic(unit.getPicPath(), picPath);
-			unit.setPicPath(picPath);
-			unit.setTuTiaoId(2);
-		}
-		return tuTiao;
-	}
-	
-	public static GTuTiao getPageContent(String strUrl) {
+	public static GTuTiao getTouTiaoPageContent(String strUrl) {
 		Document document = null;
 		GTuTiao tuTiao = null;
 		try {
@@ -83,34 +46,63 @@ public class GTest {
 		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
 		      //内容
 		      elements = document.select(".article-content p");
+		      //1：搞笑类-> 说明和图片在一个p标签内 
+		      //2：类似搞笑类，比较混乱，说明和图片可能不在一个p标签，但说明总是在前面
+		      //3：图文类，说明和图片不在一个p标签，但说明总是在图片后面
+		      
+		      List<TouTiaoElement> list = new ArrayList<GAutoTool.TouTiaoElement>();
+		      
 		      for(int i=0;i<elements.size();i++)
 		      {
 		    	  Element ele = elements.get(i);
 		    	  String text = ele.text();
 		    	  Elements eles = ele.select("img");
+		    	  if(!StringTools.isEmpty(text))
+		    		  list.add(new TouTiaoElement(false, text));
 		    	  if(eles.size()>0)
+		    		  list.add(new TouTiaoElement(true, eles.get(0).attr("src")));
+		      }
+		      
+		      while(list.size() > 0)
+		      {
+		    	  TouTiaoElement tele = list.get(0);
+		    	  String text = "";
+		    	  
+		    	  list.remove(0);
+		    	  System.out.println(list.size());
+		    	  //找到下面所有文字
+	    		  while(list.size() > 0)
+	    		  {
+	    			  TouTiaoElement tele2 = list.get(0);
+	    			  if(tele2.isPic())
+	    				  break;
+	    			  list.remove(0);
+	    			  
+	    			  text += "<br><br>"+tele2.getCon();
+	    		  }
+	    		  
+		    	  if(tele.isPic())
 		    	  {
-		    		  String src = eles.get(0).attr("src");
-		    		  if(StringTools.isEmpty(text))
-		    		  {
-		    			  if(i>0)
-		    				  text = elements.get(i-1).text();
-		    			  else
-		    				  continue;  
-		    		  }
-			    	  
-			    	  GTuTiaoUnit unit = new GTuTiaoUnit(0, text, src);
+		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, text, tele.getCon());
+			    	  units.add(unit);
+		    	  }
+		    	  else
+		    	  {
+		    		  TouTiaoElement tele3 = list.get(0);
+		    		  list.remove(0);
+		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, tele.getCon()+text, tele3.getCon());
 			    	  units.add(unit);
 		    	  }
 		      }
 		      tuTiao.setUnits(units);
+		      
+
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }
 		
 		return tuTiao;
 	}
-	
 	
 	/**
 	   * 下载文件到本地
@@ -171,4 +163,27 @@ public class GTest {
 	    
 	}   
 	
+	static class TouTiaoElement
+	{
+		private String con;
+		private boolean pic;
+		public TouTiaoElement(boolean pic,String con)
+		{
+			this.pic = pic;
+			this.con = con;
+		}
+		public String getCon() {
+			return con;
+		}
+		public void setCon(String con) {
+			this.con = con;
+		}
+		public boolean isPic() {
+			return pic;
+		}
+		public void setPic(boolean pic) {
+			this.pic = pic;
+		}
+		
+	}
 }

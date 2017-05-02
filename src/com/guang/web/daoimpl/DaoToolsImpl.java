@@ -235,4 +235,34 @@ public class DaoToolsImpl implements DaoTools{
 		}	
 		return num;
 	}
+
+	public <T> QueryResult<T> find(Class<T> entityclass, String mysql,
+			int firstindex, int maxresult, LinkedHashMap<String, String> orderby) {
+		QueryResult<T> qr = new QueryResult<T>();
+		String entityname = getEntityName(entityclass);
+		String orderbysq = getOrderBy(orderby);
+		String colvalssq = mysql;
+		String sql = null;
+		Query query = null;
+		if(colvalssq != null && !"".equals(colvalssq))
+		{
+			sql = "select o from "+entityname+" o where "+colvalssq+orderbysq;
+			System.out.println(sql);
+			query = em.createQuery(sql);
+		}else{
+			sql = "select o from "+entityname+" o "+orderbysq;	
+			query = em.createQuery(sql);
+		}	
+		query.setFirstResult(firstindex).setMaxResults(maxresult);
+		qr.setList(query.getResultList());
+		if(colvalssq != null && !"".equals(colvalssq))
+		{
+			query = em.createQuery("select count(o) from "+entityname+" o where "+colvalssq+orderbysq);
+			qr.setNum((Long)query.getSingleResult());
+		}else{
+			query = em.createQuery("select count(o) from "+entityname+" o");
+			qr.setNum((Long)query.getSingleResult());
+		}	
+		return qr;
+	}
 }
