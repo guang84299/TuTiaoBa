@@ -14,6 +14,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <title>图条吧</title>
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+  <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   <link href="<%=basePath%>styles/bootstrap.min.css" rel="stylesheet">
   <link href="<%=basePath%>styles/main.css" rel="stylesheet">
   <script src="<%=basePath%>scripts/jquery.min.js"></script>

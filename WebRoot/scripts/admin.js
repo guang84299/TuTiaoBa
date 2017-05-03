@@ -137,6 +137,9 @@ $(function() {
         	if(durl == null || durl == '' || !durl)
         		return;
         	
+        	if(durl.indexOf("#p") != -1)
+        		dtype = 2;
+        	
         	$("#auto-caiji").attr("disabled","disabled");
         	$("#auto-caiji").val("信息采集中...");
         	

@@ -205,12 +205,16 @@ public class GTuTiaoAction extends ActionSupport{
 		{
 			return;
 		}
-		System.out.println("采集->"+url + "   type="+type);
 		GTuTiao tuTiao = null;
 		if("1".equals(type))
 		{
 			tuTiao = GAutoTool.getTouTiaoPageContent(url);
 		}
+		else if("2".equals(type))
+		{
+			tuTiao = GAutoTool.getTouTiaoPageContent2(url);
+		}
+		
 		if(tuTiao != null)
 		{
 			tuTiaoService.add(tuTiao);

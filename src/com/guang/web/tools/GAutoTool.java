@@ -11,6 +11,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,6 +27,76 @@ public class GAutoTool {
 	public static GTuTiao toutiao(String strUrl)
 	{
 		return getTouTiaoPageContent(strUrl);
+	}
+	//今日头条 图片专栏
+	public static GTuTiao toutiao2(String strUrl)
+	{
+		return getTouTiaoPageContent2(strUrl);
+	}
+	
+	public static GTuTiao getTouTiaoPageContent2(String strUrl) {
+		Document document = null;
+		GTuTiao tuTiao = null;
+		try {
+			//获取指定网址的页面内容
+		      document = Jsoup.connect(strUrl).timeout(50000).get();
+		      
+		      Elements elements = document.select("script");
+		      String author = "图条吧";
+		      for(Element ele : elements)
+		      {
+		    	  String html = ele.html();
+		    	  if(html != null && html.contains("mediaInfo ="))
+		    	  {
+		    		  String mediaInfo = html.split("mediaInfo =")[1].trim();
+		    		  mediaInfo = mediaInfo.substring(0, mediaInfo.indexOf("};")) + "}";
+		    		  JSONObject obj = JSONObject.fromObject(mediaInfo);
+		    		  author = obj.getString("name");
+		    	  }
+		    	  if(html != null && html.contains("gallery ="))
+		    	  {
+		    		  html = html.split("gallery =")[1].trim();
+		    		  html = html.substring(0, html.indexOf("};")) + "}";
+		    		  
+		    		  JSONObject obj = JSONObject.fromObject(html);
+		    		  
+		    		  //获取图片链接
+		    		  List<TouTiaoElement> list_url = new ArrayList<GAutoTool.TouTiaoElement>();
+		    		  JSONArray arr_url = obj.getJSONArray("sub_images");
+		    		 
+		    		  for(int i=0;i<arr_url.size();i++)
+		    		  {
+		    			  String url = arr_url.getJSONObject(i).getJSONArray("url_list").getJSONObject(0).getString("url");
+		    			  list_url.add(new TouTiaoElement(true, url));
+		    		  }
+		    		  //获取图片描述
+		    		  List<TouTiaoElement> list_desc = new ArrayList<GAutoTool.TouTiaoElement>();
+		    		  JSONArray arr_desc = obj.getJSONArray("sub_abstracts");
+		    		 
+		    		  for(int i=0;i<arr_desc.size();i++)
+		    		  {
+		    			  String desc = arr_desc.get(i).toString();
+		    			  list_desc.add(new TouTiaoElement(false, desc));
+		    		  }
+		    		  //获取标题
+		    		  String title = obj.getJSONArray("sub_titles").get(0).toString();
+		    		  
+		    		  tuTiao = new GTuTiao(title, author, 0);
+		    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+		    		  for(int i=0;i<list_url.size();i++)
+		    		  {
+		    			  units.add(new GTuTiaoUnit(0, list_desc.get(i).getCon(), list_url.get(i).getCon()));
+		    		  }
+		    		  tuTiao.setUnits(units);
+		    		  break;
+		    	  }
+		      }
+
+		 } catch (IOException e) {
+		      e.printStackTrace();
+		  }
+		
+		return tuTiao;
 	}
 	
 	public static GTuTiao getTouTiaoPageContent(String strUrl) {
@@ -69,7 +142,6 @@ public class GAutoTool {
 		    	  String text = "";
 		    	  
 		    	  list.remove(0);
-		    	  System.out.println(list.size());
 		    	  //找到下面所有文字
 	    		  while(list.size() > 0)
 	    		  {
