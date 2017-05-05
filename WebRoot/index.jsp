@@ -24,6 +24,7 @@
   <script src="<%=basePath%>scripts/masonry.pkgd.min.js"></script>
   <script src="<%=basePath%>scripts/imagesloaded.pkgd.min.js"></script>
   <script src="<%=basePath%>scripts/main.js"></script>
+  <script src="<%=basePath%>scripts/imgh.js"></script>
  </head>
  <body>
 <div>
@@ -71,7 +72,10 @@
 	</div>
 </div>
 
-
+<div id="imloading" style="width: 150px; height: 30px; line-height: 30px; font-size: 16px; text-align: center; border-radius: 3px; opacity: 0.7; background: rgb(0, 0, 0); margin: 10px auto 50px; color: rgb(255, 255, 255);">
+		加载中.....
+</div>
+		
 <div > 
   <nav class="navbar navbar-default navbar-fixed-bottom bottom bottom-nav" role="navigation">
     <div class="container" style="margin-top:15px;">
