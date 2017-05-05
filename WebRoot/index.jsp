@@ -72,16 +72,12 @@
 	</div>
 </div>
 
-<div id="imloading" style="width: 150px; height: 30px; line-height: 30px; font-size: 16px; text-align: center; border-radius: 3px; opacity: 0.7; background: rgb(0, 0, 0); margin: 10px auto 50px; color: rgb(255, 255, 255);">
+<div id="imloading" style="width: 100px; height: 20px; line-height: 20px; font-size: 12px; text-align: center; border-radius: 3px; opacity: 0.7; background: rgb(0, 0, 0); margin: 10px auto 5px; color: rgb(255, 255, 255);">
 		加载中.....
 </div>
 		
-<div > 
-  <nav class="navbar navbar-default navbar-fixed-bottom bottom bottom-nav" role="navigation">
-    <div class="container" style="margin-top:15px;">
-      <a href= target=_blank> 设为首页 </a> <span>京ICP证0xxxxx号&nbsp;</span>
-    </div>
-  </nav>
+<div class="bottom" > 
+	<a href= target=_blank> 设为首页 </a> <span>京ICP证0xxxxx号&nbsp;</span>
 </div>
 
 </body>

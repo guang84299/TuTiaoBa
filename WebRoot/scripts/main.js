@@ -69,21 +69,22 @@ $(function() {
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
 						+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-						+ '<img src="' + obj.units[0].picPath + '">'
+						+ '<img height="1500px" src="' + baseUrl+obj.units[0].picPath + '">'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 						+ '</div></div></div></div>';
 					
-					imgReady(obj.units[0].picPath, function () {
-						$(".item img:eq(3)").height = this.height;
+					imgReady(baseUrl+obj.units[0].picPath, function () {
+//						$(".item img:eq(3)").height = this.height;
+						$('.masonry').masonry();
 					});
 				}
 				var items = $(s);
 				$("#tutiaos").append(items).masonry( 'appended',items ).masonry();
-				$('.masonry').imagesLoaded(function() {
-					$('.masonry').masonry();
-				});
+//				$('.masonry').imagesLoaded(function() {
+//					$('.masonry').masonry();
+//				});
 				
 				loading = 0;
 				tu_index += objs.length;
@@ -128,20 +129,11 @@ $(function() {
 		getTuTiao(2,0);
 	});
 	var winH = $(window).height();
-	$(window).scroll(function () {  
-        if ($(".navbar").offset().top < 1000050)
-        {
-         	$(".bottom").addClass("bottom-nav");   
-        }
-        else 
-     	{
-     		$(".bottom").removeClass("bottom-nav");
-     	}  
-
+	$(window).scroll(function () {   
         if( $(document).scrollTop() + winH > $(document).height()-1  && loading == 0 )
     	{
         	loading = 1;
-        	$("#imloading").fadeIn(500);
+        	$("#imloading").fadeTo(500,0.7);
         	 setTimeout(function(){
         		 getTuTiao(curr_type,tu_index);
         	 }, 1000)

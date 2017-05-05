@@ -25,20 +25,12 @@
   font-size: 12px;
   text-decoration: none;
   color: #000;
+  height:50px;
   background:#fff;
+  line-height: 50px;
   box-shadow: 0px -1px 2px 0px rgba(0,0,0,.12);
-  transition: all 0.5s ease-in-out;
-  webkit-transition:all 0.5s ease-in-out; 
-  -moz-transition:all 0.5s ease-in-out; 
-  -o-transition:all 0.5s ease-in-out; 
 }
 .bottom a:link{color:000}
-.bottom-nav {
-            transform: translate(0, 50px);
-            -webkit-transform: translate(0, 50px);
-            -moz-transform: translate(0, 50px);
-            -o-transform: translate(0, 50px);
-            -ms-transform: translate(0, 50px);} 
 
 
 .my-navbar {background:#fff;box-shadow: 0 1px 4px 0 rgba(0,0,0,.12);}  
