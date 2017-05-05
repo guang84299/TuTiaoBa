@@ -72,7 +72,7 @@
 	</div>
 </div>
 
-<div id="imloading" style="width: 100px; height: 20px; line-height: 20px; font-size: 12px; text-align: center; border-radius: 3px; opacity: 0.7; background: rgb(0, 0, 0); margin: 10px auto 5px; color: rgb(255, 255, 255);">
+<div id="imloading" style="width: 100px; height: 20px; line-height: 20px; font-size: 12px; text-align: center; border-radius: 3px; opacity: 0.0; background: rgb(0, 0, 0); margin: 10px auto 5px; color: rgb(255, 255, 255);">
 		加载中.....
 </div>
 		

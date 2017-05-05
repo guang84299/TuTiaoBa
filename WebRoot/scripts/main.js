@@ -98,12 +98,18 @@ $(function() {
 			});	
 		})		
 	};
-	getTuTiao(1,0);
+	
 	$("#nav_new").css("color","#f00");
 	
 	var hideMobelNav = function()
 	{
 		$("#my-navbar-collapse").removeClass("in");
+	}
+	
+	var btn_new = function()
+	{
+		$(".bottom").hide();
+		getTuTiao(1,0);
 	}
 	
 	$("#nav_new").click(function(){
@@ -115,7 +121,6 @@ $(function() {
 		$("#nav_hot").removeClass("myactive");
 		$('.masonry').masonry('reloadItems');
 		getTuTiao(1,0);
-		
 	});
 	$("#nav_hot").click(function(){
 		curr_type = 2;
@@ -137,6 +142,8 @@ $(function() {
         	 setTimeout(function(){
         		 getTuTiao(curr_type,tu_index);
         	 }, 1000)
+        	 
+        	 $(".bottom").show();
     	}
      });
 	
@@ -163,6 +170,10 @@ $(function() {
 	});
 	
 	$('.navbar-brand').click(function(){
+		$("#tutiaos").html("");
+		$('.masonry').masonry('reloadItems');
 		location.href = baseUrl;
 	});
+	
+	btn_new();
 });
