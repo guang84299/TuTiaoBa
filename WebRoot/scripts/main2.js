@@ -38,22 +38,27 @@ $(function() {
 			var objs = eval('(' + results + ')'); 
 			if(objs.length > 0)
 				tuijian_next_index = objs[0].id;
+			var s = '';
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
-				var s = '<div class="col-sm-6 col-md-3 item">' 
+				s += '<div class="col-sm-6 col-md-3 item">' 
 					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' + obj.units[0].picPath + '">'
-					+ '<span class="pic-num">' + obj.units.length + '图</span>'
+					+ '<img src="' +baseUrl+ obj.units[0].picPath + '">'
+					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
-				$("#tuijian_data").append(s);
-			}
-			$('.masonry').imagesLoaded(function() {
-				$('.masonry').masonry({
-					itemSelector: '.item'
+				imgReady(baseUrl+obj.units[0].picPath, function () {
+					$('.masonry').masonry();
 				});
-			});
+			}
+			var items = $(s);
+			$("#tuijian_data").append(items).masonry( 'appended',items ).masonry();
+//			$('.masonry').imagesLoaded(function() {
+//				$('.masonry').masonry({
+//					itemSelector: '.item'
+//				});
+//			});
 		})		
 	};
 	getShowTuiJian();
@@ -68,22 +73,28 @@ $(function() {
 			var objs = eval('(' + results + ')'); 
 			if(objs.length > 0)
 				tuijian_next_index = objs[0].id;
+			var s ='';
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
-				var s = '<div class="col-sm-6 col-md-3 item">' 
+				s += '<div class="col-sm-6 col-md-3 item">' 
 					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' + obj.units[0].picPath + '">'
-					+ '<span class="pic-num">' + obj.units.length + '图</span>'
+					+ '<img src="' + baseUrl+obj.units[0].picPath + '">'
+					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
-				$("#about_row").append(s);
-			}
-			$('.masonry').imagesLoaded(function() {
-				$('.masonry').masonry({
-					itemSelector: '.item'
+				imgReady(baseUrl+obj.units[0].picPath, function () {
+					$('.masonry').masonry();
 				});
-			});
+			}
+			var items = $(s);
+			$("#about_row").append(items).masonry( 'appended',items ).masonry();
+			
+//			$('.masonry').imagesLoaded(function() {
+//				$('.masonry').masonry({
+//					itemSelector: '.item'
+//				});
+//			});
 		})		
 	};
 	getShowXiangGuan();
@@ -200,18 +211,22 @@ $(function() {
 				
 				s += '<div class="col-sm-6 col-md-3 item">' 
 					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' + obj.units[0].picPath + '">'
-					+ '<span class="pic-num">' + obj.units.length + '图</span>'
+					+ '<img src="' + baseUrl+obj.units[0].picPath + '">'
+					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 					+ '</div></div></div></div>';
 				
+				imgReady(baseUrl+obj.units[0].picPath, function () {
+					$('.masonry').masonry();
+				});
 			}
+			
 			var items = $(s);
-			$("#search_row").append(items).masonry( 'appended',items );
-			$('.masonry').imagesLoaded(function() {
-				$('.masonry').masonry();
-			});
+			$("#search_row").append(items).masonry( 'appended',items ).masonry();
+//			$('.masonry').imagesLoaded(function() {
+//				$('.masonry').masonry();
+//			});
 			
 			loading = 0;
 			tu_index += objs.length;

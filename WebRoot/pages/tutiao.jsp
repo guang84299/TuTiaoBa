@@ -24,6 +24,7 @@
   <script src="<%=basePath%>scripts/masonry.pkgd.min.js"></script>
   <script src="<%=basePath%>scripts/imagesloaded.pkgd.min.js"></script>
   <script src="<%=basePath%>scripts/main2.js"></script>
+  <script src="<%=basePath%>scripts/imgh.js"></script>
  </head>
  <body>
 <div>
