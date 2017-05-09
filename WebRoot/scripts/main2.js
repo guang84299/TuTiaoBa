@@ -28,6 +28,10 @@ $(function() {
         return date.format('yyyy-MM-dd hh:mm:ss');
 
     }
+	$('.masonry').masonry({
+		itemSelector: '.item'
+	});
+	
 	var tuijian_next_index=1;
 	var getShowTuiJian = function()
 	{
@@ -125,26 +129,48 @@ $(function() {
 			$("#tuijian_title").text(tutiao_show_data.title);
 			
 			$("#tutiao_show_row").show();
-			
+			resetPicWidth();
 		});
 		
 	}
 	$("#tuijian_row").hide();
 	$('.pic_left').hide();
-	$('.pic_left').click(function(event) {
-		event.preventDefault();
-		if(tutiao_show_data && tutiao_show_index>0)
+	var resetPicWidth = function()
+	{
+		var width = $("#tutiao_show").width();
+		var img = $("#tutiao_show img:first").attr("src");
+		imgReady(img, function () {
+			
+			if(this.width / this.height < 1.5)
+			{
+				var w = this.width/this.height/1.5*width;
+				$("#tutiao_show img:first").attr("width",parseInt(w)+"px");
+			}
+			else
+			{
+				$("#tutiao_show img:first").attr("width",width+"px");
+			}
+				
+		});
+	};
+	
+	var picLeft = function()
+	{
+		if(tutiao_show_data)
 		{
 			tutiao_show_index--;
-			if(tutiao_show_index <= 0)
-				$('.pic_left').hide();
+			if(tutiao_show_index < 0)
+				tutiao_show_index = tutiao_show_data.units.length-1;
 			$("#tutiao_show img:first").attr("src",baseUrl+tutiao_show_data.units[tutiao_show_index].picPath);
 			$("#tutiao_show_curr_page").text(tutiao_show_index+1);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
+			
+			resetPicWidth();
 		}
-	})
-	$('.pic_right').click(function(event) {
-		event.preventDefault();
+	};
+	
+	var picRight = function()
+	{
 		if(tutiao_show_data && tutiao_show_index<tutiao_show_data.units.length)
 		{
 			tutiao_show_index++;
@@ -164,7 +190,64 @@ $(function() {
 			$("#tutiao_show img:first").attr("src",baseUrl+tutiao_show_data.units[tutiao_show_index].picPath);
 			$("#tutiao_show_curr_page").text(tutiao_show_index+1);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
+			
+			resetPicWidth();
 		}
+	};
+	
+	$('#tutiao_show').hover(function(){
+//		$(this).addClass("cursor_right"); 
+	},function(){
+		$(this).removeClass("cursor_right"); 
+		$(this).removeClass("cursor_left"); 
+	});
+	var posLeft = true;
+	$('#tutiao_show').mousemove(function(e) {  
+		var xx=e.pageX-$('#tutiao_show').offset().left;
+		var width = $(this).width();
+		if(xx>width/2)
+		{
+			$(this).removeClass("cursor_left"); 
+			$(this).addClass("cursor_right");
+			posLeft = false;
+		}
+		else
+		{
+			$(this).removeClass("cursor_right"); 
+			$(this).addClass("cursor_left");
+			posLeft = true;
+		}
+	}); 
+	$("#tutiao_show").mousedown(function(e){
+		if(e.which != 1)
+			return;
+		 if(posLeft)
+		 {
+			 picLeft();
+		 }
+		 else
+		 {
+			 picRight();
+		 }
+	});
+	
+	$('#pic_left').click(function(event) {
+		picLeft();
+	})
+	$('#pic_right').click(function(event) {
+		 picRight();
+	})
+	
+	$("#img_large_show").hide();
+	$("#img_large_show").click(function(){
+		$("#img_large_show").hide();
+		$(".content").show();
+	});
+	$('#pic_lager').click(function(event) {
+		var url = $("#tutiao_show img:first").attr("src");
+		$(".content").hide();
+		$("#img_large_show").show();
+		$("#img_large_show img:first").attr("src",url);
 	})
 	
 	$("#tuijian_refresh").click(function(){

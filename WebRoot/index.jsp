@@ -14,17 +14,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <title>图条吧</title>
+  <meta name="keywords" content="图条吧，图条，图吧，图片，条吧，图片故事，头条网，头条新闻，图条吧官网">
+  <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，美女故事，新闻故事，有你好看！">
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-  <link href="<%=basePath%>styles/bootstrap.min.css" rel="stylesheet">
+  <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=basePath%>styles/main.css" rel="stylesheet">
-  <script src="<%=basePath%>scripts/jquery.min.js"></script>
-  <script src="<%=basePath%>scripts/bootstrap.min.js"></script>
-  <script src="<%=basePath%>scripts/masonry.pkgd.min.js"></script>
-  <script src="<%=basePath%>scripts/imagesloaded.pkgd.min.js"></script>
-  <script src="<%=basePath%>scripts/main.js"></script>
-  <script src="<%=basePath%>scripts/imgh.js"></script>
+  
+  
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?71032e5a3071011e7d6b356b5fdfa901";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  
  </head>
  <body>
 <div>
@@ -77,8 +85,14 @@
 </div>
 		
 <div class="bottom" > 
-	<a href= target=_blank> 设为首页 </a> <span>京ICP证0xxxxx号&nbsp;</span>
+	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a>&nbsp;</span>
 </div>
 
 </body>
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="<%=basePath%>scripts/main.js"></script>
+<script src="<%=basePath%>scripts/imgh.js"></script>
 </html>
