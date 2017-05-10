@@ -87,6 +87,11 @@ public class GTuTiaoAction extends ActionSupport{
 		if(StringTools.isEmpty(id))
 			return list();
 		ActionContext.getContext().put("id", id);
+		GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+		if(tuTiao != null)
+		{
+			ActionContext.getContext().put("title", tuTiao.getTitle());
+		}
 		return "tutiao";
 	}
 	

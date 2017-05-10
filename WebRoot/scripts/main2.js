@@ -122,7 +122,6 @@ $(function() {
 			tutiao_show_index =0;
 			$("#tutiao_show img:first").attr("src",baseUrl+tutiao_show_data.units[0].picPath);
 			$("#tutiao_show_title").text(tutiao_show_data.title);
-			$("title").text(tutiao_show_data.title);
 			$("#tutiao_show_curr_page").text("1");
 			$("#tutiao_show_curr_page").next().text("/"+tutiao_show_data.units.length);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
