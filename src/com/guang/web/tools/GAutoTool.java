@@ -33,6 +33,41 @@ public class GAutoTool {
 	{
 		return getTouTiaoPageContent2(strUrl);
 	}
+	//头条新闻 图片专栏
+	public static GTuTiao toutiao3(String strUrl)
+	{
+		return getTouTiaoPageContent3(strUrl);
+	}
+	
+	public static GTuTiao getTouTiaoPageContent3(String strUrl) {
+		Document document = null;
+		GTuTiao tuTiao = null;
+		try {
+			//获取指定网址的页面内容
+		      document = Jsoup.connect(strUrl).timeout(50000).get();
+		      
+		      Elements elements = document.select("title");
+		      String title = elements.get(0).text();
+		      String author = "图条吧";
+		      
+		      tuTiao = new GTuTiao(title, author, 0);
+    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+    		  
+		      elements = document.select("#content figure");
+		      for(Element ele : elements)
+		      {
+		    	  String text = ele.select("figcaption").get(0).text();
+		    	  String url = ele.select("a").get(0).attr("href");
+		    		  
+		    	  units.add(new GTuTiaoUnit(0, text,url));
+		      }
+			tuTiao.setUnits(units);
+		 } catch (IOException e) {
+		      e.printStackTrace();
+		  }
+		
+		return tuTiao;
+	}
 	
 	public static GTuTiao getTouTiaoPageContent2(String strUrl) {
 		Document document = null;

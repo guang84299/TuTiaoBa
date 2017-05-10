@@ -140,6 +140,9 @@ $(function() {
         	if(durl.indexOf("#p") != -1)
         		dtype = 2;
         	
+        	if(durl.indexOf("eastday.com") != -1)
+        		dtype = 3;//头条新闻
+        	
         	$("#auto-caiji").attr("disabled","disabled");
         	$("#auto-caiji").val("信息采集中...");
         	

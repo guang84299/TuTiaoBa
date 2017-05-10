@@ -14,8 +14,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <title>图条吧</title>
-  <meta name="keywords" content="图条吧，图条，图吧，图片，条吧，图片故事，头条网，头条新闻，图条吧官网">
-  <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，美女故事，新闻故事，有你好看！">
+  <meta name="keywords" content="图条吧，图条，图吧，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
+  <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，搞笑故事，美女故事，新闻故事，有你好看！">
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
@@ -85,7 +85,7 @@ var _hmt = _hmt || [];
 </div>
 		
 <div class="bottom" > 
-	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a>&nbsp;</span>
+	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a>&nbsp;&nbsp;友情链接&nbsp;<a href="http://www.hao123.com/">hao123</a></span>
 </div>
 
 </body>

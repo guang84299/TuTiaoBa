@@ -214,6 +214,10 @@ public class GTuTiaoAction extends ActionSupport{
 		{
 			tuTiao = GAutoTool.getTouTiaoPageContent2(url);
 		}
+		else if("3".equals(type))
+		{
+			tuTiao = GAutoTool.getTouTiaoPageContent3(url);
+		}
 		
 		if(tuTiao != null)
 		{

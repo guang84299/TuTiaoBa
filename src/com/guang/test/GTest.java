@@ -40,7 +40,7 @@ public class GTest {
 
 	public static void main(String[] args)
 	{
-		GTuTiao tuTiao = GAutoTool.toutiao2("http://www.toutiao.com/a6414818258751553793/#p=1");
+		GTuTiao tuTiao = GAutoTool.toutiao3("https://mini.eastday.com/pictures/20170510/170510074837290312789.html?qid=null&idx=1&recommendtype=-1&ishot=0&fr=pgaoxiao&pgnum=1");
 		
 		System.out.println(tuTiao.toString());
 	}
