@@ -1,44 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
 	isELIgnored="false"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- saved from url=(0045)http://media.qiqiup.com/QianQi/tuijian_addapk -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>图条吧</title>
-  <meta name="keywords" content="图条吧，图条，图吧，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
-  <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，搞笑故事，美女故事，新闻故事，有你好看！">
-  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
-  <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-  <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=basePath%>styles/main.css" rel="stylesheet">
-  
-  
-  <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?71032e5a3071011e7d6b356b5fdfa901";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-  
- </head>
- <body>
+<jsp:include page="/includes/head.jsp" />
 <div>
-
    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">  
-        <div class="container-fluid content3">  
+        <div class="container-fluid index-content3">  
             <div class="navbar-header">  
                 <button type="button" class="navbar-toggle" data-toggle="collapse"  
                         data-target="#my-navbar-collapse">  
@@ -51,15 +22,15 @@ var _hmt = _hmt || [];
             </div>  
             <div class="collapse navbar-collapse" id="my-navbar-collapse">  
                 <ul class="nav navbar-nav">  
-                    <li ><a class="active myactive" href="#" id="nav_new">最新</a></li>  
+                    <li ><a class="active index-active" href="#" id="nav_new">最新</a></li>  
                     <li ><a class="" href="#" id="nav_hot">最热</a></li>  
-                    <li ><a class="" href="#" id="nav_search">搜索结果</a></li>  
+                    <li ><a class="" href="#" id="nav_search" style="display: none;">搜索结果</a></li>  
                 </ul>  
 
                 <div class="navbar-form navbar-right" role="search">
                   <div class="form-group">
                   		
-                       <div class="input-group" style="width:50px;height:30px;margin-right:10px;background:#ED4040;line-height:30px;text-align: center;color:#fff;cursor:hand;">
+                       <div class="input-group" id="btn-login" style="width:50px;height:30px;margin-right:10px;background:#ED4040;line-height:30px;text-align: center;color:#fff;cursor:hand;">
                        	登录
                        </div>
                       <div class="input-group">
@@ -77,9 +48,9 @@ var _hmt = _hmt || [];
 
 </div>
 
-<div class="content container">
+<div class="index-content container">
 
-	<div class="row content2 masonry" id="tutiaos">
+	<div class="row index-content2 masonry" id="tutiaos">
 
 	</div>
 </div>
@@ -88,15 +59,9 @@ var _hmt = _hmt || [];
 		加载中.....
 </div>
 		
-<div class="bottom" > 
+<div class="index-bottom" > 
 	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a>&nbsp;&nbsp;友情链接&nbsp;<a href="http://www.hao123.com/">hao123</a></span>
 </div>
 
-</body>
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<jsp:include page="/includes/foot.jsp" />
 <script src="<%=basePath%>scripts/main.js"></script>
-<script src="<%=basePath%>scripts/imgh.js"></script>
-</html>

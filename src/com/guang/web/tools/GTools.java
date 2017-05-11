@@ -46,6 +46,18 @@ public class GTools {
 		 return System.currentTimeMillis()+"";
 	 }
 	 
+	 //生成一个验证码
+	 public static String getRandCode()
+	 {
+		 String code = "";
+		 for(int i=0;i<4;i++)
+		{
+			int r = (int) (Math.random()*100) %10;
+			code += r;
+		}
+		 return code;
+	 }
+	 
 	 //long日期转String
 	 public static String time2String(long time)
 	 {
@@ -98,7 +110,7 @@ public class GTools {
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.socketFactory", sf);
 		 
-		Session session = Session.getDefaultInstance(props, new MyAuthenricator("mail@tutiaoba.com", "Ycg1992"));
+		Session session = Session.getInstance(props, new MyAuthenricator("mail@tutiaoba.com", "Ycg1992"));
 //		session.setDebug(true);
 		
 		MimeMessage mimeMessage = new MimeMessage(session);
@@ -108,8 +120,7 @@ public class GTools {
 					new InternetAddress(sendAdress));
 			mimeMessage.setSubject("亲,欢迎注册图条吧,赶快激活您的账号吧！");
 			mimeMessage.setSentDate(new Date());
-			mimeMessage.setText("您好，感谢您注册图条吧，请点击下面的链接激活您的账号：\n http://localhost:8080/me/updateuser_checkMail?mail="+sendAdress+ 
-				"&md5="+value);
+			mimeMessage.setText("您好，感谢您注册图条吧，请点击下面的链接激活您的账号：\n http://localhost:8080/user_active?mail="+sendAdress);
 			mimeMessage.saveChanges();
 			Transport.send(mimeMessage);
 		} catch (MessagingException e) {

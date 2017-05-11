@@ -31,7 +31,9 @@ $(function() {
 
     }
 	$('.masonry').masonry({
-		itemSelector: '.item'
+		itemSelector: '.item',
+		transitionDuration: '0.0s',
+		stagger: 0
 	});
 	
 	var tuijian_next_index=1;
@@ -112,9 +114,9 @@ $(function() {
 	var tutiao_show_index = 0;
 	var updateShow = function()
 	{
-		var id = $("#tutiao_show").attr("data-id");
+		var tid = $("#tutiao_show").attr("data-tid");
 		var datas = {};
-		datas.id = id;
+		datas.tid = tid;
 		$.ajax({
 			type: "post",
 			data : datas,
@@ -127,7 +129,6 @@ $(function() {
 			$("#tutiao_show_curr_page").text("1");
 			$("#tutiao_show_curr_page").next().text("/"+tutiao_show_data.units.length);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
-			
 			$("#tuijian_title").text(tutiao_show_data.title);
 			
 			$("#tutiao_show_row").show();
@@ -136,7 +137,7 @@ $(function() {
 		
 	}
 	$("#tuijian_row").hide();
-	$('.pic_left').hide();
+	$('.tutiao-pic-left').hide();
 	var resetPicWidth = function()
 	{
 		var width = $("#tutiao_show").width();
@@ -188,7 +189,7 @@ $(function() {
 				return;
 			}
 			if(tutiao_show_index > 0)
-				$('.pic_left').show();
+				$('.tutiao-pic-left').show();
 			$("#tutiao_show img:first").attr("src",baseUrl+tutiao_show_data.units[tutiao_show_index].picPath);
 			$("#tutiao_show_curr_page").text(tutiao_show_index+1);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
@@ -198,10 +199,9 @@ $(function() {
 	};
 	
 	$('#tutiao_show').hover(function(){
-//		$(this).addClass("cursor_right"); 
 	},function(){
-		$(this).removeClass("cursor_right"); 
-		$(this).removeClass("cursor_left"); 
+		$(this).removeClass("tutiao-cursor-right"); 
+		$(this).removeClass("tutiao-cursor-left"); 
 	});
 	var posLeft = true;
 	$('#tutiao_show').mousemove(function(e) {  
@@ -209,14 +209,14 @@ $(function() {
 		var width = $(this).width();
 		if(xx>width/2)
 		{
-			$(this).removeClass("cursor_left"); 
-			$(this).addClass("cursor_right");
+			$(this).removeClass("tutiao-cursor-left"); 
+			$(this).addClass("tutiao-cursor-right");
 			posLeft = false;
 		}
 		else
 		{
-			$(this).removeClass("cursor_right"); 
-			$(this).addClass("cursor_left");
+			$(this).removeClass("tutiao-cursor-right"); 
+			$(this).addClass("tutiao-cursor-left");
 			posLeft = true;
 		}
 	}); 
@@ -233,21 +233,21 @@ $(function() {
 		 }
 	});
 	
-	$('#pic_left').click(function(event) {
+	$('#tutiao-pic-left').click(function(event) {
 		picLeft();
 	})
-	$('#pic_right').click(function(event) {
+	$('#tutiao-pic-right').click(function(event) {
 		 picRight();
 	})
 	
 	$("#img_large_show").hide();
 	$("#img_large_show").click(function(){
 		$("#img_large_show").hide();
-		$(".content").show();
+		$(".tutiao-content").show();
 	});
 	$('#pic_lager').click(function(event) {
 		var url = $("#tutiao_show img:first").attr("src");
-		$(".content").hide();
+		$(".tutiao-content").hide();
 		$("#img_large_show").show();
 		$("#img_large_show img:first").attr("src",url);
 	})
@@ -299,7 +299,7 @@ $(function() {
 					+ '<img src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' ">'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
-					+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
+					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 					+ '</div></div></div></div>';
 				
 				imgReady(baseUrl+obj.units[0].picPath, function () {
@@ -351,4 +351,9 @@ $(function() {
 	$('.navbar-brand').click(function(){
 		location.href = baseUrl;
 	});
+	
+	$('#particles').particleground({
+        dotColor: '#faeaea',
+        lineColor: '#faeaea'
+      });
 });

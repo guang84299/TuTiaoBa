@@ -12,24 +12,27 @@ import javax.persistence.Table;
 @Table(name = "g_user")
 //uniqueConstraints={@UniqueConstraint(columnNames = {"name","password"})})
 //alter table user add constraint name UNIQUE(name,password);
-//alter table user add index index_name(name)
-//alter table user add index index_created_date(created_date)
+//alter table g_user add index index_name(name)
+//alter table g_user add index index_email(email)
+//alter table g_user add index index_created_date(created_date)
 public class GUser {
 	private long id;
 	private long permissionId;
 	private String name;
 	private String password;
+	private String email;
 	private Date createdDate = new Date();
 
 	public GUser() {
 	}
 
 	
-	public GUser(long permissionId, String name, String password) {
+	public GUser(long permissionId, String name, String password,String email) {
 		super();
 		this.permissionId = permissionId;
 		this.name = name;
 		this.password = password;
+		this.email = email;
 		this.createdDate = new Date();
 	}
 
@@ -79,6 +82,16 @@ public class GUser {
 
 	public void setPermissionId(long permissionId) {
 		this.permissionId = permissionId;
+	}
+
+	@Column(nullable = false,unique=true, length = 64)
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	

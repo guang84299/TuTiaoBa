@@ -48,7 +48,7 @@ public class GTest {
 //		
 //		System.out.println(tuTiao.toString());
 		
-		System.out.println(System.currentTimeMillis());
+		GTools.sendMail("842997290@qq.com", "%E7%AE%A1%E7%90%86%E5%91%98");
 //		autoSendMail();
 	}
 	

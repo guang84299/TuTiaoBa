@@ -27,9 +27,9 @@ Date.prototype.format = function(format) {
 $(function() {
 
 	$('.masonry').masonry({
-		itemSelector: '.item'
-//		transitionDuration: '0.0s',
-//		stagger: 0
+		itemSelector: '.item',
+		transitionDuration: '0.0s',
+		stagger: 0
 	});
 	
 	
@@ -72,15 +72,16 @@ $(function() {
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
 						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-						+ '<img height="1500px" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
+						+ '<img src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
-						+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
+						+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 						+ '</div></div></div></div>';
 					
 					imgReady(baseUrl+obj.units[0].picPath, function () {
 //						$(".item img:eq(3)").height = this.height;
 						$('.masonry').masonry();
+						
 					});
 				}
 				var items = $(s);
@@ -90,17 +91,13 @@ $(function() {
 //				});
 				
 				tu_index += objs.length;
-				if(objs.length == 0)
-				{
-					tu_index = 0;
-					if(type!=3)
-					getTuTiao(curr_type,tu_index);
-				}
+				
 				
 			});	
-			$(".bottom").show();
-			loading = 0;
+			$(".index-bottom").show();
+			
 			first_time = 500;
+			loading = 0;
 		})		
 	};
 	
@@ -113,7 +110,7 @@ $(function() {
 	
 	var btn_new = function()
 	{
-		$(".bottom").hide();
+		$(".index-bottom").hide();
 		getTuTiao(1,0);
 	}
 	btn_new();
@@ -122,8 +119,8 @@ $(function() {
 		tu_index = 0;
 		hideMobelNav();
 		$("#tutiaos").html("");
-		$("#nav_new").addClass("myactive");
-		$("#nav_hot").removeClass("myactive");
+		$("#nav_new").addClass("index-active");
+		$("#nav_hot").removeClass("index-active");
 		$('.masonry').masonry('reloadItems');
 		getTuTiao(1,0);
 	});
@@ -133,8 +130,8 @@ $(function() {
 		hideMobelNav();
 		$("#nav_new").css("color","");
 		$("#tutiaos").html("");
-		$("#nav_hot").addClass("myactive");
-		$("#nav_new").removeClass("myactive");
+		$("#nav_hot").addClass("index-active");
+		$("#nav_new").removeClass("index-active");
 		$('.masonry').masonry('reloadItems');
 		getTuTiao(2,0);
 	});
@@ -177,5 +174,12 @@ $(function() {
 		location.href = baseUrl;
 	});
 	
+	$('#particles').particleground({
+        dotColor: '#faeaea',
+        lineColor: '#faeaea'
+      });
 	
+	$("#btn-login").click(function(){
+		location.href = baseUrl + "user_login";
+	});
 });

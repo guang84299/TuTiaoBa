@@ -11,6 +11,7 @@ import javax.persistence.Table;
 public class GPermission {
 	private long id;
 	private boolean admin = false;//管理员
+	private boolean active = false;//是否激活
 	
 	@Id
 	@GeneratedValue
@@ -25,6 +26,12 @@ public class GPermission {
 	}
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

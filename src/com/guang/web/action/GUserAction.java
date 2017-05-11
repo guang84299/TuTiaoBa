@@ -3,7 +3,10 @@ package com.guang.web.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -32,8 +35,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.guang.web.dao.QueryResult;
+import com.guang.web.mode.GPermission;
 import com.guang.web.mode.GUser;
+import com.guang.web.service.GPermissionService;
 import com.guang.web.service.GUserService;
+import com.guang.web.tools.GTools;
 import com.guang.web.tools.GZipTool;
 import com.guang.web.tools.StringTools;
 import com.opensymphony.xwork2.ActionContext;
@@ -42,9 +48,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GUserAction extends ActionSupport{
 
-	private static final long serialVersionUID = -6570772391551890119L;
+	private static final long serialVersionUID = 1;
 	private final static Logger logger = LoggerFactory.getLogger(GUserAction.class);
 	@Resource private  GUserService userService;
+	@Resource private GPermissionService permissionService;
 	
 	private File source;
 	private String sourceFileName;
@@ -172,50 +179,138 @@ public class GUserAction extends ActionSupport{
 		print(result.toString());
 	}
 	
-	//登录
-	public void login()
+	public String login()
 	{
-		String data = ServletActionContext.getRequest().getParameter("data");
-		JSONObject obj = JSONObject.fromObject(data);
-		String name = obj.getString("name");
-		String password = obj.getString("password");
-		String networkType = obj.getString("networkType");
+		//生成随机验证码
+		String code = GTools.getRandCode();
+		ActionContext.getContext().getSession().put("code", code);
+		return "login";
+	}
+	//登录
+	public void vallogin()
+	{
+		String name = ServletActionContext.getRequest().getParameter("username");
+		String password = ServletActionContext.getRequest().getParameter("password");
+		String code = ServletActionContext.getRequest().getParameter("code");
 		
-		GUser user = userService.find(name,password);
-		obj = new JSONObject();
-		if(user != null)
-		{			
-			obj.put("result", true);
-			
-			userService.update(user);
-			
-			loginSuccess(user.getName());
+		if(StringTools.isEmpty(name) || StringTools.isEmpty(password) ||StringTools.isEmpty(code))
+		{
+			print(1);
 		}
 		else
 		{
-			obj.put("result", false);
+			String c = (String) ActionContext.getContext().getSession().get("code");
+			if(!code.equals(c))
+			{
+				print(2);
+			}
+			else
+			{
+				GUser user = userService.find(name,password);
+				if(user == null)
+				{
+					print(1);
+				}
+				else
+				{
+					ActionContext.getContext().getSession().put("user", user);
+					print(true);
+				}
+			}
 		}
-		print(obj.toString());
 	}
 	
+	public String toRegister()
+	{
+		return "register";
+	}
+	public void checkName()
+	{
+		String username = ServletActionContext.getRequest().getParameter("username");
+		if(StringTools.isEmpty(username))
+		{
+			print(false);
+			return;
+		}
+		GUser user = userService.findByName(username);
+		if(user != null)
+		{
+			print(false);
+		}
+		else
+		{
+			print(true);
+		}
+	}
+	public void checkMail()
+	{
+		String email = ServletActionContext.getRequest().getParameter("email");
+		if(StringTools.isEmpty(email))
+		{
+			print(false);
+			return;
+		}
+		GUser user = userService.findByEmail(email);
+		if(user != null)
+		{
+			print(false);
+		}
+		else
+		{
+			print(true);
+		}
+	}
 	//注册
 	public void register()
 	{
-		String data = ServletActionContext.getRequest().getParameter("data");
-		GUser user = (GUser) JSONObject.toBean(JSONObject.fromObject(data),GUser.class);
-		if(user == null)
+		final String name = ServletActionContext.getRequest().getParameter("name");
+		String password = ServletActionContext.getRequest().getParameter("password");
+		final String email = ServletActionContext.getRequest().getParameter("email");
+		if(StringTools.isEmpty(name) || StringTools.isEmpty(password) || StringTools.isEmpty(email))
 		{
-			return;
+			print(false);
+		}
+		else
+		{
+			GPermission permission = new GPermission();
+			permission.setAdmin(false);
+			permission.setActive(false);
+			permissionService.add(permission);
+			GUser user = new GUser(permission.getId(), name, password, email);
+			userService.add(user);
+			print(true);
+			
+			new Thread(){
+				public void run() {
+					GTools.sendMail(email, "");
+				};
+			}.start();
 		}
 		
-		
-		userService.add(user);
-		
-		
-		
-		logger.info(user.getName()+" 注册成功！");
-		loginSuccess(user.getName());
-		print("1");	
+	}
+	public String active()
+	{
+//		String name = ServletActionContext.getRequest().getParameter("name");
+		String email = ServletActionContext.getRequest().getParameter("mail");
+		if(StringTools.isEmpty(email) )
+		{
+			return "error";
+		}
+//		try {
+//			name = URLDecoder.decode(name, "utf-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+		GUser user = userService.findByEmail(email);
+		if(user != null)
+		{
+			GPermission permission = permissionService.find(user.getPermissionId());
+			permission.setActive(true);
+			permissionService.update(permission);
+			ActionContext.getContext().put("active", true);
+			return login();
+		}
+		return "error";
 	}
 	//登录成功
 	public void loginSuccess(String name)
