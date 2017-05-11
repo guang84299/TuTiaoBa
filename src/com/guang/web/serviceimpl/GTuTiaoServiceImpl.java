@@ -1,6 +1,7 @@
 package com.guang.web.serviceimpl;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -69,6 +70,21 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("title like", "'%"+val+"%'");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, null);
+	}
+
+	public GTuTiao findByTid(String tid) {
+		List<GTuTiao> list = daoTools.find(GTuTiao.class, "tid", tid, 0, 1, null).getList();
+		if(list.size() > 0)
+			return list.get(0);
+		return null;
+	}
+
+	public void deleteByTid(String tid) {
+		GTuTiao tuTiao = findByTid(tid);
+		if(tuTiao!=null)
+		{
+			delete(tuTiao.getId());
+		}
 	}
 
 }

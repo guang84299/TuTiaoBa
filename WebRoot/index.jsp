@@ -58,9 +58,13 @@ var _hmt = _hmt || [];
 
                 <div class="navbar-form navbar-right" role="search">
                   <div class="form-group">
+                  		
+                       <div class="input-group" style="width:50px;height:30px;margin-right:10px;background:#ED4040;line-height:30px;text-align: center;color:#fff;cursor:hand;">
+                       	登录
+                       </div>
                       <div class="input-group">
-                      <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
-                      <span class="glyphicon glyphicon-search input-group-addon"></span>
+                        <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
+                     			 <span class="glyphicon glyphicon-search input-group-addon"></span>
                       </div>
                   </div>
                   

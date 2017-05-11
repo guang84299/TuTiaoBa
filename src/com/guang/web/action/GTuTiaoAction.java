@@ -21,6 +21,7 @@ import com.guang.web.mode.GTuTiaoUnit;
 import com.guang.web.service.GTuTiaoService;
 import com.guang.web.service.GTuTiaoUnitService;
 import com.guang.web.tools.GAutoTool;
+import com.guang.web.tools.GTools;
 import com.guang.web.tools.StringTools;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -83,11 +84,11 @@ public class GTuTiaoAction extends ActionSupport{
 	
 	public String findTuTiao()
 	{
-		String id = ServletActionContext.getRequest().getParameter("id");
-		if(StringTools.isEmpty(id))
-			return list();
-		ActionContext.getContext().put("id", id);
-		GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+		String tid = ServletActionContext.getRequest().getParameter("tid");
+		if(StringTools.isEmpty(tid))
+			return "error";
+		ActionContext.getContext().put("tid", tid);
+		GTuTiao tuTiao = tuTiaoService.findByTid(tid);
 		if(tuTiao != null)
 		{
 			ActionContext.getContext().put("title", tuTiao.getTitle());
@@ -97,8 +98,8 @@ public class GTuTiaoAction extends ActionSupport{
 	
 	public void getTuTiaoShow()
 	{
-		String id = ServletActionContext.getRequest().getParameter("id");
-		GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+		String tid = ServletActionContext.getRequest().getParameter("tid");
+		GTuTiao tuTiao = tuTiaoService.findByTid(tid);
 		if(tuTiao != null)
 		{
 			tuTiao.setShowNum(tuTiao.getShowNum()+1);
@@ -122,7 +123,7 @@ public class GTuTiaoAction extends ActionSupport{
 	//获取展示页面相关的
 	public void getShowXiangGuan()
 	{
-		List<GTuTiao> list = tuTiaoService.findByHot(0,4).getList();
+		List<GTuTiao> list = tuTiaoService.findByHot(0,6).getList();
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
@@ -188,7 +189,7 @@ public class GTuTiaoAction extends ActionSupport{
 		JSONArray junits = obj.getJSONArray("units");
 		if(!StringTools.isEmpty(title) && junits != null && junits.size() > 0)
 		{
-			GTuTiao tuTiao = new GTuTiao(title, author, 0l);
+			GTuTiao tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0l);
 			tuTiaoService.add(tuTiao);
 			for(int i=0;i<junits.size();i++)
 			{

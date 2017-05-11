@@ -75,7 +75,7 @@ public class GAdminAction extends ActionSupport{
 	public String addUser()
 	{
 		GAdmin admin = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!admin.getPermission().isModel_admin())
+		if(!admin.getPermission().isAdmin())
 		{
 			ActionContext.getContext().put("addUser","没有权限！");
 			list();
@@ -90,7 +90,7 @@ public class GAdminAction extends ActionSupport{
 		if(name != null && !"".equals(name) && password != null && !"".equals(password))
 		{
 			GPermission permission = new GPermission();		
-			permission.setModel_admin(model_admin!=null);
+			permission.setAdmin(model_admin!=null);
 			permissionService.add(permission);
 			
 			adminService.add(new GAdmin(permission.getId(),name, password));
@@ -108,7 +108,7 @@ public class GAdminAction extends ActionSupport{
 	public String deleteUser()
 	{
 		GAdmin user = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!user.getPermission().isModel_admin())
+		if(!user.getPermission().isAdmin())
 		{
 			ActionContext.getContext().put("deleteUser","没有权限！");
 			list();
@@ -142,7 +142,7 @@ public class GAdminAction extends ActionSupport{
 	public String updateUser()
 	{
 		GAdmin admin = (GAdmin) ActionContext.getContext().getSession().get("admin");
-		if(!admin.getPermission().isModel_admin())
+		if(!admin.getPermission().isAdmin())
 		{
 			ActionContext.getContext().put("updateUser","没有权限！");
 			list();
@@ -162,7 +162,7 @@ public class GAdminAction extends ActionSupport{
 			
 			GPermission permission = permissionService.find(u.getPermissionsId());		
 			
-			permission.setModel_admin(model_admin!=null);
+			permission.setAdmin(model_admin!=null);
 			permissionService.update(permission);
 			
 			adminService.update(u);
@@ -180,7 +180,7 @@ public class GAdminAction extends ActionSupport{
 	{
 		GPermission permission = new GPermission();
 		
-		permission.setModel_admin(true);
+		permission.setAdmin(true);
 		permissionService.add(permission);
 		
 		adminService.add(new GAdmin(permission.getId(),"admin", "tutiaoba"));

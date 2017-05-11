@@ -68,20 +68,7 @@ public class GUserAction extends ActionSupport{
 		{
 			userList = new ArrayList<GUser>();
 		}
-		long time = System.currentTimeMillis();
-		for(GUser u : userList)
-		{
-			if(u.getPhoneNumber() == null || "".equals(u.getPhoneNumber()))
-				u.setPhoneNumber("未知");
-			if(time - u.getUpdatedDate().getTime() > 3*60*60*1000)
-			{
-				u.setOnline(false);
-			}
-			else
-			{
-				u.setOnline(true);
-			}
-		}
+		
 		
 		ActionContext.getContext().put("maxNum", num);
 		ActionContext.getContext().put("userList", userList);
@@ -173,8 +160,7 @@ public class GUserAction extends ActionSupport{
 		{
 			result.put("result", true);			
 
-			user.setNetworkType(obj.getString("networkType"));
-			user.setUpdatedDate(new Date());
+			
 			userService.update(user);
 			
 			loginSuccess(user.getName());
@@ -200,8 +186,7 @@ public class GUserAction extends ActionSupport{
 		if(user != null)
 		{			
 			obj.put("result", true);
-			user.setNetworkType(networkType);
-			user.setUpdatedDate(new Date());
+			
 			userService.update(user);
 			
 			loginSuccess(user.getName());
@@ -223,8 +208,7 @@ public class GUserAction extends ActionSupport{
 			return;
 		}
 		
-		user.setStartUpNum(0);
-		user.setUnInstall(false);
+		
 		userService.add(user);
 		
 		
@@ -246,57 +230,13 @@ public class GUserAction extends ActionSupport{
 		GUser user = userService.find(name,password);
 		if(user != null)
 		{
-			Date updated = user.getUpdatedDate();
-       		if(updated == null)
-       			updated =  new Date();
-        	long t = new Date().getTime() - updated.getTime();
-        	String lastOnlineTime = t/1000/60+"";
-        	
-        	String onlineTime = user.getOnlineTime();
-        	if(onlineTime == null)
-        		onlineTime = "0";
-        	long ot = Long.parseLong(onlineTime) + t/1000/60;
-        	user.setLastOnlineTime(lastOnlineTime);
-        	user.setOnlineTime(ot+"");
+			
         	
         	userService.update(user);        	
 		}
 	}
-	//自启统计
-	public void startUp()
-	{
-		String data = ServletActionContext.getRequest().getParameter("data");
-		JSONObject obj = JSONObject.fromObject(data);
-		String name = obj.getString("name");
-		String password = obj.getString("password");
-		
-		GUser user = userService.find(name,password);
-		if(user != null)
-		{
-			if(user.getStartUpNum() == null)
-				user.setStartUpNum(0);
-			user.setStartUpNum(user.getStartUpNum()+1);
-			userService.update(user);
-		}
-	}
-	//用户卸载
-	public String unInstall()
-	{
-		String name = ServletActionContext.getRequest().getParameter("name");
-		String password = ServletActionContext.getRequest().getParameter("password");
-		System.out.println("name="+name + "   password="+password);
-		if(name != null && password != null)
-		{
-			GUser user = userService.find(name,password);
-			if(user != null)
-			{
-				user.setUnInstall(true);
-				userService.update(user);
-			}
-		}
-		
-		return "uninstall";
-	}
+	
+	
 	
 	
 	

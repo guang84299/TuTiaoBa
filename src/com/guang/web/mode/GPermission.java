@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "g_permission")
 public class GPermission {
 	private long id;
-	private boolean model_admin = false;//管理员模块
+	private boolean admin = false;//管理员
 	
 	@Id
 	@GeneratedValue
@@ -20,13 +20,14 @@ public class GPermission {
 	public void setId(long id) {
 		this.id = id;
 	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	
-	public boolean isModel_admin() {
-		return model_admin;
-	}
-	public void setModel_admin(boolean model_admin) {
-		this.model_admin = model_admin;
-	}
+	
 	
 	
 }

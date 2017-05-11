@@ -2,6 +2,8 @@
  * Created by Guang on 2017/4/22.
  */
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
+if(baseUrl.indexOf("8080") == -1)
+	baseUrl = "www.tutiaoba.com/"
 //js时间格式化;
 Date.prototype.format = function(format) {
     var o = {
@@ -41,14 +43,14 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			if(objs.length > 0)
-				tuijian_next_index = objs[0].id;
+				tuijian_next_index = objs[0].tid;
 			var s = '';
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
 				s += '<div class="col-sm-6 col-md-3 item">' 
-					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' +baseUrl+ obj.units[0].picPath + '">'
+					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
+					+ '<img src="' +baseUrl+ obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
@@ -76,14 +78,14 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			if(objs.length > 0)
-				tuijian_next_index = objs[0].id;
+				tuijian_next_index = objs[0].tid;
 			var s ='';
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
-				s += '<div class="col-sm-6 col-md-3 item">' 
-					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' + baseUrl+obj.units[0].picPath + '">'
+				s += '<div class="col-sm-2 col-md-2 item">' 
+					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
+					+ '<img src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
@@ -256,7 +258,7 @@ $(function() {
 	});
 	$("#tuijian_next").click(function(){
 		$("#tuijian_row").hide();
-		location.href = baseUrl + "tutiao_findTuTiao?id="+tuijian_next_index
+		location.href = baseUrl + tuijian_next_index
 	});
 	
 	updateShow();
@@ -293,8 +295,8 @@ $(function() {
 				var obj = objs[i];
 				
 				s += '<div class="col-sm-6 col-md-3 item">' 
-					+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-					+ '<img src="' + baseUrl+obj.units[0].picPath + '">'
+					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
+					+ '<img src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' ">'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)

@@ -11,6 +11,8 @@ public interface GTuTiaoService {
 	void delete(long id);
 	void update(GTuTiao tuTiao);
 	GTuTiao find(long id);
+	GTuTiao findByTid(String tid);
+	void deleteByTid(String tid);//最好用delete(long id);
 	QueryResult<GTuTiao> find(String title);
 	QueryResult<GTuTiao> findAll();
 	QueryResult<GTuTiao> findAll(int firstindex);

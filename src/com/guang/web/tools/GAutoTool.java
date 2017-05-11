@@ -50,7 +50,7 @@ public class GAutoTool {
 		      String title = elements.get(0).text();
 		      String author = "图条吧";
 		      
-		      tuTiao = new GTuTiao(title, author, 0);
+		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
     		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
     		  
 		      elements = document.select("#content figure");
@@ -116,7 +116,7 @@ public class GAutoTool {
 		    		  //获取标题
 		    		  String title = obj.getJSONArray("sub_titles").get(0).toString();
 		    		  
-		    		  tuTiao = new GTuTiao(title, author, 0);
+		    		  tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
 		    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
 		    		  for(int i=0;i<list_url.size();i++)
 		    		  {
@@ -149,7 +149,7 @@ public class GAutoTool {
 		      String title = element.text();
 		      String author = document.select(".src").get(0).text();
 		      
-		      tuTiao = new GTuTiao(title, author, 0);
+		      tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
 		      
 		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
 		      //内容

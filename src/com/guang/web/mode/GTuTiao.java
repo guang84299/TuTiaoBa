@@ -12,8 +12,10 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "g_tutiao")
+//alter table g_tutiao add index index_tid(tid)
 public class GTuTiao {
 	private long id;
+	private String tid;
 	private String title;
 	private String author;
 	private long showNum;
@@ -24,8 +26,9 @@ public class GTuTiao {
 	public GTuTiao(){}
 	
 	
-	public GTuTiao(String title, String author, long showNum) {
+	public GTuTiao(String tid,String title, String author, long showNum) {
 		super();
+		this.tid = tid;
 		this.title = title;
 		this.author = author;
 		this.showNum = showNum;
@@ -40,6 +43,13 @@ public class GTuTiao {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	@Column(nullable=false,length=32)
+	public String getTid() {
+		return tid;
+	}
+	public void setTid(String tid) {
+		this.tid = tid;
 	}
 	@Column(nullable=false,length=256)
 	public String getTitle() {

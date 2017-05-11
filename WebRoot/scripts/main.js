@@ -2,6 +2,9 @@
  * Created by Guang on 2017/4/22.
  */
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
+if(baseUrl.indexOf("8080") == -1)
+	baseUrl = "www.tutiaoba.com/"
+	
 //js时间格式化;
 Date.prototype.format = function(format) {
     var o = {
@@ -39,6 +42,7 @@ $(function() {
 	var loading = 0;
 	var curr_type = 1;
 	var tu_index = 0;
+	var first_time = 0;
 	var getTuTiao = function(type,index)
 	{		
 		var pdata = {};
@@ -60,15 +64,15 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			var s ='';
-			$("#imloading").fadeOut(500,function(){
+			$("#imloading").fadeOut(first_time,function(){
 				
 				for(var i=0;i<objs.length;i++)
 				{
 					var obj = objs[i];
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
-						+ '<div onclick=window.open("' + baseUrl+'tutiao_findTuTiao?id=' + obj.id + '") class="thumbnail">'
-						+ '<img height="1500px" src="' + baseUrl+obj.units[0].picPath + '">'
+						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
+						+ '<img height="1500px" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
@@ -96,6 +100,7 @@ $(function() {
 			});	
 			$(".bottom").show();
 			loading = 0;
+			first_time = 500;
 		})		
 	};
 	

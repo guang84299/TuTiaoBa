@@ -23,7 +23,10 @@
 	      <result name="add" >/pages/tutiao_add.jsp</result>
 	      <result name="update" >/pages/tutiao_update.jsp</result>
 	      <result name="tutiao" >/pages/tutiao.jsp</result>
+	      <result name="error" >/pages/error.jsp</result>
 	   </action>
+	   
+	  
 	   
 	</package>
 </struts>    
