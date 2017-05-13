@@ -115,69 +115,6 @@ public class GUserAction extends ActionSupport{
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * 查询用户
-	 */
-	public String findUser(){
-		String regFrom = ServletActionContext.getRequest().getParameter("regDate_from");
-		String loginFrom = ServletActionContext.getRequest().getParameter("loginDate_from");
-		String regTo = ServletActionContext.getRequest().getParameter("regDate_to");
-		String loginTo = ServletActionContext.getRequest().getParameter("loginDate_to");
-		
-		List<GUser> gUser = null ; 
-		//注册时间
-		if (null!=regFrom&&!"".equals(regFrom) && null!=regTo&&!"".equals(regTo)) {
-			LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();			
-			colvals.put("createdDate >=", "'"+regFrom+"'");
-			colvals.put("createdDate <", "'"+regTo+"'");
-			gUser = userService.find(colvals).getList();
-			long m = userService.find(colvals).getNum();
-			ActionContext.getContext().put("maxNum", m);
-			ActionContext.getContext().put("userList", gUser);
-			ActionContext.getContext().put("pages", "user");
-			return "index";	 
-		}
-		if (null!=loginFrom&&!"".equals(loginFrom) && null!=loginTo&&!"".equals(loginTo)) {
-			//登录时间
-			LinkedHashMap<String, String> colvals2 = new LinkedHashMap<String, String>();			
-			colvals2.put("updatedDate >=", "'"+loginFrom+"'");
-			colvals2.put("updatedDate <", "'"+loginTo+"'");
-			long n = userService.find(colvals2).getNum();
-			gUser = userService.find(colvals2).getList();
-			ActionContext.getContext().put("maxNum", n);
-			ActionContext.getContext().put("userList", gUser);
-			ActionContext.getContext().put("pages", "user");
-			
-			return "index";
-		}
-		return "index";
-	}
-	
-	//验证是否已经注册
-	public void validates()
-	{
-		String data = ServletActionContext.getRequest().getParameter("data");
-		JSONObject obj = JSONObject.fromObject(data);
-		
-		String name = obj.getString("name");
-		String password = obj.getString("password");
-		GUser user = userService.find(name,password);
-		JSONObject result = new JSONObject();
-		if(user != null)
-		{
-			result.put("result", true);			
-
-			
-			userService.update(user);
-			
-			loginSuccess(user.getName());
-		}
-		else
-		{
-			result.put("result", false);
-		}
-		print(result.toString());
-	}
 	
 	public String login()
 	{
@@ -213,8 +150,16 @@ public class GUserAction extends ActionSupport{
 				}
 				else
 				{
-					ActionContext.getContext().getSession().put("user", user);
-					print(true);
+					GPermission permission = permissionService.find(user.getPermissionId());
+					if(permission.isActive())
+					{
+						ActionContext.getContext().getSession().put("user", user);
+						print(true);
+					}
+					else
+					{
+						print(3);
+					}
 				}
 			}
 		}
@@ -312,23 +257,12 @@ public class GUserAction extends ActionSupport{
 		}
 		return "error";
 	}
-	//登录成功
-	public void loginSuccess(String name)
-	{
-		logger.info(name+" 登录成功！");
-		
-	}
-	
+
 	//退出登录
-	public void loginOut(String name,String password)
+	public String loginOut()
 	{
-		GUser user = userService.find(name,password);
-		if(user != null)
-		{
-			
-        	
-        	userService.update(user);        	
-		}
+		ActionContext.getContext().getSession().put("user", null);
+		return "loginOut";
 	}
 	
 	

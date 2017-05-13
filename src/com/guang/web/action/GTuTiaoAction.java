@@ -16,10 +16,13 @@ import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.guang.web.mode.GComment;
 import com.guang.web.mode.GTuTiao;
 import com.guang.web.mode.GTuTiaoUnit;
+import com.guang.web.service.GCommentService;
 import com.guang.web.service.GTuTiaoService;
 import com.guang.web.service.GTuTiaoUnitService;
+import com.guang.web.service.GUserService;
 import com.guang.web.tools.GAutoTool;
 import com.guang.web.tools.GTools;
 import com.guang.web.tools.StringTools;
@@ -30,6 +33,8 @@ public class GTuTiaoAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	@Resource private GTuTiaoService tuTiaoService;
 	@Resource private GTuTiaoUnitService tiaoUnitService;
+	@Resource private GCommentService commentService;
+	@Resource private  GUserService userService;
 	
 	private File pic;
 	private String picFileName;
@@ -49,6 +54,10 @@ public class GTuTiaoAction extends ActionSupport{
 			num = num / 100;
 		
 		List<GTuTiao> list = tuTiaoService.findAll(page*100).getList();
+		for(GTuTiao tuTiao : list)
+		{
+			tuTiao.setCommentNum(commentService.findNum(tuTiao.getId()));
+		}
 		
 		ActionContext.getContext().put("list", list);
 		ActionContext.getContext().put("page", page+1);
@@ -105,8 +114,19 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setShowNum(tuTiao.getShowNum()+1);
 			tuTiaoService.update(tuTiao);
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 10).getList();
+			for(GComment comment : comments)
+			{
+				comment.setUserName(userService.find(comment.getUserId()).getName());
+			}
+			tuTiao.setComments(comments);
+			tuTiao.setCommentNum(commentService.findNum(tuTiao.getId()));
+			print(JSONObject.fromObject(tuTiao).toString());
 		}
-		print(JSONObject.fromObject(tuTiao).toString());
+		else
+		{
+			print("");
+		}
 	}
 	
 	//获取展示页面的推荐
@@ -332,6 +352,11 @@ public class GTuTiaoAction extends ActionSupport{
 			{
 				deletePic(unit.getPicPath());
 				tiaoUnitService.delete(unit.getId());
+			}
+			List<GComment> comments = commentService.findAll(tuTiao.getId()).getList();
+			for(GComment comment : comments)
+			{
+				commentService.delete(comment.getId());
 			}
 			tuTiaoService.delete(tuTiao.getId());
 		}

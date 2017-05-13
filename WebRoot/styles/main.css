@@ -66,6 +66,63 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
   width: 100%;
 }
 
+.index-user-nav,.index-user-nav ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.index-user-nav {
+    position:relative;
+}
+
+.index-user-nav ul {
+    height:0;
+    left:0;
+    overflow:hidden;
+    position:absolute;
+    top:35px;
+}
+
+.index-user-nav li {
+    float:left;
+    position:relative;
+}
+
+.index-user-nav li a {
+    color:#ff0000;
+    display:block;
+    font-size:14px;
+    line-height:35px;
+    padding:1px 1px;
+    margin-right:20px;
+    text-decoration:none;
+}
+.index-user-nav li:hover ul.subs {
+    height:auto;
+    width:50px;
+    border:1px solid #999;
+    border-radius:5px;
+}
+
+.index-user-nav ul li {
+    width:100%;
+}
+
+.index-user-nav li:hover ul li {
+    background:#fff;
+}
+
+.index-user-nav ul li a {
+    color:#999;
+    line-height:35px;
+    width:100%;
+}
+
+.index-user-nav ul li a:hover {
+    background:#dedede;
+}
+
 /*
 --------------index.jsp---------
 */
@@ -104,6 +161,21 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
 {
   color: #f00;
   border-bottom: 2px solid #f85959;
+}
+.index-btn-login
+{
+	width:50px;
+	height:30px;
+	margin-right:10px;
+	background:#ED4040;
+	line-height:30px;
+	text-align: center;
+	color:#fff;
+	cursor:hand;
+}
+.index-btn-loginout
+{
+	position: absolute;
 }
 /*
 --------------tutiao.jsp---------
@@ -191,7 +263,14 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
  top:60px;
  width:100%;
  } 
-
+#tutiao-btn-pinglun
+{
+	cursor:hand;
+}
+.tutiao-btn-zan
+{
+cursor:hand;
+}
 /*
 --------------login.jsp---------
 */
@@ -200,6 +279,10 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
   width:85px;
   height:27px;
   margin:20px;
+}
+.login-logo-wrap:hover
+{
+	cursor:hand;
 }
 .login-content
 {
@@ -250,6 +333,10 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
   height:27px;
   margin:20px;
 }
+.regist-logo-wrap:hover
+{
+	cursor:hand;
+}
 .regist-content
 {
   margin-left: 35%;
@@ -273,4 +360,25 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
 #regist-btn-reg:hover
 {
   cursor: hand;
+}
+
+/*
+--------------error.jsp---------
+*/
+.error-logo-wrap
+{
+  width:85px;
+  height:27px;
+  margin:20px;
+}
+.error-logo-wrap:hover
+{
+	cursor:hand;
+}
+.error-content
+{
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 10%;
+  background: #fff;
 }

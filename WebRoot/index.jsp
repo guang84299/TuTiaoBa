@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
 	isELIgnored="false"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -28,11 +29,21 @@
                 </ul>  
 
                 <div class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
+                  <div class="form-group index-user-nav">
                   		
-                       <div class="input-group" id="btn-login" style="width:50px;height:30px;margin-right:10px;background:#ED4040;line-height:30px;text-align: center;color:#fff;cursor:hand;">
-                       	登录
-                       </div>
+                  		<s:if test="#session.user != null">
+                  			<li><a href="https://www.script-tutorials.com/category/resources/"><s:property value="#session.user.name" /></a>
+					            <ul class="subs">
+					                <li><a href="<%=basePath%>user_loginOut">退出</a></li>
+					            </ul>
+					        </li>
+						</s:if>
+						<s:else>
+							<div class="input-group index-btn-login" id="btn-login">
+	                       	登录
+	                       </div>
+						</s:else>
+                       
                       <div class="input-group">
                         <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
                      			 <span class="glyphicon glyphicon-search input-group-addon"></span>

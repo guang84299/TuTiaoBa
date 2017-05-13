@@ -10,7 +10,7 @@
 <jsp:include page="/includes/head.jsp" />
 
   <div class="login-logo-wrap">
-    <img src="<%=basePath%>images/logo.png" class="img-responsive">
+    <img src="<%=basePath%>images/logo.png" href="<%=basePath%>" class="img-responsive">
   </div>
 
   <div class="well login-content" data-toggle="<s:if test="#request.active == true">tooltip</s:if>" title="<s:if test="#request.active == true">邮箱激活成功，请登录</s:if>">
@@ -111,8 +111,10 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 		            {
 		            	if(result == '1')
 		            		alert("用户名或密码不正确！");
-		            	else
+		            	else if(result == '2')
 		            		alert("验证码不正确！");
+		            	else if(result == '3')
+		            		alert("您的邮箱还没有激活！");
 		            	window.location.reload();
 		            }
 		          });
@@ -125,6 +127,10 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
       
        $("#login-btn-toreg").click(function(){
 		location.href = baseUrl + "user_toRegister";
+	});
+	
+	$(".login-logo-wrap").click(function(){
+		location.href = baseUrl;
 	});
   
   $('#particles').particleground({

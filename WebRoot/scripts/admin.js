@@ -130,6 +130,16 @@ $(function() {
 		location.href = baseUrl + "tutiao_deleteTuTiao?id="+$(this).attr("title");
 	})
 	
+	$('.pinglun_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "comment_list?tid="+$(this).attr("title");
+	})
+	
+	$('.pinglun_delete_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "comment_deleteComment?id="+$(this).attr("title") + "&tid=" + $(this).attr("data-tid");
+	})
+	
 	$("#auto-caiji").keydown(function() {
         if (event.keyCode == "13") {//keyCode=13是回车键
         	var dtype = 1;//今日头条
@@ -173,6 +183,24 @@ $(function() {
     $("#a_pre").attr("href","tutiao_list?index="+p_index);
     $("#a_next").attr("href","tutiao_list?index="+n_index);
     $("#a_end").attr("href","tutiao_list?index="+num);
+    
+    
+    var curr_index2 = $("#a_curr2").attr("title");
+    var c_index2 = parseInt(curr_index2);
+    var p_index2 = c_index2 - 1;
+    if(p_index2 < 1)
+    	p_index2 = 1;
+    
+    var a_num2 = $("#a_num2").attr("title");
+    var num2 = parseInt(a_num2);
+    var n_index2 = c_index2 + 1;
+    if(n_index2 > num2)
+    	n_index2 = num2;
+    var tid = $("#ye2").attr("data-tid");
+    $("#a_first2").attr("href","comment_list?index="+1+"&tid="+tid);
+    $("#a_pre2").attr("href","comment_list?index="+p_index2+"&tid="+tid);
+    $("#a_next2").attr("href","comment_list?index="+n_index2+"&tid="+tid);
+    $("#a_end2").attr("href","comment_list?index="+num2+"&tid="+tid);
 });
 
 

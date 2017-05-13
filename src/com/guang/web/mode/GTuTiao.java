@@ -22,6 +22,8 @@ public class GTuTiao {
 	private Date cdate;
 	
 	private List<GTuTiaoUnit> units;
+	private List<GComment> comments;
+	private long commentNum;
 	
 	public GTuTiao(){}
 	
@@ -86,6 +88,26 @@ public class GTuTiao {
 	}
 	public void setCdate(Date cdate) {
 		this.cdate = cdate;
+	}
+
+	@Transient
+	public List<GComment> getComments() {
+		return comments;
+	}
+
+
+	public void setComments(List<GComment> comments) {
+		this.comments = comments;
+	}
+
+	@Transient
+	public long getCommentNum() {
+		return commentNum;
+	}
+
+
+	public void setCommentNum(long commentNum) {
+		this.commentNum = commentNum;
 	}
 
 

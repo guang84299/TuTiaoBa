@@ -112,6 +112,7 @@ $(function() {
 	//显示界面
 	var tutiao_show_data = null;
 	var tutiao_show_index = 0;
+	var commentNum = 0;//评论数量
 	var updateShow = function()
 	{
 		var tid = $("#tutiao_show").attr("data-tid");
@@ -133,9 +134,102 @@ $(function() {
 			
 			$("#tutiao_show_row").show();
 			resetPicWidth();
+			commentNum = tutiao_show_data.commentNum;
+			updatePingLun(tutiao_show_data.comments);
 		});
 		
 	}
+	var updatePingLun = function(comments)
+	{
+		var s = '';
+		for(var i=0;i<comments.length;i++)
+		{
+			var comment = comments[i];
+			var t1 = new Date(comment.cdate.time);
+			var t2 = new Date().getTime() - t1.getTime();
+			var t3 = '刚刚';
+			if(t2 > 1000*60 && t2 <= 1000*60*60)
+				t3 = parseInt(t2/1000/60) + "分钟前";
+			else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
+				t3 = parseInt(t2/1000/60/60) + "小时前";
+			else if(t2 > 1000*60*60*24)
+				t3 = parseInt(t2/1000/60/60/24) + "天前";
+			
+			s += '<li class="list-group-item">' +
+	    			'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+t3+'</small></p>'+
+	    			'<p class="text-left">'+comment.content+'</p>'+
+	    			'<p class="pull-right text-muted tutiao-btn-zan" data-id="'+comment.id+'"><span style="margin-right:5px;">'+comment.support+'</span><span class="glyphicon glyphicon-thumbs-up"></span></p><br>'+
+					'</li>';
+		}
+		$("#tutiao-pinglun-ul").append(s);
+		$("#tutiao_pinglun_num").text(commentNum);
+		if(commentNum == $("#tutiao-pinglun-ul li").length)
+		{
+			$("#tutiao-morepinglun").hide();
+		}
+		$(".tutiao-btn-zan").unbind("click");
+		$(".tutiao-btn-zan").click(function(){
+			var datas = {};
+			datas.id = $(this).attr("data-id");
+			var t = $(this);
+			$.ajax({
+				type: "post",
+				data : datas,
+				url: baseUrl + "comment_support"
+			}).done(function(result) {
+				if(result == 'false')
+				{
+					alert("点赞失败！");
+				}
+				else
+				{
+					t.find("span:eq(0)").text(result);
+				}
+				
+			});
+		});
+	};
+	var addPingLun = function(comment)
+	{
+		var t1 = new Date(comment.cdate.time);
+		var t2 = new Date().getTime() - t1.getTime();
+		var t3 = '刚刚';
+		if(t2 > 1000*60 && t2 <= 1000*60*60)
+			t3 = parseInt(t2/1000/60) + "分钟前";
+		else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
+			t3 = parseInt(t2/1000/60/60) + "小时前";
+		else if(t2 > 1000*60*60*24)
+			t3 = parseInt(t2/1000/60/60/24) + "天前";
+		var s = '<li class="list-group-item">' +
+		'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+t3+'</small></p>'+
+		'<p class="text-left">'+comment.content+'</p>'+
+		'<p class="pull-right text-muted tutiao-btn-zan" data-id="'+ comment.id +'"><span style="margin-right:5px;">'+comment.support+'</span><span class="glyphicon glyphicon-thumbs-up"></span></p><br>'+
+		'</li>';
+		commentNum+=1;
+		$("#tutiao-pinglun-ul").prepend(s);
+		$("#tutiao_pinglun_num").text(commentNum);
+		$(".tutiao-btn-zan").unbind("click");
+		$(".tutiao-btn-zan").click(function(){
+			var datas = {};
+			datas.id = $(this).attr("data-id");
+			var t = $(this);
+			$.ajax({
+				type: "post",
+				data : datas,
+				url: baseUrl + "comment_support"
+			}).done(function(result) {
+				if(result == 'false')
+				{
+					alert("点赞失败！");
+				}
+				else
+				{
+					t.find("span:eq(0)").text(result);
+				}
+				
+			});
+		});
+	};
 	$("#tuijian_row").hide();
 	$('.tutiao-pic-left').hide();
 	var resetPicWidth = function()
@@ -352,8 +446,68 @@ $(function() {
 		location.href = baseUrl;
 	});
 	
+	$("#btn-login").click(function(){
+		location.href = baseUrl + "user_login";
+	});
+	
 	$('#particles').particleground({
         dotColor: '#faeaea',
         lineColor: '#faeaea'
       });
+	
+	$("#tutiao-btn-pinglun").click(function(){
+		if(document.getElementById("btn-login") != null)
+		{
+			location.href = baseUrl + "user_login";
+			return;
+		}
+		var datas = {};
+		datas.tid = $("#tutiao_show").attr("data-tid");
+		datas.content = $("#tutiao-pinglun-content").val();
+		if(datas.content == null || datas.content.length < 1|| datas.content.length > 500)
+		{
+			alert("评论内容不能为空且不能超过500字！");
+			return;
+		}
+		$.ajax({
+			type: "post",
+			data : datas,
+			url: baseUrl + "comment_addComment"
+		}).done(function(result) {
+			if(result == 'false')
+			{
+				alert("评论失败！");
+			}
+			else
+			{
+				var comment = eval('(' + result + ')'); 
+				addPingLun(comment);
+			}
+			
+		});
+	});
+	
+	$("#tutiao-morepinglun").click(function(){
+		var datas = {};
+		datas.tid = $("#tutiao_show").attr("data-tid");
+		datas.index = $("#tutiao-pinglun-ul li").length;
+		$.ajax({
+			type: "post",
+			data : datas,
+			url: baseUrl + "comment_getComment"
+		}).done(function(result) {
+			if(result == 'false')
+			{
+				alert("获取评论失败！");
+			}
+			else
+			{
+				var comments = eval('(' + result + ')'); 
+				updatePingLun(comments);
+			}
+			
+		});
+	});
+	
+	
 });

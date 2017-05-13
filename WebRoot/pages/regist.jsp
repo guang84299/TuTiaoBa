@@ -9,7 +9,7 @@
 %>
 <jsp:include page="/includes/head.jsp" />
 	<div class="regist-logo-wrap">
-    <img src="<%=basePath%>images/logo.png" class="img-responsive">
+    <img src="<%=basePath%>images/logo.png" href="<%=basePath%>" class="img-responsive">
   </div>
   <div class="well regist-content">
       <form class="form-horizontal" role="form">
@@ -46,7 +46,7 @@
         </div>
       </form>
 	<h5 id="regist-result" style="display:none;">恭喜注册成功！我们已经为您发送一封电子邮件，请您登陆邮箱，验证激活帐号！</h5>
-	
+	</div>
   <jsp:include page="/includes/foot.jsp" /> 
 <script >
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
@@ -187,7 +187,9 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
       });
       
       
-	 $("#regist-btn-reg").siblings('.spinner').css('display', 'inline-block');
+	 $(".regist-logo-wrap").click(function(){
+		location.href = baseUrl;
+	 });
 
   });
 </script>

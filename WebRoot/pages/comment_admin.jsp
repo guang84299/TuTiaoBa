@@ -22,19 +22,14 @@
   <div class="container-fluid">
    <h3 class="col-sm-offset-1">后台管理页</h3>
    
-   <div class="pull-right" style="margin-top:-40px;">
-        <button class="btn btn-primary add_btn">添加</button>
-    </div>
    <hr/>
    
    
    <table class="table table-hover">
   <thead>
     <tr>
-      <th>标题</th>
-      <th>作者</th>
-      <th>浏览量</th>
-      <th>评论量</th>
+      <th>内容</th>
+      <th>点赞量</th>
       <th>时间</th>
       <th>操作</th>
     </tr>
@@ -42,15 +37,11 @@
   <tbody>
   <s:iterator value="#list" var="val" status="sta">
     <tr>
-      <td>${val.title }</td>
-      <td>${val.author }</td>
-      <td>${val.showNum }</td>
-      <td>${val.commentNum }</td>
+      <td>${val.content }</td>
+      <td>${val.support }</td>
       <td><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></td>
       <td>
-      	<button class="btn btn-primary btn-xs pinglun_btn" title="${val.id }">评论管理</button>
-        <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
-        <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
+        <button class="btn btn-primary btn-xs pinglun_delete_btn" title="${val.id }" data-tid="${tid }">删除</button>
       </td>
     </tr>
 	</s:iterator>
@@ -60,13 +51,13 @@
 </table>
 <hr/>
 <div class="text-center">
-  <p id="ye1" align="center">
-    <a href="" id="a_first" class="btn btn-small btn-success" title="First Page">&laquo; 首页</a>
-    <a href="" id="a_pre" class="btn btn-small btn-success" title="Previous Page">&laquo;上一页</a>
-    <a href="" id="a_curr" class="btn btn-small btn-warning ye1" title="${page}">${page}</a>
-    <a href="" id="a_next" class="btn btn-small btn-success" title="Next Page">下一页 &raquo;</a>
-    <a href="" id="a_end" class="btn btn-small btn-success" title="Last Page">尾页&raquo;</a>
-    <a id="a_num" class="btn btn-small btn-warning yel" title="${num}">共${num} 页</a>
+  <p id="ye2" align="center" data-tid="${tid }">
+    <a href="" id="a_first2" class="btn btn-small btn-success" title="First Page">&laquo; 首页</a>
+    <a href="" id="a_pre2" class="btn btn-small btn-success" title="Previous Page">&laquo;上一页</a>
+    <a href="" id="a_curr2" class="btn btn-small btn-warning ye1" title="${page}">${page}</a>
+    <a href="" id="a_next2" class="btn btn-small btn-success" title="Next Page">下一页 &raquo;</a>
+    <a href="" id="a_end2" class="btn btn-small btn-success" title="Last Page">尾页&raquo;</a>
+    <a id="a_num2" class="btn btn-small btn-warning yel" title="${num}">共${num} 页</a>
   </p>
 </div>
 

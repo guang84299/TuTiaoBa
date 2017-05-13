@@ -28,7 +28,21 @@
                 </ul>  
 
                 <div class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
+                  <div class="form-group index-user-nav">
+                  
+                  	<s:if test="#session.user != null">
+                  			<li><a href="https://www.script-tutorials.com/category/resources/"><s:property value="#session.user.name" /></a>
+					            <ul class="subs">
+					                <li><a href="<%=basePath%>user_loginOut">退出</a></li>
+					            </ul>
+					        </li>
+						</s:if>
+						<s:else>
+							<div class="input-group index-btn-login" id="btn-login">
+	                       	登录
+	                       </div>
+						</s:else>
+						
                       <div class="input-group">
                       <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
                       <span class="glyphicon glyphicon-search input-group-addon"></span>
@@ -134,6 +148,36 @@
         </div>
     </div>
 </div>
+
+<div class="row" id="div_pinglun">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <span class="tutiao-abstract-index"><em id="tutiao_pinglun_num">39</em><span class="tutiao-abstract-index">条评论</span></span>
+                
+                <div id="pinglun_row" style="margin-top:20px;">
+                	<div class="input-group col-sm-6">
+                      <textarea class="form-control glyphicon" id="tutiao-pinglun-content" rows="2" placeholder="写下您的评论..."></textarea>
+                      <span class="glyphicon input-group-addon" id="tutiao-btn-pinglun">评论</span>
+                      </div>
+                </div>
+                <ul class="list-group col-sm-6" style="margin-top:20px;" id="tutiao-pinglun-ul">
+				   <%--  <li class="list-group-item">
+				    	<p class="text-left"><a>用户名</a> <small class="text-muted">9天前</small></p>
+				    	<p class="text-left">内容</p>
+				        <p class="pull-right text-muted" id="tutiao-btn-zan"><span style="margin-right:5px;">3</span><span class="glyphicon glyphicon-thumbs-up"></span></p><br>
+				   	</li> --%>
+				   
+				</ul>
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-link" id="tutiao-morepinglun">查看更多评论</button>
+				</div>
+				
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="row" id="div_search">
     <div class="col-sm-12">
