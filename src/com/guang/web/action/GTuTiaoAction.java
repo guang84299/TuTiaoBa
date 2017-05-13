@@ -132,7 +132,7 @@ public class GTuTiaoAction extends ActionSupport{
 	//获取展示页面的推荐
 	public void getShowTuiJian()
 	{
-		List<GTuTiao> list = tuTiaoService.findByHot(0,8).getList();
+		List<GTuTiao> list = tuTiaoService.findByHot(0,4).getList();
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());

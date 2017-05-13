@@ -63,7 +63,9 @@
 <div class="row" id="tutiao_show_row">
     <div class="col-sm-8" >
          <div class="thumbnail" id="tutiao_show" data-tid="${tid}">
-            <img src="" alt="" width="800px" id="tutiao_show_img">
+         	<p  class="thumbnail" style="overflow:hidden;width:750px; height:450px;user-select：none;">
+            	<img src="" alt="" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;">
+            </p>
              <div class="caption text-center">
                 <button type="button" class="btn btn-primary btn-sm" id="tutiao-pic-left">
                   <span class="glyphicon glyphicon-step-backward"></span> 上一个

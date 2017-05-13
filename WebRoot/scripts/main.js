@@ -64,15 +64,15 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			var s ='';
-			$("#imloading").fadeOut(first_time,function(){
+			$("#imloading").fadeTo(first_time,0.01,function(){
 				
 				for(var i=0;i<objs.length;i++)
 				{
 					var obj = objs[i];
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
-						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-						+ '<img src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
+						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '")  class="thumbnail">'
+						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)

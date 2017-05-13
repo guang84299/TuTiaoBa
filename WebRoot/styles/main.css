@@ -20,20 +20,24 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
     color: #f00;
     background-color: transparent;
 }
-
-.masonry .thumbnail{
-  transition: all 0.2s ease-in-out;
-  webkit-transition:all 0.2s ease-in-out; 
-  -moz-transition:all 0.2s ease-in-out; 
-  -o-transition:all 0.2s ease-in-out; 
+.thumbnail
+{
+	padding:1px;
 }
-.masonry .thumbnail:hover{
-   transform:translate(0,-10px);
-   -webkit-transform:translate(0,-10px);
-   -moz-transform:translate(0,-10px);
-   -o-transform:translate(0,-10px);
-   -ms-transform:translate(0,-10px);
-  cursor:hand;
+.thumbnail div img{
+  transition:transform 0.5s ease-in-out;
+  webkit-transition:transform 0.5s ease-in-out; 
+  -moz-transition:transform 0.5s ease-in-out; 
+  -o-transition:transform 0.5s ease-in-out; 
+  
+}
+.thumbnail div img:hover{
+   transform:scale(1.2);
+   -webkit-transform:scale(1.2);
+   -moz-transform:scale(1.2);
+   -o-transform:scale(1.2);
+   -ms-transform:scale(1.2);
+   cursor:hand;
 }
 .navbar-brand:hover
 {

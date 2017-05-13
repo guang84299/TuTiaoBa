@@ -50,18 +50,28 @@ $(function() {
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
-				s += '<div class="col-sm-6 col-md-3 item">' 
+				s = '<div class="col-sm-6 col-md-3 item">' 
 					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-					+ '<img src="' +baseUrl+ obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
+					+ '<div style="overflow:hidden;height:150px;"><img style="height:220px;" src="' +baseUrl+ obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
+				$("#tuijian_data").append(s);
 				imgReady(baseUrl+obj.units[0].picPath, function () {
-					$('.masonry').masonry();
+					var p = this.width/this.height;
+					var pic = this.src;
+			    	$('#tuijian_data .thumbnail img').each(function(){
+		    		     var src = $(this).attr("src");
+		    		     if(src == pic)
+	    		    	 {
+		    		    	 var sc = 1.5-p+1;
+		    		    	 $(this).height($(this).height()*sc);			    		    	 
+	    		    	 }
+		    		  });
 				});
 			}
-			var items = $(s);
-			$("#tuijian_data").append(items).masonry( 'appended',items ).masonry();
+//			var items = $(s);
+//			$("#tuijian_data").append(items).masonry( 'appended',items ).masonry();
 //			$('.masonry').imagesLoaded(function() {
 //				$('.masonry').masonry({
 //					itemSelector: '.item'
@@ -85,18 +95,28 @@ $(function() {
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
-				s += '<div class="col-sm-2 col-md-2 item">' 
+				s = '<div class="col-sm-2 col-md-2 item">' 
 					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-					+ '<img src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' ">'
+					+ '<div style="overflow:hidden;height:100px;"><img style="height:120px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '</div></div></div>';
+				$("#about_row").append(s);
 				imgReady(baseUrl+obj.units[0].picPath, function () {
-					$('.masonry').masonry();
+					var p = this.width/this.height;
+					var pic = this.src;
+			    	$('#about_row .thumbnail img').each(function(){
+		    		     var src = $(this).attr("src");
+		    		     if(src == pic)
+	    		    	 {
+		    		    	 var sc = 1.5-p+1;
+		    		    	 $(this).height($(this).height()*sc);			    		    	 
+	    		    	 }
+		    		  });
 				});
 			}
-			var items = $(s);
-			$("#about_row").append(items).masonry( 'appended',items ).masonry();
+//			var items = $(s);
+//			$("#about_row").append(items).masonry( 'appended',items ).masonry();
 			
 //			$('.masonry').imagesLoaded(function() {
 //				$('.masonry').masonry({
@@ -133,7 +153,6 @@ $(function() {
 			$("#tuijian_title").text(tutiao_show_data.title);
 			
 			$("#tutiao_show_row").show();
-			resetPicWidth();
 			commentNum = tutiao_show_data.commentNum;
 			updatePingLun(tutiao_show_data.comments);
 		});
@@ -232,24 +251,7 @@ $(function() {
 	};
 	$("#tuijian_row").hide();
 	$('.tutiao-pic-left').hide();
-	var resetPicWidth = function()
-	{
-		var width = $("#tutiao_show").width();
-		var img = $("#tutiao_show img:first").attr("src");
-		imgReady(img, function () {
-			
-			if(this.width / this.height < 1.5)
-			{
-				var w = this.width/this.height/1.5*width;
-				$("#tutiao_show img:first").attr("width",parseInt(w)+"px");
-			}
-			else
-			{
-				$("#tutiao_show img:first").attr("width",width+"px");
-			}
-				
-		});
-	};
+	
 	
 	var picLeft = function()
 	{
@@ -262,7 +264,6 @@ $(function() {
 			$("#tutiao_show_curr_page").text(tutiao_show_index+1);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
 			
-			resetPicWidth();
 		}
 	};
 	
@@ -275,11 +276,11 @@ $(function() {
 			{
 				$("#tutiao_show_row").hide();
 				$("#tuijian_row").show();
-				$('.masonry').imagesLoaded(function() {
-					$('.masonry').masonry({
-						itemSelector: '.item'
-					});
-				});
+//				$('.masonry').imagesLoaded(function() {
+//					$('.masonry').masonry({
+//						itemSelector: '.item'
+//					});
+//				});
 				return;
 			}
 			if(tutiao_show_index > 0)
@@ -288,7 +289,6 @@ $(function() {
 			$("#tutiao_show_curr_page").text(tutiao_show_index+1);
 			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
 			
-			resetPicWidth();
 		}
 	};
 	
@@ -314,7 +314,7 @@ $(function() {
 			posLeft = true;
 		}
 	}); 
-	$("#tutiao_show").mousedown(function(e){
+	$("#tutiao_show p").mousedown(function(e){
 		if(e.which != 1)
 			return;
 		 if(posLeft)
@@ -390,7 +390,7 @@ $(function() {
 				
 				s += '<div class="col-sm-6 col-md-3 item">' 
 					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-					+ '<img src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' ">'
+					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
@@ -427,18 +427,19 @@ $(function() {
 		$("#tutiao_show_row").hide();
 		$("#tuijian_row").hide();
 		$("#div_xiangguan").hide();
+		$("#div_pinglun").hide();
 		$("#search_row").html("");
 		$('.masonry').masonry('reloadItems');
 		
 		tu_index = 0;
 		getTuTiao(3,tu_index);
 	}
-	$(".glyphicon-search").keydown(function() {
+	$(".index-user-nav .glyphicon-search").keydown(function() {
         if (event.keyCode == "13") {//keyCode=13是回车键
         	search();
         }
     });
-	$(".glyphicon-search:last").click(function(){
+	$(".index-user-nav .glyphicon-search:last").click(function(){
 		search();
 	});
 	
