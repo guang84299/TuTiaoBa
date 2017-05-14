@@ -106,12 +106,6 @@ $(function() {
 		$("#my-navbar-collapse").removeClass("in");
 	}
 	
-//	var btn_new = function()
-//	{
-//		$(".index-bottom").hide();
-//		getTuTiao(1,0);
-//	}
-//	btn_new();
 	$("#nav_new").click(function(){
 		curr_type = 1;
 		tu_index = 0;

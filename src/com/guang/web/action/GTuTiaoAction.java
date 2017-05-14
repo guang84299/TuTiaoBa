@@ -148,6 +148,10 @@ public class GTuTiaoAction extends ActionSupport{
 			ActionContext.getContext().put("tuijian", tuijian);
 			ActionContext.getContext().put("xiangguan", xiangguan);
 		}
+		else
+		{
+			return "error";
+		}
 		return "tutiao";
 	}
 	

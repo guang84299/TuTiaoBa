@@ -45,47 +45,7 @@ $(function() {
 					var sc = 1.5-p+1;
 					img.height(img.height()*sc);	
 				});
-		  });
-		
-//		$.ajax({
-//			type: "post",
-//			url: baseUrl + "tutiao_getShowTuiJian"
-//		}).done(function(results) {
-//			var objs = eval('(' + results + ')'); 
-//			if(objs.length > 0)
-//				tuijian_next_index = objs[0].tid;
-//			var s = '';
-//			for(var i=0;i<objs.length;i++)
-//			{
-//				var obj = objs[i];
-//				s = '<div class="col-sm-6 col-md-3 item">' 
-//					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-//					+ '<div style="overflow:hidden;height:150px;"><img style="height:220px;" src="' +baseUrl+ obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
-//					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
-//					+ '<div class="caption"><b>' + obj.title + '</b>'
-//					+ '</div></div></div>';
-//				$("#tuijian_data").append(s);
-//				imgReady(baseUrl+obj.units[0].picPath, function () {
-//					var p = this.width/this.height;
-//					var pic = this.src;
-//			    	$('#tuijian_data .thumbnail img').each(function(){
-//		    		     var src = $(this).attr("src");
-//		    		     if(src == pic)
-//	    		    	 {
-//		    		    	 var sc = 1.5-p+1;
-//		    		    	 $(this).height($(this).height()*sc);			    		    	 
-//	    		    	 }
-//		    		  });
-//				});
-//			}
-//			var items = $(s);
-//			$("#tuijian_data").append(items).masonry( 'appended',items ).masonry();
-//			$('.masonry').imagesLoaded(function() {
-//				$('.masonry').masonry({
-//					itemSelector: '.item'
-//				});
-//			});
-//		})		
+		  });	
 	};
 	getShowTuiJian();
 	
@@ -101,46 +61,6 @@ $(function() {
 					img.height(img.height()*sc);	
 				});
 		  });
-//		$.ajax({
-//			type: "post",
-//			url: baseUrl + "tutiao_getShowXiangGuan"
-//		}).done(function(results) {
-//			var objs = eval('(' + results + ')'); 
-//			if(objs.length > 0)
-//				tuijian_next_index = objs[0].tid;
-//			var s ='';
-//			for(var i=0;i<objs.length;i++)
-//			{
-//				var obj = objs[i];
-//				s = '<div class="col-sm-2 col-md-2 item">' 
-//					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
-//					+ '<div style="overflow:hidden;height:100px;"><img style="height:120px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
-//					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
-//					+ '<div class="caption"><b>' + obj.title + '</b>'
-//					+ '</div></div></div>';
-//				$("#about_row").append(s);
-//				imgReady(baseUrl+obj.units[0].picPath, function () {
-//					var p = this.width/this.height;
-//					var pic = this.src;
-//			    	$('#about_row .thumbnail img').each(function(){
-//		    		     var src = $(this).attr("src");
-//		    		     if(src == pic)
-//	    		    	 {
-//		    		    	 var sc = 1.5-p+1;
-//		    		    	 $(this).height($(this).height()*sc);			    		    	 
-//	    		    	 }
-//		    		  });
-//				});
-//			}
-//			var items = $(s);
-//			$("#about_row").append(items).masonry( 'appended',items ).masonry();
-			
-//			$('.masonry').imagesLoaded(function() {
-//				$('.masonry').masonry({
-//					itemSelector: '.item'
-//				});
-//			});
-//		})		
 	};
 	getShowXiangGuan();
 	
@@ -157,29 +77,7 @@ $(function() {
 		$("#tutiao_show .thumbnail").hide();
 		$(".tutiao_show_des").hide();
 		$("#tutiao_show .thumbnail:eq(0)").show();
-		$(".tutiao_show_des:eq(0)").show();
-//		var tid = $("#tutiao_show").attr("data-tid");
-//		var datas = {};
-//		datas.tid = tid;
-//		$.ajax({
-//			type: "post",
-//			data : datas,
-//			url: baseUrl + "tutiao_getTuTiaoShow"
-//		}).done(function(results) {
-//			tutiao_show_data = eval('(' + results + ')'); 
-//			tutiao_show_index =0;
-//			$("#tutiao_show img:first").attr("src",baseUrl+tutiao_show_data.units[0].picPath);
-//			$("#tutiao_show_title").text(tutiao_show_data.title);
-//			$("#tutiao_show_curr_page").text("1");
-//			$("#tutiao_show_curr_page").next().text("/"+tutiao_show_data.units.length);
-//			$("#tutiao_show_des").html(tutiao_show_data.units[tutiao_show_index].tdescribe);
-//			$("#tuijian_title").text(tutiao_show_data.title);
-//			
-//			$("#tutiao_show_row").show();
-//			commentNum = tutiao_show_data.commentNum;
-//			updatePingLun(tutiao_show_data.comments);
-//		});
-		
+		$(".tutiao_show_des:eq(0)").show();		
 	}
 	var updatePingLun = function(comments)
 	{
@@ -187,18 +85,9 @@ $(function() {
 		for(var i=0;i<comments.length;i++)
 		{
 			var comment = comments[i];
-			var t1 = new Date(comment.cdate.time);
-			var t2 = new Date().getTime() - t1.getTime();
-			var t3 = '刚刚';
-			if(t2 > 1000*60 && t2 <= 1000*60*60)
-				t3 = parseInt(t2/1000/60) + "分钟前";
-			else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
-				t3 = parseInt(t2/1000/60/60) + "小时前";
-			else if(t2 > 1000*60*60*24)
-				t3 = parseInt(t2/1000/60/60/24) + "天前";
 			
 			s += '<li class="list-group-item">' +
-	    			'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+t3+'</small></p>'+
+	    			'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+comment.time+'</small></p>'+
 	    			'<p class="text-left">'+comment.content+'</p>'+
 	    			'<p class="pull-right text-muted tutiao-btn-zan" data-id="'+comment.id+'"><span style="margin-right:5px;">'+comment.support+'</span><span class="glyphicon glyphicon-thumbs-up"></span></p><br>'+
 					'</li>';
@@ -233,17 +122,8 @@ $(function() {
 	};
 	var addPingLun = function(comment)
 	{
-		var t1 = new Date(comment.cdate.time);
-		var t2 = new Date().getTime() - t1.getTime();
-		var t3 = '刚刚';
-		if(t2 > 1000*60 && t2 <= 1000*60*60)
-			t3 = parseInt(t2/1000/60) + "分钟前";
-		else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
-			t3 = parseInt(t2/1000/60/60) + "小时前";
-		else if(t2 > 1000*60*60*24)
-			t3 = parseInt(t2/1000/60/60/24) + "天前";
 		var s = '<li class="list-group-item">' +
-		'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+t3+'</small></p>'+
+		'<p class="text-left"><a>'+comment.userName+'</a> <small class="text-muted">'+comment.time+'</small></p>'+
 		'<p class="text-left">'+comment.content+'</p>'+
 		'<p class="pull-right text-muted tutiao-btn-zan" data-id="'+ comment.id +'"><span style="margin-right:5px;">'+comment.support+'</span><span class="glyphicon glyphicon-thumbs-up"></span></p><br>'+
 		'</li>';

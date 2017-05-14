@@ -1,6 +1,7 @@
 package com.guang.web.action;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -99,6 +100,15 @@ public class GCommentAction extends ActionSupport{
 			for(GComment comment : comments)
 			{
 				comment.setUserName(userService.find(comment.getUserId()).getName());
+				long t2 = new Date().getTime() - comment.getCdate().getTime();
+				String t3 = "刚刚";
+				if(t2 > 1000*60 && t2 <= 1000*60*60)
+					t3 = (t2/1000/60) + "分钟前";
+				else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
+					t3 = (t2/1000/60/60) + "小时前";
+				else if(t2 > 1000*60*60*24)
+					t3 = (t2/1000/60/60/24) + "天前";
+				comment.setTime(t3);
 			}
 			print(JSONArray.fromObject(comments).toString());
 		}
