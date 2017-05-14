@@ -8,6 +8,7 @@
      <constant name="struts.multipart.maxSize" value="200000000"/> 
     
 	<package name="game_user" namespace="/" extends="struts-default">
+    
 	   <action name="user_*" class="com.guang.web.action.GUserAction" method="{1}">
 	       <result name="login" >/pages/login.jsp</result>
 	       <result name="register" >/pages/regist.jsp</result>
@@ -21,6 +22,7 @@
 	      <result name="add" >/pages/tutiao_add.jsp</result>
 	      <result name="update" >/pages/tutiao_update.jsp</result>
 	      <result name="tutiao" >/pages/tutiao.jsp</result>
+	      <result name="home" >/pages/home.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
 	   </action>
 	   

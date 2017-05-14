@@ -20,6 +20,7 @@ public class GComment {
 	private Date cdate;
 	
 	private String userName;
+	private String time;
 	
 	public GComment(){}
 	public GComment(long userId, long tuTiaoId, String content, int support) {
@@ -75,6 +76,13 @@ public class GComment {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	@Transient
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 	
 	

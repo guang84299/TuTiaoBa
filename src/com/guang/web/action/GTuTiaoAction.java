@@ -66,6 +66,17 @@ public class GTuTiaoAction extends ActionSupport{
 		return "index";
 	}
 	
+	public String home()
+	{
+		List<GTuTiao> list = tuTiaoService.findByNew(0,12).getList();
+		for(GTuTiao tuTiao : list)
+		{
+			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+		}
+		ActionContext.getContext().put("tuTiaos", list);
+		return "home";
+	}
+	
 	public void getTuTiaos()
 	{
 		String index = ServletActionContext.getRequest().getParameter("index");
@@ -100,7 +111,42 @@ public class GTuTiaoAction extends ActionSupport{
 		GTuTiao tuTiao = tuTiaoService.findByTid(tid);
 		if(tuTiao != null)
 		{
-			ActionContext.getContext().put("title", tuTiao.getTitle());
+			tuTiao.setShowNum(tuTiao.getShowNum()+1);
+			tuTiaoService.update(tuTiao);
+			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 10).getList();
+			for(GComment comment : comments)
+			{
+				comment.setUserName(userService.find(comment.getUserId()).getName());
+				long t2 = new Date().getTime() - comment.getCdate().getTime();
+				String t3 = "刚刚";
+				if(t2 > 1000*60 && t2 <= 1000*60*60)
+					t3 = (t2/1000/60) + "分钟前";
+				else if(t2 > 1000*60*60 && t2 <= 1000*60*60*24)
+					t3 = (t2/1000/60/60) + "小时前";
+				else if(t2 > 1000*60*60*24)
+					t3 = (t2/1000/60/60/24) + "天前";
+				comment.setTime(t3);
+			}
+			tuTiao.setComments(comments);
+			tuTiao.setCommentNum(commentService.findNum(tuTiao.getId()));
+			
+			//推荐数据 带广告
+			List<GTuTiao> tuijian = tuTiaoService.findByHot(0,6).getList();
+			for(GTuTiao tuTiao2 : tuijian)
+			{
+				tuTiao2.setUnits(tiaoUnitService.findAll(tuTiao2.getId()).getList());
+			}
+			//相关数据
+			List<GTuTiao> xiangguan = tuTiaoService.findByHot(0,4).getList();
+			for(GTuTiao tuTiao3 : xiangguan)
+			{
+				tuTiao3.setUnits(tiaoUnitService.findAll(tuTiao3.getId()).getList());
+			}
+			
+			ActionContext.getContext().put("tuTiao", tuTiao);
+			ActionContext.getContext().put("tuijian", tuijian);
+			ActionContext.getContext().put("xiangguan", xiangguan);
 		}
 		return "tutiao";
 	}

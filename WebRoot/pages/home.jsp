@@ -1,13 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
-	isELIgnored="false"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
-<%
+	isELIgnored="false"%><%@taglib uri="/struts-tags" prefix="s"%><%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<jsp:include page="/includes/head.jsp" />
+			+ request.getServerName() + path + "/";
+	int port = request.getServerPort();
+	if(port == 8080)
+	{
+		basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":"+ port + path + "/";
+	}
+%><jsp:include page="/includes/head.jsp" />
 <div>
    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">  
         <div class="container-fluid index-content3">  
@@ -19,7 +21,7 @@
                     <span class="icon-bar"></span>  
                     <span class="icon-bar"></span>  
                 </button>  
-                <div><img class="navbar-brand" href="<%=basePath%>" src="<%=basePath%>images/logo.png" class="img-rounded"></div>
+                <div><a href="<%=basePath%>"><img class="navbar-brand"  src="<%=basePath%>images/logo.png" class="img-rounded"></a></div>
             </div>  
             <div class="collapse navbar-collapse" id="my-navbar-collapse">  
                 <ul class="nav navbar-nav">  
@@ -32,7 +34,7 @@
                   <div class="form-group index-user-nav">
                   		
                   		<s:if test="#session.user != null">
-                  			<li><a href="https://www.script-tutorials.com/category/resources/"><s:property value="#session.user.name" /></a>
+                  			<li><a href="#"><s:property value="#session.user.name" /></a>
 					            <ul class="subs">
 					                <li><a href="<%=basePath%>user_loginOut">退出</a></li>
 					            </ul>
@@ -62,7 +64,18 @@
 <div class="index-content container">
 
 	<div class="row index-content2 masonry" id="tutiaos">
-
+		
+		<s:iterator value="#tuTiaos" var="val" status="sta">
+		<div class="col-sm-6 col-md-3 item">
+			<div onclick="window.open('<%=basePath%>${val.tid}')"  class="thumbnail">
+				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="<%=basePath%>${val.units[0].picPath}" alt="${val.units[0].tdescribe}"></div>
+					<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+					<div class="caption"><b> ${val.title} </b>
+						<div class="index-fontBottom">${val.author} ⋅ ${val.showNum}浏览 ⋅ <s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></div>
+					</div>
+			</div>
+		</div>
+		</s:iterator>				
 	</div>
 </div>
 

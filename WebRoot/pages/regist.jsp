@@ -4,12 +4,17 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ request.getServerName() + path + "/";
+	int port = request.getServerPort();
+	if(port == 8080)
+	{
+		basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":"+ port + path + "/";
+	}
 %>
 <jsp:include page="/includes/head.jsp" />
 	<div class="regist-logo-wrap">
-    <img src="<%=basePath%>images/logo.png" href="<%=basePath%>" class="img-responsive">
+    <a href="<%=basePath%>" ><img src="<%=basePath%>images/logo.png" class="img-responsive"></a>
   </div>
   <div class="well regist-content">
       <form class="form-horizontal" role="form">
@@ -50,8 +55,7 @@
   <jsp:include page="/includes/foot.jsp" /> 
 <script >
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
-		if(baseUrl.indexOf("8080") == -1)
-			baseUrl = "www.tutiaoba.com/"
+		
   $(function(){
 
       $('#particles').particleground({

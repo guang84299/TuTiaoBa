@@ -1,13 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
-	isELIgnored="false"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
-<%
+	isELIgnored="false"%><%@taglib uri="/struts-tags" prefix="s"%><%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+			+ request.getServerName() +  path + "/";
+	int port = request.getServerPort();
+	if(port == 8080)
+	{
+		basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":"+ port + path + "/";
+	}
+%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

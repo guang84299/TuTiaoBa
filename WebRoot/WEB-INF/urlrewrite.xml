@@ -5,6 +5,11 @@
 
 <urlrewrite>
 
+	<rule>
+        <from>^/$</from>  
+        <to>/tutiao_home</to> 
+    </rule>
+    
     <rule>
         <from>^/([A-Za-z0-9]+)$</from>  
         <to>/tutiao_findTuTiao?tid=$1</to> 

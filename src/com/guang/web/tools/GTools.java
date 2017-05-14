@@ -120,7 +120,7 @@ public class GTools {
 					new InternetAddress(sendAdress));
 			mimeMessage.setSubject("亲,欢迎注册图条吧,赶快激活您的账号吧！");
 			mimeMessage.setSentDate(new Date());
-			mimeMessage.setText("您好，感谢您注册图条吧，请点击下面的链接激活您的账号：\n http://localhost:8080/user_active?mail="+sendAdress);
+			mimeMessage.setText("您好，感谢您注册图条吧，请点击下面的链接激活您的账号：\n http://www.tutiaoba.com/user_active?mail="+sendAdress);
 			mimeMessage.saveChanges();
 			Transport.send(mimeMessage);
 		} catch (MessagingException e) {

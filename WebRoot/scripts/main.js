@@ -2,8 +2,6 @@
  * Created by Guang on 2017/4/22.
  */
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
-if(baseUrl.indexOf("8080") == -1)
-	baseUrl = "www.tutiaoba.com/"
 	
 //js时间格式化;
 Date.prototype.format = function(format) {
@@ -41,7 +39,7 @@ $(function() {
 	
 	var loading = 0;
 	var curr_type = 1;
-	var tu_index = 0;
+	var tu_index = $("#tutiaos .item").length;
 	var first_time = 0;
 	var getTuTiao = function(type,index)
 	{		
@@ -72,7 +70,7 @@ $(function() {
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
 						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '")  class="thumbnail">'
-						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.title + ' "></div>'
+						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.units[0].tdescribe + ' "></div>'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
@@ -108,12 +106,12 @@ $(function() {
 		$("#my-navbar-collapse").removeClass("in");
 	}
 	
-	var btn_new = function()
-	{
-		$(".index-bottom").hide();
-		getTuTiao(1,0);
-	}
-	btn_new();
+//	var btn_new = function()
+//	{
+//		$(".index-bottom").hide();
+//		getTuTiao(1,0);
+//	}
+//	btn_new();
 	$("#nav_new").click(function(){
 		curr_type = 1;
 		tu_index = 0;
