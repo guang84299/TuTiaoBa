@@ -107,7 +107,7 @@ var _hmt = _hmt || [];
          <div class="thumbnail" id="tutiao_show" data-tid="${tid}">
          	<s:iterator value="#tuTiao.units" var="val" status="sta">
          	<p  class="thumbnail" style="overflow:hidden;width:750px; height:450px;user-select：none;display:none;">
-            	<img src="${val.picPath }" alt="${val.tdescribe }" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;">
+            	<img src="${val.picPath }" alt="${val.tdescribe }" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;height:450px;">
             </p>
             </s:iterator>
              <div class="caption text-center">
@@ -149,9 +149,9 @@ var _hmt = _hmt || [];
 <div class="row" id="tuijian_row">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body" style="padding-left:0px;padding-right:0px;">
                 
-                <div class="tutiao-panel-body-d">
+                <div class="tutiao-panel-body-d" style="padding-left:15px;padding-right:15px;">
                     <div class="row">
                         <div class="col-sm-8">
                             <h4 id="tuijian_title">${tuTiao.title }</h4>
@@ -174,9 +174,9 @@ var _hmt = _hmt || [];
 					<s:iterator value="#xiangguan" var="val" status="sta">
                 	 	<div class="col-sm-6 col-md-3 item" data-tid="<%=basePath%>${val.tid }">
 					    	<div onclick="window.open('<%=basePath%>${val.tid }')" class="thumbnail">
-								<div style="overflow:hidden;height:150px;"><img style="height:220px;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
+								<div class="thumbnail tuijian_div_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img style="height:220px;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
-								<div class="caption"><b>  ${val.title } </b></div>
+								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
 						</div>
                 	 </s:iterator>
@@ -193,16 +193,16 @@ var _hmt = _hmt || [];
 <div class="row" id="div_xiangguan">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-body" >
+            <div class="panel-body" style="padding-left:0px;padding-right:0px;">
                 <h3>相关推荐</h3>
                 
                 <div id="about_row" class="masonry">
                 	 <s:iterator value="#tuijian" var="val" status="sta">
-                	 	<div class="col-sm-2 col-md-2 item">
+                	 	<div class="col-sm-6 col-md-3 item">
 					    	<div onclick="window.open('<%=basePath%>${val.tid }')" class="thumbnail">
-								<div style="overflow:hidden;height:100px;"><img style="height:120px;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
+								<div class="thumbnail about_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img style="height:220px;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
-								<div class="caption"><b>  ${val.title } </b></div>
+								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
 						</div>
                 	 </s:iterator>

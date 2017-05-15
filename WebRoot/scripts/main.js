@@ -37,7 +37,6 @@ $(function() {
 
     }
 	
-	var loading = 0;
 	var curr_type = 1;
 	var tu_index = $("#tutiaos .item").length;
 	var first_time = 0;
@@ -95,7 +94,6 @@ $(function() {
 			$(".index-bottom").show();
 			
 			first_time = 500;
-			loading = 0;
 		})		
 	};
 	
@@ -107,6 +105,7 @@ $(function() {
 		    	 	$('.masonry').masonry();	
 				});
 		  });	
+		$('#imloading').css('opacity',0.01);
 	}
 	
 	initPic();
@@ -141,12 +140,15 @@ $(function() {
 	});
 	var winH = $(window).height();
 	$(window).scroll(function () {   
-        if( $(document).scrollTop() + winH > $(document).height()-10  && loading == 0 )
+        if( $(document).scrollTop() + winH > $(document).height()-winH/5)
     	{
-        	loading = 1;
-        	$("#imloading").fadeTo(500,0.7,function(){
-        		getTuTiao(curr_type,tu_index);
-        	});
+        	var opa = $('#imloading').css('opacity');
+        	if(opa <= 0.01)
+    		{
+        		$("#imloading").fadeTo(500,0.7,function(){
+            		getTuTiao(curr_type,tu_index);
+            	});
+    		}
     	}
      });
 	

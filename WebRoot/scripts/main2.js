@@ -47,7 +47,7 @@ $(function() {
 				});
 		  });	
 	};
-	getShowTuiJian();
+//	getShowTuiJian();
 	
 	
 	var getShowXiangGuan = function()
@@ -62,10 +62,33 @@ $(function() {
 				});
 		  });
 	};
-	getShowXiangGuan();
+//	getShowXiangGuan();
 	
-	
-	
+	//窗口变化
+	var winReSize = function()
+	{
+		var w = $("#tutiao_show").width()-6;
+		var h = w*(450.0/750.0);
+		$("#tutiao_show p").width(w);
+		$("#tutiao_show p").height(h);
+		$("#tutiao_show img").height(h);
+		
+		var roww = $("#tuijian_data .item:eq(0)").width()-8;
+		var rowh = roww*(150.0/250.0);
+		$(".tuijian_div_wrap").width(roww);
+		$(".tuijian_div_wrap").height(rowh);
+		$(".tuijian_div_wrap img").height(rowh);
+		
+		var roww2 = $("#about_row .item:eq(0)").width()-8;
+		var rowh2 = roww2*(150.0/250.0);
+		$(".about_wrap").width(roww2);
+		$(".about_wrap").height(rowh2);
+		$(".about_wrap img").height(rowh2);		
+		
+	}
+	$(window).resize(function() {
+			winReSize();
+		});
 	//显示界面
 	var tutiao_show_num = 0;
 	var tutiao_show_index = 0;
@@ -77,7 +100,9 @@ $(function() {
 		$("#tutiao_show .thumbnail").hide();
 		$(".tutiao_show_des").hide();
 		$("#tutiao_show .thumbnail:eq(0)").show();
-		$(".tutiao_show_des:eq(0)").show();		
+		$(".tutiao_show_des:eq(0)").show();	
+		
+		winReSize();
 	}
 	var updatePingLun = function(comments)
 	{
@@ -152,9 +177,7 @@ $(function() {
 			});
 		});
 	};
-	$("#tuijian_row").hide();
-	$('.tutiao-pic-left').hide();
-	
+		
 	
 	var picLeft = function()
 	{
@@ -258,6 +281,7 @@ $(function() {
 	});
 	
 	updateShow();
+	$("#tuijian_row").hide();
 	
 	//搜索
 	var loading = 0;

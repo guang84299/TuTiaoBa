@@ -132,7 +132,7 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setCommentNum(commentService.findNum(tuTiao.getId()));
 			
 			//推荐数据 带广告
-			List<GTuTiao> tuijian = tuTiaoService.findByHot(0,6).getList();
+			List<GTuTiao> tuijian = tuTiaoService.findByHot(0,4).getList();
 			for(GTuTiao tuTiao2 : tuijian)
 			{
 				tuTiao2.setUnits(tiaoUnitService.findAll(tuTiao2.getId()).getList());
