@@ -99,6 +99,18 @@ $(function() {
 		})		
 	};
 	
+	var initPic = function()
+	{
+		$("#tutiaos .item img").each(function(){
+		     var src = $(this).attr("src");
+		     imgReady(src, function () {
+		    	 	$('.masonry').masonry();	
+				});
+		  });	
+	}
+	
+	initPic();
+	
 	$("#nav_new").css("color","#f00");
 	
 	var hideMobelNav = function()
