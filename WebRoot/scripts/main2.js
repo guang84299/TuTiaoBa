@@ -77,14 +77,13 @@ $(function() {
 		var rowh = roww*(150.0/250.0);
 		$(".tuijian_div_wrap").width(roww);
 		$(".tuijian_div_wrap").height(rowh);
-		$(".tuijian_div_wrap img").height(rowh);
+		$(".tuijian_div_wrap img").width(roww);
 		
 		var roww2 = $("#about_row .item:eq(0)").width()-8;
 		var rowh2 = roww2*(150.0/250.0);
 		$(".about_wrap").width(roww2);
 		$(".about_wrap").height(rowh2);
-		$(".about_wrap img").height(rowh2);		
-		
+		$(".about_wrap img").width(roww2);
 	}
 	$(window).resize(function() {
 			winReSize();
