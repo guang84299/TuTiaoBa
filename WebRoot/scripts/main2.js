@@ -63,7 +63,7 @@ $(function() {
 		  });
 	};
 //	getShowXiangGuan();
-	
+	var roww_cache = 0;
 	//窗口变化
 	var winReSize = function()
 	{
@@ -74,6 +74,10 @@ $(function() {
 		$("#tutiao_show img").height(h);
 		
 		var roww = $("#tuijian_data .item:eq(0)").width()-8;
+		if(roww > 20)
+			roww_cache = roww;
+		else
+			roww = roww_cache;
 		var rowh = roww*(150.0/250.0);
 		$(".tuijian_div_wrap").width(roww);
 		$(".tuijian_div_wrap").height(rowh);
@@ -314,12 +318,13 @@ $(function() {
 				var obj = objs[i];
 				
 				s += '<div class="col-sm-6 col-md-3 item">' 
-					+ '<div onclick=window.open("' + baseUrl+ obj.tid + '") class="thumbnail">'
+					+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
+					+ '<div class="thumbnail">'
 					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
-					+ '</div></div></div></div>';
+					+ '</div></div></div></a></div>';
 				
 				imgReady(baseUrl+obj.units[0].picPath, function () {
 					$('.masonry').masonry();

@@ -68,12 +68,13 @@ $(function() {
 					var obj = objs[i];
 					
 					s += '<div class="col-sm-6 col-md-3 item">' 
-						+ '<div onclick=window.open("' + baseUrl+ obj.tid + '")  class="thumbnail">'
+						+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
+						+ '<div class="thumbnail">'
 						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.units[0].tdescribe + ' "></div>'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
-						+ '</div></div></div></div>';
+						+ '</div></div></div></a></div>';
 					
 					imgReady(baseUrl+obj.units[0].picPath, function () {
 //						$(".item img:eq(3)").height = this.height;

@@ -67,13 +67,15 @@
 		
 		<s:iterator value="#tuTiaos" var="val" status="sta">
 		<div class="col-sm-6 col-md-3 item">
-			<div onclick="window.open('<%=basePath%>${val.tid}')"  class="thumbnail">
+			<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
+			<div class="thumbnail">
 				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="<%=basePath%>${val.units[0].picPath}" alt="${val.units[0].tdescribe}"></div>
 					<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 					<div class="caption"><b> ${val.title} </b>
 						<div class="index-fontBottom">${val.author} ⋅ ${val.showNum}浏览 ⋅ <s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></div>
 					</div>
 			</div>
+			</a>
 		</div>
 		</s:iterator>				
 	</div>

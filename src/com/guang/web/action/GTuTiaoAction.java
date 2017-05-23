@@ -68,7 +68,7 @@ public class GTuTiaoAction extends ActionSupport{
 	
 	public String home()
 	{
-		List<GTuTiao> list = tuTiaoService.findByNew(0,12).getList();
+		List<GTuTiao> list = tuTiaoService.findByNew(0,24).getList();
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
@@ -138,7 +138,7 @@ public class GTuTiaoAction extends ActionSupport{
 				tuTiao2.setUnits(tiaoUnitService.findAll(tuTiao2.getId()).getList());
 			}
 			//相关数据
-			List<GTuTiao> xiangguan = tuTiaoService.findByHot(0,4).getList();
+			List<GTuTiao> xiangguan = tuTiaoService.findByNew(0,4).getList();
 			for(GTuTiao tuTiao3 : xiangguan)
 			{
 				tuTiao3.setUnits(tiaoUnitService.findAll(tuTiao3.getId()).getList());
@@ -308,7 +308,7 @@ public class GTuTiaoAction extends ActionSupport{
 				Date currentTime = new Date();
 				String dateString = formatter.format(currentTime);
 				String dateString2 = formatter2.format(currentTime);
-				String picPath = "images/tutiao/"+ dateString + "/" + dateString2 + ".t";
+				String picPath = "images/tutiao/"+ dateString + "/" + dateString2 + ".jpg";
 				String pic_relpath = ServletActionContext.getServletContext().getRealPath(picPath);
 				GAutoTool.downloadPic(unit.getPicPath(), pic_relpath);
 				unit.setPicPath(picPath);

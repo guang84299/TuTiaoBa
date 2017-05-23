@@ -173,11 +173,13 @@ var _hmt = _hmt || [];
 				<div id="tuijian_data" class="masonry">
 					<s:iterator value="#xiangguan" var="val" status="sta">
                 	 	<div class="col-sm-6 col-md-3 item" data-tid="<%=basePath%>${val.tid }">
-					    	<div onclick="window.open('<%=basePath%>${val.tid }')" class="thumbnail">
+                	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
+					    	<div class="thumbnail">
 								<div class="thumbnail tuijian_div_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
+							</a>
 						</div>
                 	 </s:iterator>
 				</div>
@@ -199,11 +201,13 @@ var _hmt = _hmt || [];
                 <div id="about_row" class="masonry">
                 	 <s:iterator value="#tuijian" var="val" status="sta">
                 	 	<div class="col-sm-6 col-md-3 item">
-					    	<div onclick="window.open('<%=basePath%>${val.tid }')" class="thumbnail">
+                	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
+					    	<div class="thumbnail">
 								<div class="thumbnail about_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
+							</a>
 						</div>
                 	 </s:iterator>
                 </div>
