@@ -265,3 +265,4 @@ var _hmt = _hmt || [];
 
 <jsp:include page="/includes/foot.jsp" />
 <script src="<%=basePath%>scripts/main2.js"></script>
+</html>

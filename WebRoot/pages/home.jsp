@@ -87,3 +87,4 @@
 
 <jsp:include page="/includes/foot.jsp" />
 <script src="<%=basePath%>scripts/main.js"></script>
+</html>

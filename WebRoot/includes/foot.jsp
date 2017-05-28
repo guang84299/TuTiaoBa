@@ -20,4 +20,3 @@
 <script src="<%=basePath%>scripts/imagesloaded.pkgd.min.js"></script>
 <script src="<%=basePath%>scripts/jquery.particleground.min.js"></script>
 <script src="<%=basePath%>scripts/imgh.js"></script>
-</html>
