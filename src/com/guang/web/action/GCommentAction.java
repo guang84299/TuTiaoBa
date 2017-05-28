@@ -80,6 +80,7 @@ public class GCommentAction extends ActionSupport{
 			GTuTiao tuTiao = tuTiaoService.findByTid(tid);
 			GComment comment = new GComment(user.getId(), tuTiao.getId(), content, 0);
 			comment.setUserName(user.getName());
+			comment.setTime("刚刚");
 			commentService.add(comment);
 			print(JSONObject.fromObject(comment).toString());
 		}

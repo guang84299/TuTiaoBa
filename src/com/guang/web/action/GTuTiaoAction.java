@@ -74,6 +74,19 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
 		}
 		ActionContext.getContext().put("tuTiaos", list);
+		ActionContext.getContext().put("type", "1");
+		return "home";
+	}
+	
+	public String hot()
+	{
+		List<GTuTiao> list = tuTiaoService.findByHot(0,24).getList();
+		for(GTuTiao tuTiao : list)
+		{
+			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+		}
+		ActionContext.getContext().put("tuTiaos", list);
+		ActionContext.getContext().put("type", "2");
 		return "home";
 	}
 	
@@ -114,7 +127,7 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setShowNum(tuTiao.getShowNum()+1);
 			tuTiaoService.update(tuTiao);
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
-			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 10).getList();
+			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 5).getList();
 			for(GComment comment : comments)
 			{
 				comment.setUserName(userService.find(comment.getUserId()).getName());
@@ -131,22 +144,29 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setComments(comments);
 			tuTiao.setCommentNum(commentService.findNum(tuTiao.getId()));
 			
-			//推荐数据 带广告
-			List<GTuTiao> tuijian = tuTiaoService.findByHot(0,4).getList();
-			for(GTuTiao tuTiao2 : tuijian)
+			// 带广告
+			List<GTuTiao> hots = tuTiaoService.findByHot(0,5).getList();
+			for(GTuTiao tuTiao2 : hots)
 			{
 				tuTiao2.setUnits(tiaoUnitService.findAll(tuTiao2.getId()).getList());
 			}
-			//相关数据
-			List<GTuTiao> xiangguan = tuTiaoService.findByNew(0,4).getList();
-			for(GTuTiao tuTiao3 : xiangguan)
+			//
+			List<GTuTiao> news = tuTiaoService.findByNew(0,5).getList();
+			for(GTuTiao tuTiao3 : news)
 			{
 				tuTiao3.setUnits(tiaoUnitService.findAll(tuTiao3.getId()).getList());
 			}
+			//推荐 带广告
+			List<GTuTiao> tuijians = tuTiaoService.findByHot(0,6).getList();
+			for(GTuTiao tuTiao4 : tuijians)
+			{
+				tuTiao4.setUnits(tiaoUnitService.findAll(tuTiao4.getId()).getList());
+			}
 			
 			ActionContext.getContext().put("tuTiao", tuTiao);
-			ActionContext.getContext().put("tuijian", tuijian);
-			ActionContext.getContext().put("xiangguan", xiangguan);
+			ActionContext.getContext().put("hots", hots);
+			ActionContext.getContext().put("news", news);
+			ActionContext.getContext().put("tuijians", tuijians);
 		}
 		else
 		{
@@ -220,7 +240,7 @@ public class GTuTiaoAction extends ActionSupport{
 			e.printStackTrace();
 		}
 			
-		List<GTuTiao> list = tuTiaoService.findSearch(val, num, 12).getList();
+		List<GTuTiao> list = tuTiaoService.findSearch(val, num, 24).getList();
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());

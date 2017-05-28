@@ -25,9 +25,9 @@
             </div>  
             <div class="collapse navbar-collapse" id="my-navbar-collapse">                  
                 <div class="nav navbar-nav btn-group">
-                		<a  class="btn btn-default index-nav-btn index-active" id="nav_new">最新</a>
-                    	<a  class="btn btn-default index-nav-btn" id="nav_hot">最热</a>
-                    	<a  class="btn btn-default index-nav-btn" id="nav_search" style="display: none;">搜索结果</a>
+                		<a  href="<%=basePath%>" class="btn btn-default index-nav-btn <s:if test="#type == 1">index-active</s:if>" id="nav_new">最新</a>
+                    	<a  href="<%=basePath%>tutiao_hot" class="btn btn-default index-nav-btn <s:if test="#type == 2">index-active</s:if>" id="nav_hot">最热</a>
+                    	<a  class="btn btn-default index-nav-btn index-active" id="nav_search" style="display: none;">搜索结果</a>
                 </div>
                 
 
@@ -57,7 +57,7 @@
 
 <div class="index-content">
 
-	<div class="row index-content2 masonry" id="tutiaos" style="margin-left:0px;margin-right:0px;">
+	<div class="row index-content2 masonry" id="tutiaos" data-type="${type }" style="margin-left:0px;margin-right:0px;">
 		
 		<s:iterator value="#tuTiaos" var="val" status="sta">
 		<div class="col-xs-3 item"  style="padding:1px;">

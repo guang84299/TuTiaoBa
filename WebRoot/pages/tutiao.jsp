@@ -64,34 +64,31 @@ var _hmt = _hmt || [];
                 <div><a href="<%=basePath%>"><img class="navbar-brand" href="/" src="<%=basePath%>images/logo.png" class="img-rounded"></a></div>
             </div>  
             <div class="collapse navbar-collapse" id="my-navbar-collapse">  
-                <ul class="nav navbar-nav">  
-                    <li ><a class="ac" href="#" id="nav_kan">看图条</a></li>  
+                <!-- <ul class="nav navbar-nav">  
+                    <li ><a class="ac" href="#" id="">看图条</a></li>  
                     <li ><a class="ac" href="#" id="nav_search" style="display: none;">搜索结果</a></li>
-                </ul>  
+                </ul>   -->
+                <div class="nav navbar-nav btn-group">
+                		<a  class="btn btn-default index-nav-btn index-active" id="nav_kan">看图条</a>
+                    	<a  class="btn btn-default index-nav-btn index-active" id="nav_search" style="display: none;">搜索结果</a>
+                </div>
 
                 <div class="navbar-form navbar-right" role="search">
-                  <div class="form-group index-user-nav">
-                  
-                  	<s:if test="#session.user != null">
-                  			<li><a href="#"><s:property value="#session.user.name" /></a>
-					            <ul class="subs">
-					                <li><a href="<%=basePath%>user_loginOut">退出</a></li>
-					            </ul>
-					        </li>
-						</s:if>
-						<s:else>
-							<div class="input-group index-btn-login" id="btn-login">
-	                       	登录
-	                       </div>
-						</s:else>
-						
-                      <div class="input-group">
-                      <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
-                      <span class="glyphicon glyphicon-search input-group-addon"></span>
+                
+                	<div class="btn-group">
+					  	<s:if test="#session.user != null">
+					  		<a  class="btn btn-default index-nav-btn3" ><s:property value="#session.user.name" /></a>
+					  		<a  href="<%=basePath%>user_loginOut" class="btn btn-default index-nav-btn4">退出</a>
+					  	</s:if>
+					  	<s:else>
+                       		<a  class="btn btn-default index-nav-btn2" id="btn-login">登录</a>
+                       	</s:else>
+                       	<div class="input-group">
+                        <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
+                     			 <span class="glyphicon glyphicon-search input-group-addon"></span>
+                      	</div>
                       </div>
-                  </div>
-                  
-              </div> 
+                </div> 
 
             </div> 
 
@@ -102,94 +99,72 @@ var _hmt = _hmt || [];
 
 <div class="tutiao-content container">
 
-<div class="row" id="tutiao_show_row">
-    <div class="col-sm-8" >
-         <div class="thumbnail" id="tutiao_show" data-tid="${tid}">
-         	<s:iterator value="#tuTiao.units" var="val" status="sta">
-         	<p  class="thumbnail" style="overflow:hidden;width:750px; height:450px;user-select：none;display:none;">
-            	<img src="${val.picPath }" alt="图吧-${val.tdescribe }" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;height:450px;">
-            </p>
-            </s:iterator>
-             <div class="caption text-center">
-                <button type="button" class="btn btn-primary btn-sm" id="tutiao-pic-left">
-                  <span class="glyphicon glyphicon-step-backward"></span> 上一个
-                </button>
-                <small>&nbsp;&nbsp;&nbsp;</small>
-                <button type="button" class="btn btn-primary btn-sm" id="pic_lager">
-                  <span class="glyphicon glyphicon-search"></span> 大图
-                </button>
-                <small>&nbsp;&nbsp;&nbsp;</small>
-                <button type="button" class="btn btn-primary btn-sm" id="tutiao-pic-right">
-                  <span class="glyphicon glyphicon-step-forward"></span> 下一个
-                </button>
-             </div>
-        </div>
 
-    </div>
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-body" >
-    
-                <h4 id="tutiao_show_title">${tuTiao.title }</h4>
-                <s:iterator value="#tuTiao.units" var="val" status="sta">
-                <div class="tutiao_show_des" style="display:none;">
-	                <span class="tutiao-abstract-index" ><em id="tutiao_show_curr_page"><s:property value="#sta.index+1" /></em><span class="tutiao-abstract-index">/<s:property value="#tuTiao.units.size()" /></span></span>
-	                <p  >${val.tdescribe } </p>
-                </div>
-                </s:iterator>
-            </div>
-        </div>
-
-    </div>
-    
+<div class="row" id="tutiao_row">
+	<div class="col-xs-1" ></div>
+	<div class="col-xs-8" id="tutiao_col" data-tid="${tuTiao.tid }">
+		<p>
+			<b style="font-size:2em;">${tuTiao.title }</b><br>
+			<small>${tuTiao.author } <s:date name="#tuTiao.cdate" format="yyyy-MM-dd HH:mm" /></small>
+			<br><br>
+		</p>
+		
+		<s:iterator value="#tuTiao.units" var="val" status="sta">
+             <p class="text-center">
+            	<a href="${val.picPath }"><img src="${val.picPath }" alt="${val.tdescribe }"  class="img-responsive center-block" style="max-height:500px;"></a>
+             </p>
+             <p class="text-center">
+				${val.tdescribe }<br><br>
+			</p>
+         </s:iterator>
+	</div>
+	<div class="col-xs-3" id="tutiao_col2">
+		<div class="list-group">
+		    <a href="#tuijian" class="list-group-item active">
+		        <h4 class="list-group-item-heading">
+		            精彩热门
+		        </h4>
+		    </a>
+		    <s:iterator value="#news" var="val" status="sta">
+		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
+		        <div class="list-group-item-heading" >
+		        	<div style="overflow:hidden;max-height:200px;">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }">
+		       		</div>
+		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		        </div>
+		        <p class="list-group-item-text">
+		            ${val.title }
+		        </p>
+		    </a>
+		    </s:iterator>
+		   
+		</div>
+		
+		<div class="list-group">
+		    <a href="#" class="list-group-item active">
+		        <h4 class="list-group-item-heading">
+		            猜你喜欢
+		        </h4>
+		    </a>
+		    <s:iterator value="#hots" var="val" status="sta">
+		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
+		        <div class="list-group-item-heading" >
+		        	<div style="overflow:hidden;max-height:200px;">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }">
+		       		</div>
+		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		        </div>
+		        <p class="list-group-item-text">
+		            ${val.title }
+		        </p>
+		    </a>
+		    </s:iterator>
+		   
+		</div>
+		
+	</div>
 </div>
-
-
-
-<div class="row" id="tuijian_row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-body" style="padding-left:0px;padding-right:0px;">
-                
-                <div class="tutiao-panel-body-d" style="padding-left:15px;padding-right:15px;">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h4 id="tuijian_title">${tuTiao.title }</h4>
-                        </div>
-                        <div class="col-sm-4">
-                            <small class="pull-right">
-                            <button type="button" class="btn btn-primary btn-sm" id="tuijian_refresh">
-                                  <span class="glyphicon glyphicon-refresh"></span> 重新浏览
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" id="tuijian_next">
-                                  <span class="glyphicon glyphicon-step-forward"></span> 下一图条
-                                </button>
-                            </small>
-                        </div>
-                    </div>
-    
-                </div>
-                
-				<div id="tuijian_data" class="masonry">
-					<s:iterator value="#xiangguan" var="val" status="sta">
-                	 	<div class="col-sm-6 col-md-3 item" data-tid="<%=basePath%>${val.tid }">
-                	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
-					    	<div class="thumbnail">
-								<div class="thumbnail tuijian_div_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
-								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
-								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
-							</div>
-							</a>
-						</div>
-                	 </s:iterator>
-				</div>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
 <div class="row" id="div_xiangguan">
@@ -198,12 +173,12 @@ var _hmt = _hmt || [];
             <div class="panel-body" style="padding-left:0px;padding-right:0px;">
                 <h3>相关推荐</h3>
                 
-                <div id="about_row" class="masonry">
-                	 <s:iterator value="#tuijian" var="val" status="sta">
-                	 	<div class="col-sm-6 col-md-3 item">
+                <div id="about_row">
+                	 <s:iterator value="#tuijians" var="val" status="sta">
+                	 	<div class="col-xs-2 item" style="padding:2px;">
                 	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
-					    	<div class="thumbnail">
-								<div class="thumbnail about_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
+					    	<div class="thumbnail" style="margin:2px;">
+								<div class="thumbnail about_wrap" style="overflow:hidden;max-height:120px;margin-bottom:0px;"><img style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
@@ -247,9 +222,38 @@ var _hmt = _hmt || [];
     </div>
 </div>
 
+<div class="row" id="div_moile_tuijian" style="display: none;">
+	<div class="col-sm-12">
+	
+         <div class="list-group" id="div_moile_tuijian_con">
+		    <a href="#" class="list-group-item active">
+		        <h4 class="list-group-item-heading">
+		            猜你喜欢
+		        </h4>
+		    </a>
+		    <s:iterator value="#hots" var="val" status="sta">
+		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
+		        <div class="list-group-item-heading" >
+		        	<div style="overflow:hidden;max-height:200px;">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }">
+		       		</div>
+		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		        </div>
+		        <p class="list-group-item-text">
+		            ${val.title }
+		        </p>
+		    </a>
+		    </s:iterator>
+		   
+		</div>
+		<div class="col-sm-12">
+			<button type="button" class="btn btn-link center-block" id="div_moile_tuijian_more">查看更多</button>
+		</div>
+    </div>
+</div>
 
-<div class="row" id="div_search">
-    <div class="col-sm-12">
+<div class="row" id="div_search" >
+    <div class="col-sm-12" style="padding:2px;">
          <div id="search_row" class="masonry">
                 
          </div>
@@ -258,10 +262,6 @@ var _hmt = _hmt || [];
 
 </div>
 
-
-<div class="tutiao-d-large-show thumbnail" id="img_large_show">
-    <img src="">
-</div>
 
 <jsp:include page="/includes/foot.jsp" />
 <script src="<%=basePath%>scripts/main2.js"></script>

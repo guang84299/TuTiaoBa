@@ -57,7 +57,7 @@ $(function() {
         return date.format('yyyy-MM-dd');
     }
 	
-	var curr_type = 1;
+	var curr_type = $("#tutiaos").attr("data-type");
 	var tu_index = $("#tutiaos .item").length;
 	var first_time = 0;
 	var getTuTiao = function(type,index)
@@ -139,34 +139,7 @@ $(function() {
 	}
 	
 	initPic();
-	
-	
-	var hideMobelNav = function()
-	{
-		$("#my-navbar-collapse").removeClass("in");
-	}
-	
-	$("#nav_new").click(function(){
-		curr_type = 1;
-		tu_index = 0;
-		hideMobelNav();
-		$("#tutiaos").html("");
-		$("#nav_new").addClass("index-active");
-		$("#nav_hot").removeClass("index-active");
-		$('.masonry').masonry('reloadItems');
-		getTuTiao(1,0);
-	});
-	$("#nav_hot").click(function(){
-		curr_type = 2;
-		tu_index = 0;
-		hideMobelNav();
-		$("#nav_new").css("color","");
-		$("#tutiaos").html("");
-		$("#nav_hot").addClass("index-active");
-		$("#nav_new").removeClass("index-active");
-		$('.masonry').masonry('reloadItems');
-		getTuTiao(2,0);
-	});
+
 	var winH = $(window).height();
 	$(window).scroll(function () {   
         if( $(document).scrollTop() + winH > $(document).height()-winH/5)
@@ -180,8 +153,11 @@ $(function() {
     		}
     	}
      });
-	
-	$('#nav_search').hide();
+	var hideMobelNav = function()
+	{
+		$("#my-navbar-collapse").removeClass("in");
+	}
+
 	var search = function()
 	{
 		hideMobelNav();
@@ -190,7 +166,7 @@ $(function() {
 		$("#nav_new").hide();
 		$("#tutiaos").html("");
 		$('.masonry').masonry('reloadItems');
-		
+		curr_type = 3;
 		tu_index = 0;
 		getTuTiao(3,tu_index);
 	}

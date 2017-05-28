@@ -23,90 +23,41 @@ Date.prototype.format = function(format) {
 }
 $(function() {
 	
+	function judgmentClient(){
+	    var UserClient = navigator.userAgent.toLowerCase();
+	    var IsIPad = UserClient.match(/ipad/i) == "ipad";
+	    var IsIphoneOs = UserClient.match(/iphone os/i) == "iphone os";
+	    var IsMidp = UserClient.match(/midp/i) == "midp";
+	    var IsUc7 = UserClient.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+	    var IsUc = UserClient.match(/ucweb/i) == "ucweb";
+	    var IsAndroid = UserClient.match(/android/i) == "android";
+	    var IsCE = UserClient.match(/windows ce/i) == "windows ce";
+	    var IsWM = UserClient.match(/windows mobile/i) == "windows mobile";
+	    if(IsIPad || IsIphoneOs || IsMidp || IsUc7 || IsUc || IsAndroid || IsCE || IsWM){
+	        return true;
+	    }else{
+	    	return false;
+	    }
+	}
+	
+	var isMobile = judgmentClient();
+	
 	function getDate(strDate) {
         var date = new Date(strDate.time);
-        return date.format('yyyy-MM-dd hh:mm:ss');
+        return date.format('yyyy-MM-dd');
 
     }
+	
 	$('.masonry').masonry({
 		itemSelector: '.item',
 		transitionDuration: '0.0s',
 		stagger: 0
 	});
+
 	
-	var tuijian_next_index=1;
-	var getShowTuiJian = function()
-	{
-		$('#tuijian_data .thumbnail img').each(function(){
-		     var src = $(this).attr("src");
-		     var img = $(this);
-		     imgReady(src, function () {
-					var p = this.width/this.height;
-					var sc = 1.5-p+1;
-					img.height(img.height()*sc);	
-				});
-		  });	
-	};
-//	getShowTuiJian();
-	
-	
-	var getShowXiangGuan = function()
-	{
-		$('#about_row .thumbnail img').each(function(){
-		     var src = $(this).attr("src");
-		     var img = $(this);
-		     imgReady(src, function () {
-					var p = this.width/this.height;
-					var sc = 1.5-p+1;
-					img.height(img.height()*sc);	
-				});
-		  });
-	};
-//	getShowXiangGuan();
-	var roww_cache = 0;
-	//窗口变化
-	var winReSize = function()
-	{
-		var w = $("#tutiao_show").width()-6;
-		var h = w*(450.0/750.0);
-		$("#tutiao_show p").width(w);
-		$("#tutiao_show p").height(h);
-		$("#tutiao_show img").height(h);
-		
-		var roww = $("#tuijian_data .item:eq(0)").width()-8;
-		if(roww > 20)
-			roww_cache = roww;
-		else
-			roww = roww_cache;
-		var rowh = roww*(150.0/250.0);
-		$(".tuijian_div_wrap").width(roww);
-		$(".tuijian_div_wrap").height(rowh);
-		$(".tuijian_div_wrap img").width(roww);
-		
-		var roww2 = $("#about_row .item:eq(0)").width()-8;
-		var rowh2 = roww2*(150.0/250.0);
-		$(".about_wrap").width(roww2);
-		$(".about_wrap").height(rowh2);
-		$(".about_wrap img").width(roww2);
-	}
-	$(window).resize(function() {
-			winReSize();
-		});
 	//显示界面
-	var tutiao_show_num = 0;
-	var tutiao_show_index = 0;
 	var commentNum = 0;//评论数量
-	var updateShow = function()
-	{
-		tutiao_show_num = $("#tutiao_show .thumbnail").length;
-		tutiao_show_index = 0;
-		$("#tutiao_show .thumbnail").hide();
-		$(".tutiao_show_des").hide();
-		$("#tutiao_show .thumbnail:eq(0)").show();
-		$(".tutiao_show_des:eq(0)").show();	
-		
-		winReSize();
-	}
+	
 	var updatePingLun = function(comments)
 	{
 		var s = '';
@@ -180,112 +131,21 @@ $(function() {
 			});
 		});
 	};
+	
+	var addMobileHot = function(val)
+	{
+		var s = '<a href="'+baseUrl+val.tid+'" class="list-group-item">' +
+			'<div class="list-group-item-heading" >' +
+			'<div style="overflow:hidden;max-height:200px;">'+
+			'<img class="img-responsive" style="padding:0px;width:100%;" src="'+baseUrl+val.units[0].picPath+ '" alt="'+val.units[0].tdescribe+'">'+
+			'</div>'+
+			'<span class="pic-num pull-right">'+val.units.length+'图</span>'+
+			'</div>'+
+			'<p class="list-group-item-text">'+val.title+'</p>'+
+			'</a>';
+		$("#div_moile_tuijian_con").append(s);
+	}
 		
-	
-	var picLeft = function()
-	{
-		if(tutiao_show_num > 0)
-		{
-			tutiao_show_index--;
-			if(tutiao_show_index < 0)
-				tutiao_show_index = tutiao_show_num-1;
-			$("#tutiao_show .thumbnail").hide();
-			$(".tutiao_show_des").hide();
-			$("#tutiao_show .thumbnail:eq("+tutiao_show_index+")").show();
-			$(".tutiao_show_des:eq("+tutiao_show_index+")").show();			
-		}
-	};
-	
-	var picRight = function()
-	{
-		if(tutiao_show_num>0 && tutiao_show_index<tutiao_show_num)
-		{
-			tutiao_show_index++;
-			if(tutiao_show_index>=tutiao_show_num)
-			{
-				$("#tutiao_show_row").hide();
-				$("#tuijian_row").show();
-//				$('.masonry').imagesLoaded(function() {
-//					$('.masonry').masonry({
-//						itemSelector: '.item'
-//					});
-//				});
-				return;
-			}
-			$("#tutiao_show .thumbnail").hide();
-			$(".tutiao_show_des").hide();
-			$("#tutiao_show .thumbnail:eq("+tutiao_show_index+")").show();
-			$(".tutiao_show_des:eq("+tutiao_show_index+")").show();		
-		}
-	};
-	
-	$('#tutiao_show').hover(function(){
-	},function(){
-		$(this).removeClass("tutiao-cursor-right"); 
-		$(this).removeClass("tutiao-cursor-left"); 
-	});
-	var posLeft = true;
-	$('#tutiao_show').mousemove(function(e) {  
-		var xx=e.pageX-$('#tutiao_show').offset().left;
-		var width = $(this).width();
-		if(xx>width/2)
-		{
-			$(this).removeClass("tutiao-cursor-left"); 
-			$(this).addClass("tutiao-cursor-right");
-			posLeft = false;
-		}
-		else
-		{
-			$(this).removeClass("tutiao-cursor-right"); 
-			$(this).addClass("tutiao-cursor-left");
-			posLeft = true;
-		}
-	}); 
-	$("#tutiao_show p").mousedown(function(e){
-		if(e.which != 1)
-			return;
-		 if(posLeft)
-		 {
-			 picLeft();
-		 }
-		 else
-		 {
-			 picRight();
-		 }
-	});
-	
-	$('#tutiao-pic-left').click(function(event) {
-		picLeft();
-	})
-	$('#tutiao-pic-right').click(function(event) {
-		 picRight();
-	})
-	
-	$("#img_large_show").hide();
-	$("#img_large_show").click(function(){
-		$("#img_large_show").hide();
-		$(".tutiao-content").show();
-	});
-	$('#pic_lager').click(function(event) {
-		var url = $("#tutiao_show img:visible:eq(0)").attr("src");
-		$(".tutiao-content").hide();
-		$("#img_large_show").show();
-		$("#img_large_show img:first").attr("src",url);
-	})
-	
-	$("#tuijian_refresh").click(function(){
-		$("#tuijian_row").hide();
-		$("#tutiao_show_row").show();
-		updateShow();
-	});
-	$("#tuijian_next").click(function(){
-		$("#tuijian_row").hide();
-		location.href = $("#tuijian_data .item:eq(0)").attr("data-tid");
-	});
-	
-	updateShow();
-	$("#tuijian_row").hide();
-	
 	//搜索
 	var loading = 0;
 	var curr_type = 3;
@@ -313,14 +173,17 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			var s ='';
+			var col_num = "col-xs-3";
+			if(isMobile)
+				col_num = "col-xs-6";
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
 				
-				s += '<div class="col-sm-6 col-md-3 item">' 
+				s += '<div class="'+col_num+' item"  style="padding:1px;">' 
 					+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
-					+ '<div class="thumbnail">'
-					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' "></div>'
+					+ '<div class="thumbnail" style="margin:2px;">'
+					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
@@ -346,16 +209,21 @@ $(function() {
 				
 		})		
 	};
-	
+	var hideMobelNav = function()
+	{
+		$("#my-navbar-collapse").removeClass("in");
+	}
 	$("#nav_search").hide();
 	$("#div_search").hide();
 	var search = function()
 	{
+		hideMobelNav();
+		
 		$('#nav_search').show();
 		$('#div_search').show();
 		$("#nav_kan").hide();
-		$("#tutiao_show_row").hide();
-		$("#tuijian_row").hide();
+		$("#tutiao_row").hide();
+		$("#div_moile_tuijian").hide();
 		$("#div_xiangguan").hide();
 		$("#div_pinglun").hide();
 		$("#search_row").html("");
@@ -364,12 +232,12 @@ $(function() {
 		tu_index = 0;
 		getTuTiao(3,tu_index);
 	}
-	$(".index-user-nav .glyphicon-search").keydown(function() {
+	$(".glyphicon-search").keydown(function() {
         if (event.keyCode == "13") {//keyCode=13是回车键
         	search();
         }
     });
-	$(".index-user-nav .glyphicon-search:last").click(function(){
+	$(".glyphicon-search:last").click(function(){
 		search();
 	});
 	
@@ -393,7 +261,7 @@ $(function() {
 			return;
 		}
 		var datas = {};
-		datas.tid = $("#tutiao_show").attr("data-tid");
+		datas.tid = $("#tutiao_col").attr("data-tid");
 		datas.content = $("#tutiao-pinglun-content").val();
 		if(datas.content == null || datas.content.length < 1|| datas.content.length > 500)
 		{
@@ -420,7 +288,7 @@ $(function() {
 	
 	$("#tutiao-morepinglun").click(function(){
 		var datas = {};
-		datas.tid = $("#tutiao_show").attr("data-tid");
+		datas.tid = $("#tutiao_col").attr("data-tid");
 		datas.index = $("#tutiao-pinglun-ul li").length;
 		$.ajax({
 			type: "post",
@@ -461,4 +329,50 @@ $(function() {
 			
 		});
 	});
+	
+	$("#div_moile_tuijian_more").click(function(){
+		var pdata = {};
+		pdata.index = $("#div_moile_tuijian_con .list-group-item").length-1;
+		pdata.type = 2;
+		$.ajax({
+			type: "post",
+			data : pdata,
+			url: baseUrl + "tutiao_getTuTiaos"
+		}).done(function(results) {
+			var objs = eval('(' + results + ')'); 
+			for(var i=0;i<objs.length;i++)
+			{
+				var obj = objs[i];
+				addMobileHot(obj);
+			}
+			if(objs.length == 0)
+			{
+				$("#div_moile_tuijian_more").text("没有啦");
+				$("#div_moile_tuijian_more").addClass("disabled");
+			}
+		});
+	});
+	
+	 $(".index-nav-btn").on({
+	        mousedown:function(){
+	            $(this).css("background-color","white");
+	        },
+	        mouseup:function(){
+	            $(this).css("background-color","white");
+	        }
+	    });
+	 
+	 if(isMobile)
+	 {
+		 $(".tutiao-content").addClass("index-mcontent");
+			
+		 $("#tutiao_col").removeClass("col-xs-8");
+		 $("#tutiao_col").addClass("col-xs-12");
+		 $("#tutiao_col2").removeClass("col-xs-3");
+		 $("#tutiao_col2").addClass("col-xs-12");
+		 
+		 $("#tutiao_col2").hide();
+		 $("#div_xiangguan").hide();
+		 $("#div_moile_tuijian").show();
+	 }
 });

@@ -25,20 +25,35 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
 	padding:0px;
 }
 .thumbnail div img{
-  transition:transform 0.5s ease-in-out;
-  webkit-transition:transform 0.5s ease-in-out; 
-  -moz-transition:transform 0.5s ease-in-out; 
-  -o-transition:transform 0.5s ease-in-out; 
+  transition:transform 0.2s ease-in-out;
+  webkit-transition:transform 0.2s ease-in-out; 
+  -moz-transition:transform 0.2s ease-in-out; 
+  -o-transition:transform 0.2s ease-in-out; 
   
 }
 .thumbnail div img:hover{
-   transform:scale(1.2);
-   -webkit-transform:scale(1.2);
-   -moz-transform:scale(1.2);
-   -o-transform:scale(1.2);
-   -ms-transform:scale(1.2);
+   transform:scale(1.1);
+   -webkit-transform:scale(1.1);
+   -moz-transform:scale(1.1);
+   -o-transform:scale(1.1);
+   -ms-transform:scale(1.1);
    cursor:hand;
 }
+.list-group-item-heading img
+{
+  transition:transform 0.2s ease-in-out;
+  webkit-transition:transform 0.2s ease-in-out; 
+  -moz-transition:transform 0.2s ease-in-out; 
+  -o-transition:transform 0.2s ease-in-out; 
+}
+.list-group-item-heading img:hover{
+   transform:scale(1.1);
+   -webkit-transform:scale(1.1);
+   -moz-transform:scale(1.1);
+   -o-transform:scale(1.1);
+   -ms-transform:scale(1.1);
+}
+
 .navbar-brand:hover
 {
 	cursor:hand;
