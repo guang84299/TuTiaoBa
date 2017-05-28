@@ -19,26 +19,26 @@
   <div class="well regist-content">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="firstname" class="col-sm-3 control-label">用户名</label>
-          <div class="col-sm-8">
+          <label for="firstname" class="col-xs-3 control-label">用户名</label>
+          <div class="col-xs-8">
             <input type="text" class="form-control" id="username" placeholder="请输入用户名">
           </div>
         </div>
         <div class="form-group">
-          <label for="lastname" class="col-sm-3 control-label">邮箱</label>
-          <div class="col-sm-8">
+          <label for="lastname" class="col-xs-3 control-label">邮箱</label>
+          <div class="col-xs-8">
             <input type="text" class="form-control" id="email" placeholder="请输入邮箱">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword" class="col-sm-3 control-label">密码</label>
-          <div class="col-sm-8">
+          <label for="inputPassword" class="col-xs-3 control-label">密码</label>
+          <div class="col-xs-8">
             <input type="password" class="form-control" id="password" placeholder="请输入密码">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword" class="col-sm-3 control-label">确认密码</label>
-          <div class="col-sm-8">
+          <label for="inputPassword" class="col-xs-3 control-label">确认密码</label>
+          <div class="col-xs-8">
             <input type="password" class="form-control" id="password2" placeholder="请确认密码">
           </div>
         </div>
@@ -46,8 +46,8 @@
           注 册
         </div>
         <div class="form-group" id="regist-pro" style="display:none;">
-        	<label class="col-sm-5 control-label"></label>
-        	<img class="col-sm-2" src="<%=basePath%>images/pro.gif">
+        	<label class="col-xs-5 control-label"></label>
+        	<img class="col-xs-2" src="<%=basePath%>images/pro.gif">
         </div>
       </form>
 	<h5 id="regist-result" style="display:none;">恭喜注册成功！我们已经为您发送一封电子邮件，请您登陆邮箱，验证激活帐号！</h5>
@@ -57,6 +57,25 @@
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 		
   $(function(){
+  
+  	function judgmentClient(){
+	    var UserClient = navigator.userAgent.toLowerCase();
+	    var IsIPad = UserClient.match(/ipad/i) == "ipad";
+	    var IsIphoneOs = UserClient.match(/iphone os/i) == "iphone os";
+	    var IsMidp = UserClient.match(/midp/i) == "midp";
+	    var IsUc7 = UserClient.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+	    var IsUc = UserClient.match(/ucweb/i) == "ucweb";
+	    var IsAndroid = UserClient.match(/android/i) == "android";
+	    var IsCE = UserClient.match(/windows ce/i) == "windows ce";
+	    var IsWM = UserClient.match(/windows mobile/i) == "windows mobile";
+	    if(IsIPad || IsIphoneOs || IsMidp || IsUc7 || IsUc || IsAndroid || IsCE || IsWM){
+	        return true;
+	    }else{
+	    	return false;
+	    }
+	}
+	
+	var isMobile = judgmentClient();
 
       $('#particles').particleground({
     dotColor: '#faeaea',
@@ -194,6 +213,12 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 	 $(".regist-logo-wrap").click(function(){
 		location.href = baseUrl;
 	 });
+	 
+	 if(isMobile)
+      {
+      		$(".well").addClass("regist-content-m");
+      }
+	 
 
   });
 </script>

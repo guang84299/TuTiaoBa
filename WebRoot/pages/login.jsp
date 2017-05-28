@@ -21,24 +21,24 @@
   <div class="well login-content" data-toggle="<s:if test="#request.active == true">tooltip</s:if>" title="<s:if test="#request.active == true">邮箱激活成功，请登录</s:if>">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="firstname" class="col-sm-2 control-label"></label>
-          <div class="col-sm-8">
+          <label for="firstname" class="col-xs-2 control-label"></label>
+          <div class="col-xs-8">
             <input type="text" class="form-control" id="username" placeholder="用户名">
           </div>
         </div>
         
         <div class="form-group">
-          <label for="inputPassword" class="col-sm-2 control-label"></label>
-          <div class="col-sm-8">
+          <label for="inputPassword" class="col-xs-2 control-label"></label>
+          <div class="col-xs-8">
             <input type="password" class="form-control" id="password" placeholder="密码">
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label"></label>
-          <div class="col-sm-5">
+          <label class="col-xs-2 control-label"></label>
+          <div class="col-xs-5">
             <input type="text" class="form-control" id="code" placeholder="验证码">
           </div>
-          <h4 class="col-sm-2" ><span class="label label-default">${sessionScope.code }</span></h4>
+          <h4 class="col-xs-2" ><span class="label label-default">${sessionScope.code }</span></h4>
         </div>
 
         <div id="login-btn-login">
@@ -46,8 +46,8 @@
         </div>
         <div id="login-btn-toreg">注册</div>
         <div class="form-group" id="login-pro" style="display:none;">
-        	<label class="col-sm-5 control-label"></label>
-        	<img class="col-sm-2" src="<%=basePath%>images/pro.gif">
+        	<label class="col-xs-5 control-label"></label>
+        	<img class="col-xs-2" src="<%=basePath%>images/pro.gif">
         </div>
         <small id="btn-lost" class="pull-right"><a>忘记密码?</a></small>
       </form>
@@ -58,6 +58,25 @@
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 		
   $(function(){
+  
+  function judgmentClient(){
+	    var UserClient = navigator.userAgent.toLowerCase();
+	    var IsIPad = UserClient.match(/ipad/i) == "ipad";
+	    var IsIphoneOs = UserClient.match(/iphone os/i) == "iphone os";
+	    var IsMidp = UserClient.match(/midp/i) == "midp";
+	    var IsUc7 = UserClient.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+	    var IsUc = UserClient.match(/ucweb/i) == "ucweb";
+	    var IsAndroid = UserClient.match(/android/i) == "android";
+	    var IsCE = UserClient.match(/windows ce/i) == "windows ce";
+	    var IsWM = UserClient.match(/windows mobile/i) == "windows mobile";
+	    if(IsIPad || IsIphoneOs || IsMidp || IsUc7 || IsUc || IsAndroid || IsCE || IsWM){
+	        return true;
+	    }else{
+	    	return false;
+	    }
+	}
+	
+	var isMobile = judgmentClient();
 
       function validateName(name){  
           if(name == null || name.length == 0)
@@ -141,6 +160,11 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
         dotColor: '#faeaea',
         lineColor: '#faeaea'
       });
+      
+      if(isMobile)
+      {
+      		$(".well").addClass("login-content-m");
+      }
 
   });
   

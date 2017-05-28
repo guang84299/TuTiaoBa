@@ -412,6 +412,13 @@ cursor:hand;
   margin-top: 10%;
   background: #fff;
 }
+.login-content-m
+{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10%;
+  background: #fff;
+}
 #login-btn-login
 {
   background:#ED4040;
@@ -462,6 +469,13 @@ cursor:hand;
 {
   margin-left: 35%;
   margin-right: 35%;
+  margin-top: 10%;
+  background: #fff;
+}
+.regist-content-m
+{
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 10%;
   background: #fff;
 }
