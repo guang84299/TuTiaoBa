@@ -125,7 +125,7 @@ var _hmt = _hmt || [];
 		            精彩热门
 		        </h4>
 		    </a>
-		    <s:iterator value="#news" var="val" status="sta">
+		    <s:iterator value="#hots" var="val" status="sta">
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
@@ -147,7 +147,7 @@ var _hmt = _hmt || [];
 		            猜你喜欢
 		        </h4>
 		    </a>
-		    <s:iterator value="#hots" var="val" status="sta">
+		    <s:iterator value="#news" var="val" status="sta">
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">

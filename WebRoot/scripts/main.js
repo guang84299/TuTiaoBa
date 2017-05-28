@@ -79,7 +79,7 @@ $(function() {
 			url: link,
 			data: pdata
 		}).done(function(results) {
-			var objs = eval('(' + results + ')'); 
+			var objs = JSON.parse(results);
 			var s ='';
 			if(objs.length == 0)
 			{
@@ -141,6 +141,7 @@ $(function() {
 	initPic();
 
 	var winH = $(window).height();
+	$("#imloading").fadeTo(0,0.01);
 	$(window).scroll(function () {   
         if( $(document).scrollTop() + winH > $(document).height()-winH/5)
     	{

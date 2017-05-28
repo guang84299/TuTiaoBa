@@ -171,7 +171,7 @@ $(function() {
 			url: link,
 			data: pdata
 		}).done(function(results) {
-			var objs = eval('(' + results + ')'); 
+			var objs = JSON.parse(results);
 			var s ='';
 			var col_num = "col-xs-3";
 			if(isMobile)
@@ -279,7 +279,7 @@ $(function() {
 			}
 			else
 			{
-				var comment = eval('(' + result + ')'); 
+				var comment = JSON.parse(result);
 				addPingLun(comment);
 			}
 			
@@ -301,7 +301,7 @@ $(function() {
 			}
 			else
 			{
-				var comments = eval('(' + result + ')'); 
+				var comments = JSON.parse(result);
 				updatePingLun(comments);
 			}
 			
@@ -339,7 +339,7 @@ $(function() {
 			data : pdata,
 			url: baseUrl + "tutiao_getTuTiaos"
 		}).done(function(results) {
-			var objs = eval('(' + results + ')'); 
+			var objs =  JSON.parse(results);
 			for(var i=0;i<objs.length;i++)
 			{
 				var obj = objs[i];
