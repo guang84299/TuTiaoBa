@@ -1,7 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
-	isELIgnored="false"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
-<%
+	isELIgnored="false"%><%@taglib uri="/struts-tags" prefix="s"%><%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + path + "/";
@@ -11,8 +9,7 @@
 		basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":"+ port + path + "/";
 	}
-%>
-<jsp:include page="/includes/head.jsp" />
+%><jsp:include page="/includes/head.jsp" />
 	<div class="error-logo-wrap">
     <a href="<%=basePath%>"><img src="<%=basePath%>images/logo.png"  class="img-responsive"></a>
   </div>
@@ -37,3 +34,4 @@ var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 
   });
 </script>
+</html>
