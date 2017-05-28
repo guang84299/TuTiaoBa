@@ -23,6 +23,26 @@ Date.prototype.format = function(format) {
         return format;
 }
 $(function() {
+	
+	function judgmentClient(){
+	    var UserClient = navigator.userAgent.toLowerCase();
+	    var IsIPad = UserClient.match(/ipad/i) == "ipad";
+	    var IsIphoneOs = UserClient.match(/iphone os/i) == "iphone os";
+	    var IsMidp = UserClient.match(/midp/i) == "midp";
+	    var IsUc7 = UserClient.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+	    var IsUc = UserClient.match(/ucweb/i) == "ucweb";
+	    var IsAndroid = UserClient.match(/android/i) == "android";
+	    var IsCE = UserClient.match(/windows ce/i) == "windows ce";
+	    var IsWM = UserClient.match(/windows mobile/i) == "windows mobile";
+	    if(IsIPad || IsIphoneOs || IsMidp || IsUc7 || IsUc || IsAndroid || IsCE || IsWM){
+	        return true;
+	    }else{
+	    	return false;
+	    }
+	}
+	
+	var isMobile = judgmentClient();
+	
 
 	$('.masonry').masonry({
 		itemSelector: '.item',
@@ -33,8 +53,8 @@ $(function() {
 	
 	function getDate(strDate) {
         var date = new Date(strDate.time);
-        return date.format('yyyy-MM-dd hh:mm:ss');
-
+//        return date.format('yyyy-MM-dd hh:mm:ss');
+        return date.format('yyyy-MM-dd');
     }
 	
 	var curr_type = 1;
@@ -61,16 +81,27 @@ $(function() {
 		}).done(function(results) {
 			var objs = eval('(' + results + ')'); 
 			var s ='';
+			if(objs.length == 0)
+			{
+				$("#imloading").text("没有啦.....");
+			}
+			else
+			{	
+				$("#imloading").text("加载中.....");
+			}
+			var col_num = "col-xs-3";
+			if(isMobile)
+				col_num = "col-xs-6";
 			$("#imloading").fadeTo(first_time,0.01,function(){
 				
 				for(var i=0;i<objs.length;i++)
 				{
 					var obj = objs[i];
 					
-					s += '<div class="col-sm-6 col-md-3 item">' 
+					s += '<div class="'+col_num+' item"  style="padding:1px;">' 
 						+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
-						+ '<div class="thumbnail">'
-						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.units[0].tdescribe + ' "></div>'
+						+ '<div class="thumbnail" style="margin:2px;">'
+						+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.units[0].picPath + '" alt=" '+ obj.units[0].tdescribe + ' "></div>'
 						+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 						+ '<div class="caption"><b>' + obj.title + '</b>'
 						+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
@@ -89,8 +120,6 @@ $(function() {
 //				});
 				
 				tu_index += objs.length;
-				
-				
 			});	
 			$(".index-bottom").show();
 			
@@ -111,7 +140,6 @@ $(function() {
 	
 	initPic();
 	
-	$("#nav_new").css("color","#f00");
 	
 	var hideMobelNav = function()
 	{
@@ -189,4 +217,25 @@ $(function() {
 	$("#btn-login").click(function(){
 		location.href = baseUrl + "user_login";
 	});
+	
+	 $(".index-nav-btn").on({
+	        mousedown:function(){
+	            $(this).css("background-color","white");
+	        },
+	        mouseup:function(){
+	            $(this).css("background-color","white");
+	        }
+	    });
+	 
+	if(isMobile)
+	{
+		$(".index-content").addClass("index-mcontent");
+		$(".index-content2").addClass("index-mcontent");
+		$(".index-content3").addClass("index-mcontent");
+		$(".item").removeClass("col-xs-3");
+		$(".item").addClass("col-xs-6");
+		$('.masonry').masonry();
+	}
+	
+	
 });

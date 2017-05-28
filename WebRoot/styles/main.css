@@ -22,7 +22,7 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
 }
 .thumbnail
 {
-	padding:1px;
+	padding:0px;
 }
 .thumbnail div img{
   transition:transform 0.5s ease-in-out;
@@ -66,7 +66,6 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
   position: absolute;
   left: 0;
   top: 0%;
-  padding: 0 20px;
   width: 100%;
 }
 
@@ -127,6 +126,106 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
     background:#dedede;
 }
 
+.index-nav-btn
+{
+	border:0px solid red;
+	border-bottom-left-radius:0px;
+	border-top-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-right-radius:0px;
+	border-bottom-width:0px;
+	padding-bottom:0px;
+	padding-top:0px;
+	margin-left:5px !important;
+	color:#000;
+	height:50px;
+	line-height:50px;
+	font-size:14px;
+	font-family: "微软雅黑";
+	font-weight:bold;
+}
+.index-nav-btn:hover
+{
+	color: #ff0000;
+    background-color: #fff;
+    border:0px solid red;
+  	border-bottom: 2px solid #f85959;
+}
+
+
+.index-nav-btn2
+{
+	border:0px solid red;
+	border-bottom-left-radius:0px;
+	border-top-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-right-radius:0px;
+	border-bottom-width:0px;
+	padding-bottom:0px;
+	padding-top:0px;
+	margin-right:5px;
+	background-color: #f00;
+	color:#fff;
+	height:35px;
+	line-height:35px;
+	font-size:14px;
+	font-family: "微软雅黑";
+	font-weight:bold;
+}
+.index-nav-btn2:hover
+{
+	color:#fff;
+    background-color: #ff1100;
+}
+.index-nav-btn3
+{
+	border:0px solid red;
+	border-bottom-left-radius:0px;
+	border-top-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-right-radius:0px;
+	border-bottom-width:0px;
+	padding:0px;
+	margin-right:1px;
+	color:#f00;
+	height:35px;
+	line-height:35px;
+	font-size:14px;
+	font-family: "微软雅黑";
+	font-weight:bold;
+}
+.index-nav-btn3:hover
+{
+	color: #ff0000;
+    background-color: #fff;
+    border:0px solid red;
+}
+.index-nav-btn4
+{
+	border:0px solid red;
+	border-bottom-left-radius:0px;
+	border-top-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-right-radius:0px;
+	border-bottom-width:0px;
+	padding-bottom:0px;
+	padding-top:0px;
+	margin-right:5px;
+	color:#000;
+	height:35px;
+	line-height:35px;
+	font-size:14px;
+	font-family: "微软雅黑";
+	font-weight:bold;
+}
+.index-nav-btn4:hover
+{
+	color: #ff0000;
+    background-color: #fff;
+    border:0px solid red;
+  	border-bottom: 2px solid #f85959;
+}
+
 /*
 --------------index.jsp---------
 */
@@ -142,6 +241,9 @@ button.navbar-toggle > span.icon-bar {background-color:#dedede}
 .index-content3{
   width: 95%;
   margin: 0 auto;
+}
+.index-mcontent{
+  width: 100%;
 }
 .index-fontBottom
 {

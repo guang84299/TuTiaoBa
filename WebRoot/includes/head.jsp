@@ -15,7 +15,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <title>图条吧</title>
-  <meta name="keywords" content="图条吧，图条，图吧，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
+  <meta name="keywords" content="图吧，图条吧，图条，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
   <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，搞笑故事，美女故事，新闻故事，有你好看！">
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />

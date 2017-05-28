@@ -15,8 +15,8 @@
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>${tuTiao.title}</title>
-  <meta name="keywords" content="图条吧，图条，图吧，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
+  <title>图吧:${tuTiao.title}</title>
+  <meta name="keywords" content="图吧，图条吧，图条，搞笑故事，美女故事，图片故事，新闻故事，图条吧官网">
   <meta name="description" content="《图条吧》(www.tutiaoba.com)每天提供最新最好看的图片故事，搞笑故事，美女故事，新闻故事，有你好看！">
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
@@ -107,7 +107,7 @@ var _hmt = _hmt || [];
          <div class="thumbnail" id="tutiao_show" data-tid="${tid}">
          	<s:iterator value="#tuTiao.units" var="val" status="sta">
          	<p  class="thumbnail" style="overflow:hidden;width:750px; height:450px;user-select：none;display:none;">
-            	<img src="${val.picPath }" alt="${val.tdescribe }" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;height:450px;">
+            	<img src="${val.picPath }" alt="图吧-${val.tdescribe }" id="tutiao_show_img" onselectstart="return false;" style="-moz-user-select:none;height:450px;">
             </p>
             </s:iterator>
              <div class="caption text-center">
@@ -175,7 +175,7 @@ var _hmt = _hmt || [];
                 	 	<div class="col-sm-6 col-md-3 item" data-tid="<%=basePath%>${val.tid }">
                 	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 					    	<div class="thumbnail">
-								<div class="thumbnail tuijian_div_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
+								<div class="thumbnail tuijian_div_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
                 	 	<div class="col-sm-6 col-md-3 item">
                 	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 					    	<div class="thumbnail">
-								<div class="thumbnail about_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }"></div>
+								<div class="thumbnail about_wrap" style="overflow:hidden;height:150px;width:250px;margin-bottom:0px;"><img  src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>

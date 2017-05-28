@@ -23,35 +23,29 @@
                 </button>  
                 <div><a href="<%=basePath%>"><img class="navbar-brand"  src="<%=basePath%>images/logo.png" class="img-rounded"></a></div>
             </div>  
-            <div class="collapse navbar-collapse" id="my-navbar-collapse">  
-                <ul class="nav navbar-nav">  
-                    <li ><a class="active index-active" href="#" id="nav_new">最新</a></li>  
-                    <li ><a class="" href="#" id="nav_hot">最热</a></li>  
-                    <li ><a class="" href="#" id="nav_search" style="display: none;">搜索结果</a></li>  
-                </ul>  
+            <div class="collapse navbar-collapse" id="my-navbar-collapse">                  
+                <div class="nav navbar-nav btn-group">
+                		<a  class="btn btn-default index-nav-btn index-active" id="nav_new">最新</a>
+                    	<a  class="btn btn-default index-nav-btn" id="nav_hot">最热</a>
+                    	<a  class="btn btn-default index-nav-btn" id="nav_search" style="display: none;">搜索结果</a>
+                </div>
+                
 
                 <div class="navbar-form navbar-right" role="search">
-                  <div class="form-group index-user-nav">
-                  		
-                  		<s:if test="#session.user != null">
-                  			<li><a href="#"><s:property value="#session.user.name" /></a>
-					            <ul class="subs">
-					                <li><a href="<%=basePath%>user_loginOut">退出</a></li>
-					            </ul>
-					        </li>
-						</s:if>
-						<s:else>
-							<div class="input-group index-btn-login" id="btn-login">
-	                       	登录
-	                       </div>
-						</s:else>
-                       
-                      <div class="input-group">
+                
+                	<div class="btn-group">
+					  	<s:if test="#session.user != null">
+					  		<a  class="btn btn-default index-nav-btn3" ><s:property value="#session.user.name" /></a>
+					  		<a  href="<%=basePath%>user_loginOut" class="btn btn-default index-nav-btn4">退出</a>
+					  	</s:if>
+					  	<s:else>
+                       		<a  class="btn btn-default index-nav-btn2" id="btn-login">登录</a>
+                       	</s:else>
+                       	<div class="input-group">
                         <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search">
                      			 <span class="glyphicon glyphicon-search input-group-addon"></span>
+                      	</div>
                       </div>
-                  </div>
-                  
               </div> 
 
             </div> 
@@ -61,23 +55,25 @@
 
 </div>
 
-<div class="index-content container">
+<div class="index-content">
 
-	<div class="row index-content2 masonry" id="tutiaos">
+	<div class="row index-content2 masonry" id="tutiaos" style="margin-left:0px;margin-right:0px;">
 		
 		<s:iterator value="#tuTiaos" var="val" status="sta">
-		<div class="col-sm-6 col-md-3 item">
+		<div class="col-xs-3 item"  style="padding:1px;">
 			<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
-			<div class="thumbnail">
-				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;" src="<%=basePath%>${val.units[0].picPath}" alt="${val.units[0].tdescribe}"></div>
+			<div class="thumbnail" style="margin:2px;">
+				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath}" alt="图吧-${val.units[0].tdescribe}"></div>
 					<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
-					<div class="caption"><b> ${val.title} </b>
-						<div class="index-fontBottom">${val.author} ⋅ ${val.showNum}浏览 ⋅ <s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></div>
+					<div class="caption">
+						<b> ${val.title} </b>
+						<div class="index-fontBottom">${val.author} ⋅ ${val.showNum}浏览 ⋅ <s:date name="#val.cdate" format="yyyy-MM-dd" /></div>
 					</div>
 			</div>
 			</a>
 		</div>
-		</s:iterator>				
+		</s:iterator>
+						
 	</div>
 </div>
 
@@ -86,7 +82,7 @@
 </div>
 		
 <div class="index-bottom" > 
-	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a>&nbsp;&nbsp;友情链接&nbsp;<a href="http://www.hao123.com/">hao123</a></span>
+	<a href= target=_blank> 设为首页 </a> <span><a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a> </span>
 </div>
 
 <jsp:include page="/includes/foot.jsp" />
