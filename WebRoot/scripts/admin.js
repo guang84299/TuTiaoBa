@@ -150,8 +150,11 @@ $(function() {
         	if(durl.indexOf("#p") != -1)
         		dtype = 2;
         	
-        	if(durl.indexOf("eastday.com") != -1)
-        		dtype = 3;//头条新闻
+        	if(durl.indexOf("eastday.com/pictures") != -1)
+        		dtype = 3;//头条新闻 图片
+        	
+        	if(durl.indexOf("eastday.com/mobile") != -1)
+        		dtype = 4;//头条新闻 图文
         	
         	$("#auto-caiji").attr("disabled","disabled");
         	$("#auto-caiji").val("信息采集中...");

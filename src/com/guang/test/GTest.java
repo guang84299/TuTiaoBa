@@ -44,11 +44,11 @@ public class GTest {
 
 	public static void main(String[] args)
 	{
-//		GTuTiao tuTiao = GAutoTool.toutiao3("https://mini.eastday.com/pictures/20170510/170510074837290312789.html?qid=null&idx=1&recommendtype=-1&ishot=0&fr=pgaoxiao&pgnum=1");
-//		
-//		System.out.println(tuTiao.toString());
+		GTuTiao tuTiao = GAutoTool.toutiao4("https://mini.eastday.com/mobile/170529205444648.html?idx=15&recommendtype=-1&ishot=0&fr=toutiao&pgnum=1");
 		
-		GTools.sendMail("842997290@qq.com", "%E7%AE%A1%E7%90%86%E5%91%98");
+		System.out.println(tuTiao.toString());
+		
+//		GTools.sendMail("842997290@qq.com", "%E7%AE%A1%E7%90%86%E5%91%98");
 //		autoSendMail();
 	}
 	

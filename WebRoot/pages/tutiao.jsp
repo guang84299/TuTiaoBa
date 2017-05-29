@@ -113,8 +113,8 @@ var _hmt = _hmt || [];
              <p class="text-center">
             	<a href="${val.picPath }"><img src="${val.picPath }" alt="${val.tdescribe }"  class="img-responsive center-block" style="max-height:500px;"></a>
              </p>
-             <p class="text-center">
-				${val.tdescribe }<br><br>
+             <p class="text-center" style="font-size:16px;">
+				<br>${val.tdescribe }<br><br>
 			</p>
          </s:iterator>
 	</div>
