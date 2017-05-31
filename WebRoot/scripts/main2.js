@@ -309,26 +309,6 @@ $(function() {
 	});
 	commentNum = parseInt($("#tutiao_pinglun_num").text());
 	updatePingLun([]);
-	$(".tutiao-btn-zan").click(function(){
-		var datas = {};
-		datas.id = $(this).attr("data-id");
-		var t = $(this);
-		$.ajax({
-			type: "post",
-			data : datas,
-			url: baseUrl + "comment_support"
-		}).done(function(result) {
-			if(result == 'false')
-			{
-				alert("点赞失败！");
-			}
-			else
-			{
-				t.find("span:eq(0)").text(result);
-			}
-			
-		});
-	});
 	
 	$("#div_moile_tuijian_more").click(function(){
 		var pdata = {};

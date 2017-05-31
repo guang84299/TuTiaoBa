@@ -86,6 +86,7 @@ $(function() {
 			var tutiaos = {};
 			tutiaos.title = $("[name='title']").val();
 			tutiaos.author = $("[name='author']").val();
+			tutiaos.showNum = $("[name='showNum']").val();
 			tutiaos.id = $("[name='title']")[0].title;
 			tutiaos.units = getTuTiaoData();
 			var data = JSON.stringify(tutiaos);

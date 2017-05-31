@@ -38,6 +38,11 @@
          <input type="text" name="author" value="${requestScope.tuTiao.author }" class="form-control">
          <p class="bg-warning warning"></p>
         </div>
+         <label class="control-label col-sm-2 col-sm-offset-1">阅读量</label>
+        <div class="col-sm-8">
+         <input type="text" name="showNum" value="${requestScope.tuTiao.showNum }" class="form-control">
+         <p class="bg-warning warning"></p>
+        </div>
        </div>
 
         <hr/>

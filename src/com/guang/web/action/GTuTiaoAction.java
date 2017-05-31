@@ -354,6 +354,7 @@ public class GTuTiaoAction extends ActionSupport{
 		String title = obj.getString("title");
 		String tid = obj.getString("id");
 		String author = obj.getString("author");
+		String showNum = obj.getString("showNum");
 		
 		JSONArray junits = obj.getJSONArray("units");
 		
@@ -362,6 +363,8 @@ public class GTuTiaoAction extends ActionSupport{
 			GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(tid));
 			tuTiao.setTitle(title);
 			tuTiao.setAuthor(author);
+			if(!StringTools.isEmpty(showNum))
+				tuTiao.setShowNum(Long.parseLong(showNum));
 			List<GTuTiaoUnit> units = tiaoUnitService.findAll(tuTiao.getId()).getList();
 			if(junits.size() > 0)
 			{
