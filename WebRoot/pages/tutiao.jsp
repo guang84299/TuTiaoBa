@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }">
 		       		</div>
 		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 		        </div>
@@ -151,7 +151,7 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }">
 		       		</div>
 		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 		        </div>
@@ -178,7 +178,7 @@ var _hmt = _hmt || [];
                 	 	<div class="col-xs-2 item" style="padding:2px;">
                 	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 					    	<div class="thumbnail" style="margin:2px;">
-								<div class="thumbnail about_wrap" style="overflow:hidden;max-height:120px;margin-bottom:0px;"><img style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="图吧-${val.units[0].tdescribe }"></div>
+								<div class="thumbnail about_wrap" style="overflow:hidden;max-height:120px;margin-bottom:0px;"><img style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }"></div>
 								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
@@ -235,7 +235,7 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath }" alt="${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="${val.units[0].tdescribe }">
 		       		</div>
 		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 		        </div>

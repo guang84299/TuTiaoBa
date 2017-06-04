@@ -19,6 +19,7 @@ public class GTuTiao {
 	private String title;
 	private String author;
 	private long showNum;
+	private String headPath;
 	private Date cdate;
 	
 	private List<GTuTiaoUnit> units;
@@ -73,6 +74,13 @@ public class GTuTiao {
 	}
 	public void setShowNum(long showNum) {
 		this.showNum = showNum;
+	}
+	@Column(length=128)
+	public String getHeadPath() {
+		return headPath;
+	}
+	public void setHeadPath(String headPath) {
+		this.headPath = headPath;
 	}
 
 

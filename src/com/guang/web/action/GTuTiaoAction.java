@@ -280,6 +280,17 @@ public class GTuTiaoAction extends ActionSupport{
 		if(!StringTools.isEmpty(title) && junits != null && junits.size() > 0)
 		{
 			GTuTiao tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0l);
+			//生成头图片
+			JSONObject ob = junits.getJSONObject(0);
+			String opicPath = ob.getString("picPath");
+			String hp =  opicPath.substring(0,opicPath.lastIndexOf('.'));
+			String toPicPath = hp + "0.jpg";
+			String topic_relpath = ServletActionContext.getServletContext().getRealPath(toPicPath);
+			String pic_relpath = ServletActionContext.getServletContext().getRealPath(opicPath);
+			String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+			GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, true);
+			
+			tuTiao.setHeadPath(toPicPath);
 			tuTiaoService.add(tuTiao);
 			for(int i=0;i<junits.size();i++)
 			{
@@ -319,8 +330,9 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao = GAutoTool.getTouTiaoPageContent4(url);
 		}
 		
-		if(tuTiao != null)
+		if(tuTiao != null && tuTiao.getUnits().size() > 0)
 		{
+			//生成头图片
 			tuTiaoService.add(tuTiao);
 			
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -332,10 +344,35 @@ public class GTuTiaoAction extends ActionSupport{
 				Date currentTime = new Date();
 				String dateString = formatter.format(currentTime);
 				String dateString2 = formatter2.format(currentTime);
+				
+				String extension = unit.getPicPath().substring(unit.getPicPath().lastIndexOf('.'), unit.getPicPath().length()).toLowerCase();
 				String picPath = "images/tutiao/"+ dateString + "/" + dateString2 + ".jpg";
+				if(".gif".equals(extension))
+					picPath = "images/tutiao/"+ dateString + "/" + dateString2 + ".gif";
+				String toPicPath = picPath;
 				String pic_relpath = ServletActionContext.getServletContext().getRealPath(picPath);
 				GAutoTool.downloadPic(unit.getPicPath(), pic_relpath);
-				unit.setPicPath(picPath);
+				
+				if(!".gif".equals(extension))
+				{
+					toPicPath = "images/tutiao/"+ dateString + "/" + dateString2 + "1.jpg";
+					String topic_relpath = ServletActionContext.getServletContext().getRealPath(toPicPath);
+					String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+					GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, false);
+				}
+				
+				if(tuTiao.getHeadPath() == null)
+				{
+					String headPicPath = "images/tutiao/"+ dateString + "/" + dateString2 + "0.jpg";
+					String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPicPath);
+					String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+					GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, true);
+					
+					tuTiao.setHeadPath(headPicPath);
+					tuTiaoService.update(tuTiao);
+				}
+				
+				unit.setPicPath(toPicPath);
 				unit.setTuTiaoId(tuTiao.getId());
 				tiaoUnitService.add(unit);
 			}
@@ -475,12 +512,21 @@ public class GTuTiaoAction extends ActionSupport{
 		String extension = picFileName.substring(picFileName.lastIndexOf('.'), picFileName.length()).toLowerCase();
 		String picPath = "images/tutiao/"+ dateString + "/" + dateString2 + extension;
 		String pic_relpath = ServletActionContext.getServletContext().getRealPath(picPath);
+		String toPicPath = picPath;
 		try {
 			//上传apk		
 			File file = new File(pic_relpath);
 			if (!file.getParentFile().exists())
 				file.getParentFile().mkdirs();
 			FileUtils.copyFile(pic, file);
+			
+			if(!".gif".equals(extension))
+			{
+				toPicPath = "images/tutiao/"+ dateString + "/" + dateString2 + "1.jpg";
+				String topic_relpath = ServletActionContext.getServletContext().getRealPath(toPicPath);
+				String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+				GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, false);
+			}
 			
 			if(!StringTools.isEmpty(fileToDel))
 			{
@@ -489,14 +535,53 @@ public class GTuTiaoAction extends ActionSupport{
 					file.delete();
 			}
 			
-			print(picPath);
+			print(toPicPath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	
-	
+	public void uppic()
+	{
+		List<GTuTiao> list = tuTiaoService.findAll().getList();
+		for(GTuTiao tuTiao : list)
+		{
+			if(tuTiao.getHeadPath() == null)
+			{
+				List<GTuTiaoUnit> units = tiaoUnitService.findAll(tuTiao.getId()).getList();
+				for(GTuTiaoUnit unit : units)
+				{
+					String picPath = unit.getPicPath();
+					String extension = picPath.substring(picPath.lastIndexOf('.'), picPath.length()).toLowerCase();
+					String toPicPath = picPath;
+					String pic_relpath = ServletActionContext.getServletContext().getRealPath(picPath);
+					
+					if(!".gif".equals(extension) && !".t".equals(extension))
+					{
+						toPicPath = picPath.substring(0,picPath.lastIndexOf('.')) + "1.jpg";
+						String topic_relpath = ServletActionContext.getServletContext().getRealPath(toPicPath);
+						String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+						GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, false);
+						
+						unit.setPicPath(toPicPath);
+						tiaoUnitService.update(unit);
+					}
+					
+					if(tuTiao.getHeadPath() == null)
+					{
+						String headPicPath = picPath.substring(0,picPath.lastIndexOf('.')) + "0.jpg";
+						String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPicPath);
+						String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+						GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, true);
+						
+						tuTiao.setHeadPath(headPicPath);
+						tuTiaoService.update(tuTiao);
+					}
+				}
+			}
+		}
+	}
 	
 	
 	public File getPic() {

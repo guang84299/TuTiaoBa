@@ -63,7 +63,7 @@
 		<div class="col-xs-3 item"  style="padding:1px;">
 			<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 			<div class="thumbnail" style="margin:2px;">
-				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="<%=basePath%>${val.units[0].picPath}" alt="图吧-${val.units[0].tdescribe}"></div>
+				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath}" alt="图吧-${val.units[0].tdescribe}"></div>
 					<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
 					<div class="caption">
 						<b> ${val.title} </b>

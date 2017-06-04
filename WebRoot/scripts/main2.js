@@ -137,7 +137,7 @@ $(function() {
 		var s = '<a href="'+baseUrl+val.tid+'" class="list-group-item">' +
 			'<div class="list-group-item-heading" >' +
 			'<div style="overflow:hidden;max-height:200px;">'+
-			'<img class="img-responsive" style="padding:0px;width:100%;" src="'+baseUrl+val.units[0].picPath+ '" alt="'+val.units[0].tdescribe+'">'+
+			'<img class="img-responsive" style="padding:0px;width:100%;" src="'+baseUrl+val.headPath+ '" alt="'+val.units[0].tdescribe+'">'+
 			'</div>'+
 			'<span class="pic-num pull-right">'+val.units.length+'图</span>'+
 			'</div>'+
@@ -183,7 +183,7 @@ $(function() {
 				s += '<div class="'+col_num+' item"  style="padding:1px;">' 
 					+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
 					+ '<div class="thumbnail" style="margin:2px;">'
-					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.units[0].picPath +'" alt=" '+ obj.title + ' "></div>'
+					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.headPath +'" alt=" '+ obj.title + ' "></div>'
 					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)

@@ -1,11 +1,14 @@
 package com.guang.web.tools;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -15,6 +18,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
@@ -188,4 +194,45 @@ public class GTools {
 			return new PasswordAuthentication(u, p);
 		}
 	}
+	
+	//压缩图片
+	public static void tozipPic(String picPath,String toPicPath,String waterPicPath,boolean head)
+	{
+		File fromPic = new File(picPath); 
+		File toPic=new File(toPicPath); 
+		File waterPic=new File(waterPicPath); 
+		try {
+			if(head)
+			{
+//				float w = ImageIO.read(fromPic).getWidth();
+//				w = w > 400 ? 400 : w;
+//				int hw = (int) (w/5);
+//				String wp = waterPicPath.substring(0, waterPicPath.lastIndexOf("."));
+//				wp = wp + hw + ".png";
+//				File waterPic2=new File(wp); 
+//				if(!waterPic2.exists())
+//				{
+//					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
+//				}
+				Thumbnails.of(fromPic).size(400,400).outputQuality(0.3f).toFile(toPic);
+			}
+			else
+			{
+				float w = ImageIO.read(fromPic).getWidth();
+				int hw = (int) (w/5);
+				String wp = waterPicPath.substring(0, waterPicPath.lastIndexOf("."));
+				wp = wp + hw + ".png";
+				File waterPic2=new File(wp); 
+				if(!waterPic2.exists())
+				{
+					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
+				}
+				
+				Thumbnails.of(fromPic).scale(1f).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
