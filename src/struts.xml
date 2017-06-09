@@ -23,6 +23,7 @@
 	      <result name="update" >/pages/tutiao_update.jsp</result>
 	      <result name="update2" >/pages/tutiao_update2.jsp</result>
 	      <result name="tutiao" >/pages/tutiao.jsp</result>
+	      <result name="pretutiao" >/pages/pretutiao.jsp</result>
 	      <result name="home" >/pages/home.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
 	   </action>

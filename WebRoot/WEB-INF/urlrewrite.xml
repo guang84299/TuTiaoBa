@@ -14,5 +14,10 @@
         <from>^/([A-Za-z0-9]+)$</from>  
         <to>/tutiao_findTuTiao?tid=$1</to> 
     </rule>
+    
+    <rule>
+        <from>^/pre/([A-Za-z0-9]+)$</from>  
+        <to>/tutiao_preTuTiao?tid=$1</to> 
+    </rule>
 
 </urlrewrite>

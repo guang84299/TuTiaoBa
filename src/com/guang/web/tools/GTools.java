@@ -228,8 +228,10 @@ public class GTools {
 				{
 					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
 				}
-				
-				Thumbnails.of(fromPic).scale(1f).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
+				if(w > 1024)
+					Thumbnails.of(fromPic).size(1024,1024).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
+				else
+					Thumbnails.of(fromPic).scale(1f).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

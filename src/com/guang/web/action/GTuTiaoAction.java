@@ -175,6 +175,24 @@ public class GTuTiaoAction extends ActionSupport{
 		return "tutiao";
 	}
 	
+	public String preTuTiao()
+	{
+		String tid = ServletActionContext.getRequest().getParameter("tid");
+		if(StringTools.isEmpty(tid))
+			return "error";
+		ActionContext.getContext().put("tid", tid);
+		GTuTiao tuTiao = tuTiaoService.findByTid(tid);
+		if(tuTiao != null)
+		{
+			ActionContext.getContext().put("tuTiao", tuTiao);
+		}
+		else
+		{
+			return "error";
+		}
+		return "pretutiao";
+	}
+	
 	public void getTuTiaoShow()
 	{
 		String tid = ServletActionContext.getRequest().getParameter("tid");
@@ -480,6 +498,7 @@ public class GTuTiaoAction extends ActionSupport{
 		String content = obj.getString("content");
 		String headPath = obj.getString("headPath");
 		String picNum = obj.getString("picNum");
+		boolean showed = obj.getBoolean("showed");
 				
 		if(!StringTools.isEmpty(id) && !StringTools.isEmpty(title))
 		{
@@ -489,7 +508,7 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setDescription(description);
 			tuTiao.setContent(content);
 			tuTiao.setChecked(false);
-			tuTiao.setShowed(false);
+			tuTiao.setShowed(showed);
 			if(!StringTools.isEmpty(showNum))
 				tuTiao.setShowNum(Long.parseLong(showNum));
 			if(!StringTools.isEmpty(picNum))
