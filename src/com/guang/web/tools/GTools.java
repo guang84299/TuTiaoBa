@@ -215,6 +215,7 @@ public class GTools {
 //					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
 //				}
 				Thumbnails.of(fromPic).size(400,400).outputQuality(0.3f).toFile(toPic);
+//				Thumbnails.of(fromPic).size(400,400).outputQuality(0.3f).sourceRegion(Positions.TOP_LEFT,400,400).toFile(toPic);
 			}
 			else
 			{

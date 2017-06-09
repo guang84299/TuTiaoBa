@@ -77,8 +77,8 @@
 	</div>
 </div>
 
-<div id="imloading" style="width: 100px; height: 20px; line-height: 20px; font-size: 12px; text-align: center; border-radius: 3px; opacity: 0.0; background: rgb(0, 0, 0); margin: 10px auto 5px; color: rgb(255, 255, 255);">
-		加载中.....
+<div id="imloading" style="width: 250px; height: 30px; line-height: 30px; font-size: 16px; text-align: center; border-radius: 3px; background: rgb(160, 160, 160); cursor:hand; margin: 10px auto 10px; color: rgb(255, 255, 255);">
+		查看更多
 </div>
 		
 <div class="index-bottom" > 

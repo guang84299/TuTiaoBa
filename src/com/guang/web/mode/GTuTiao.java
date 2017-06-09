@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -20,6 +21,13 @@ public class GTuTiao {
 	private String author;
 	private long showNum;
 	private String headPath;
+	
+	private Integer picNum = 0;
+	private String description;
+	private Boolean checked = false;
+	private Boolean showed = false;
+	private String content;
+	
 	private Date cdate;
 	
 	private List<GTuTiaoUnit> units;
@@ -35,6 +43,22 @@ public class GTuTiao {
 		this.title = title;
 		this.author = author;
 		this.showNum = showNum;
+		this.cdate = new Date();
+	}
+
+	public GTuTiao(String tid, String title, String author, long showNum,
+			String headPath, int picNum, String description,
+			boolean checked, boolean showed) {
+		super();
+		this.tid = tid;
+		this.title = title;
+		this.author = author;
+		this.showNum = showNum;
+		this.headPath = headPath;
+		this.picNum = picNum;
+		this.description = description;
+		this.checked = checked;
+		this.showed = showed;
 		this.cdate = new Date();
 	}
 
@@ -83,6 +107,39 @@ public class GTuTiao {
 		this.headPath = headPath;
 	}
 
+	public Integer getPicNum() {
+		return picNum;
+	}
+	public void setPicNum(Integer picNum) {
+		this.picNum = picNum;
+	}
+	@Column(length=256)
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Boolean getChecked() {
+		return checked;
+	}
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
+	public Boolean getShowed() {
+		return showed;
+	}
+	public void setShowed(Boolean showed) {
+		this.showed = showed;
+	}
+	@Lob
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 
 	@Transient
 	public List<GTuTiaoUnit> getUnits() {
@@ -118,7 +175,7 @@ public class GTuTiao {
 		this.commentNum = commentNum;
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "GTuTiao [id=" + id + ", title=" + title + ", author=" + author

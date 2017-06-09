@@ -15,12 +15,19 @@ public class GTuTiaoUnit {
 	private String tdescribe;
 	private String picPath;
 	
+	private String content;
+	
 	public GTuTiaoUnit(){}
 	public GTuTiaoUnit(long tuTiaoId, String tdescribe, String picPath) {
 		super();
 		this.tuTiaoId = tuTiaoId;
 		this.tdescribe = tdescribe;
 		this.picPath = picPath;
+	}
+	
+	public GTuTiaoUnit(String content) {
+		super();
+		this.content = content;
 	}
 	
 	@Id
@@ -50,6 +57,13 @@ public class GTuTiaoUnit {
 	}
 	public void setPicPath(String picPath) {
 		this.picPath = picPath;
+	}
+	@Lob
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	@Override
 	public String toString() {

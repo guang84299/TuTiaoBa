@@ -50,6 +50,7 @@
       <td>
       	<button class="btn btn-primary btn-xs pinglun_btn" title="${val.id }">评论管理</button>
         <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
+        <button class="btn btn-primary btn-xs update_btn2" title="${val.id }">更改2</button>
         <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
       </td>
     </tr>

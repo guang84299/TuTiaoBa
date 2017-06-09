@@ -189,7 +189,7 @@ $(function() {
 					+ '<div class="tutiao-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 					+ '</div></div></div></a></div>';
 				
-				imgReady(baseUrl+obj.units[0].picPath, function () {
+				imgReady(baseUrl+obj.headPath, function () {
 					$('.masonry').masonry();
 				});
 			}

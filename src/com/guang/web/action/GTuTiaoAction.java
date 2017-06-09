@@ -265,6 +265,18 @@ public class GTuTiaoAction extends ActionSupport{
 		return "update";
 	}
 	
+	public String update2() {
+		String id = ServletActionContext.getRequest().getParameter("id");
+		if(StringTools.isEmpty(id))
+		{
+			return list();
+		}
+		
+		GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+		ActionContext.getContext().put("tuTiao", tuTiao);
+		return "update2";
+	}
+	
 	public void addTuTiao()
 	{
 		String tutiao = ServletActionContext.getRequest().getParameter("tutiao");
@@ -448,6 +460,56 @@ public class GTuTiaoAction extends ActionSupport{
 				}
 				tuTiaoService.delete(Long.parseLong(tid));
 			}
+		}
+	}
+	
+	public void updateTuTiao2()
+	{
+		String tutiao = ServletActionContext.getRequest().getParameter("tutiao");
+		if(StringTools.isEmpty(tutiao))
+		{
+			print(false);
+			return;
+		}
+		JSONObject obj = JSONObject.fromObject(tutiao);
+		String title = obj.getString("title");
+		String id = obj.getString("id");
+		String author = obj.getString("author");
+		String showNum = obj.getString("showNum");
+		String description = obj.getString("description");
+		String content = obj.getString("content");
+		String headPath = obj.getString("headPath");
+		String picNum = obj.getString("picNum");
+				
+		if(!StringTools.isEmpty(id) && !StringTools.isEmpty(title))
+		{
+			GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+			tuTiao.setTitle(title);
+			tuTiao.setAuthor(author);
+			tuTiao.setDescription(description);
+			tuTiao.setContent(content);
+			tuTiao.setChecked(false);
+			tuTiao.setShowed(false);
+			if(!StringTools.isEmpty(showNum))
+				tuTiao.setShowNum(Long.parseLong(showNum));
+			if(!StringTools.isEmpty(picNum))
+				tuTiao.setPicNum(Integer.parseInt(picNum));
+			
+			//判断是否更改头图片
+			String sourcePath = headPath.substring(headPath.indexOf("images"), headPath.length());
+			headPath = headPath.substring(headPath.indexOf("images"), headPath.lastIndexOf(".")-1)+"0.jpg";
+			if(!headPath.equals(tuTiao.getHeadPath()))
+			{
+				String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
+				String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
+				String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+				GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, true);
+				
+				tuTiao.setHeadPath(headPath);
+			}
+			
+			tuTiaoService.update(tuTiao);
+			print(true);
 		}
 	}
 	
