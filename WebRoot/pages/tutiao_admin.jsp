@@ -43,7 +43,11 @@
   <tbody>
   <s:iterator value="#list" var="val" status="sta">
     <tr>
-      <td>${val.title }</td>
+      <td>
+      	<s:if test="#val.showed == true">
+        	<button class="btn btn-primary btn-xs">已发布</button>
+        </s:if>${val.title }
+       </td>
       <td>${val.author }</td>
       <td>${val.showNum }</td>
       <td>${val.commentNum }</td>
@@ -53,6 +57,14 @@
         <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
         <button class="btn btn-primary btn-xs update_btn2" title="${val.id }">更改2</button>
         <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
+        <a class="btn btn-primary btn-xs" href="<%=basePath%>pre/${val.tid }" target="_blank">预览</a>
+        <s:if test="#val.checked == true">
+        	<button class="btn btn-primary btn-xs check_btn" title="${val.id }" data-check="${val.checked }">已审核</button>
+        </s:if>
+        <s:else>
+        	<button class="btn btn-primary btn-warning btn-xs check_btn" title="${val.id }" data-check="${val.checked }">审核</button>
+        </s:else>
+        
       </td>
     </tr>
 	</s:iterator>

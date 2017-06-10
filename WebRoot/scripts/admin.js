@@ -151,6 +151,33 @@ $(function() {
 		location.href = baseUrl + "comment_deleteComment?id="+$(this).attr("title") + "&tid=" + $(this).attr("data-tid");
 	})
 	
+	$('.check_btn').click(function(){
+		var check = $(this).attr("data-check");
+		var title = $(this).attr("title");
+		var btn = $(this);
+		$.ajax({
+			type: "post",
+			data: {id:title,checked: check},
+			url: baseUrl + "tutiao_checkTuTiao"
+		}).done(function(results) {
+			if(results == "true")
+			{
+				if(check == "false")
+				{
+					btn.removeClass("btn-warning");
+					btn.text("已审核");
+					btn.attr("data-check","true");
+				}
+				else
+				{
+					btn.addClass("btn-warning");
+					btn.text("审核");
+					btn.attr("data-check","false");
+				}
+			}
+		})
+	});
+	
 	$("#auto-caiji").keydown(function() {
         if (event.keyCode == "13") {//keyCode=13是回车键
         	var dtype = 1;//今日头条

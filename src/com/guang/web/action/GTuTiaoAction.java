@@ -594,6 +594,29 @@ public class GTuTiaoAction extends ActionSupport{
 		}
 	}
 	
+	public void checkTuTiao()
+	{
+		String id = ServletActionContext.getRequest().getParameter("id");
+		String checked = ServletActionContext.getRequest().getParameter("checked");
+		if(StringTools.isEmpty(id) || StringTools.isEmpty(checked))
+		{
+			print(false);
+		}
+		else
+		{
+			GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
+			if(tuTiao != null)
+			{
+				boolean b = false;
+				if("false".equals(checked))
+					b = true;
+				tuTiao.setChecked(b);
+				tuTiaoService.update(tuTiao);
+				print(true);
+			}
+		}
+	}
+	
 	public String deleteTuTiao()
 	{
 		String id = ServletActionContext.getRequest().getParameter("id");
