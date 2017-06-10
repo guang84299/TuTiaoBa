@@ -20,6 +20,7 @@
 	    <action name="tutiao_*" class="com.guang.web.action.GTuTiaoAction" method="{1}">
 	      <result name="index" >/pages/tutiao_admin.jsp</result>
 	      <result name="add" >/pages/tutiao_add.jsp</result>
+	      <result name="add2" >/pages/tutiao_add2.jsp</result>
 	      <result name="update" >/pages/tutiao_update.jsp</result>
 	      <result name="update2" >/pages/tutiao_update2.jsp</result>
 	      <result name="tutiao" >/pages/tutiao.jsp</result>

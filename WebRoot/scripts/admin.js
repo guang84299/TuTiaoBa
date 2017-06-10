@@ -121,6 +121,11 @@ $(function() {
 		location.href = baseUrl + "tutiao_add";
 	})
 	
+	$(".add_btn2").click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "tutiao_add2";
+	})
+	
 	$('.update_btn').click(function(event) {
 		event.preventDefault();
 		location.href = baseUrl + "tutiao_update?id="+$(this).attr("title");

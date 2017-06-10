@@ -72,6 +72,7 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		ActionContext.getContext().put("tuTiaos", list);
 		ActionContext.getContext().put("type", "1");
@@ -84,6 +85,7 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		ActionContext.getContext().put("tuTiaos", list);
 		ActionContext.getContext().put("type", "2");
@@ -111,6 +113,7 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		print(JSONArray.fromObject(list).toString());
 	}
@@ -127,6 +130,7 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setShowNum(tuTiao.getShowNum()+1);
 			tuTiaoService.update(tuTiao);
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 5).getList();
 			for(GComment comment : comments)
 			{
@@ -149,18 +153,21 @@ public class GTuTiaoAction extends ActionSupport{
 			for(GTuTiao tuTiao2 : hots)
 			{
 				tuTiao2.setUnits(tiaoUnitService.findAll(tuTiao2.getId()).getList());
+				tuTiao.setContent("");
 			}
 			//
 			List<GTuTiao> news = tuTiaoService.findByNew(0,5).getList();
 			for(GTuTiao tuTiao3 : news)
 			{
 				tuTiao3.setUnits(tiaoUnitService.findAll(tuTiao3.getId()).getList());
+				tuTiao.setContent("");
 			}
 			//推荐 带广告
 			List<GTuTiao> tuijians = tuTiaoService.findByHot(0,6).getList();
 			for(GTuTiao tuTiao4 : tuijians)
 			{
 				tuTiao4.setUnits(tiaoUnitService.findAll(tuTiao4.getId()).getList());
+				tuTiao.setContent("");
 			}
 			
 			ActionContext.getContext().put("tuTiao", tuTiao);
@@ -202,6 +209,7 @@ public class GTuTiaoAction extends ActionSupport{
 			tuTiao.setShowNum(tuTiao.getShowNum()+1);
 			tuTiaoService.update(tuTiao);
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 			List<GComment> comments = commentService.findBySuport(tuTiao.getId(), 0, 10).getList();
 			for(GComment comment : comments)
 			{
@@ -224,6 +232,7 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		print(JSONArray.fromObject(list).toString());
 	}
@@ -235,6 +244,7 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		print(JSONArray.fromObject(list).toString());
 	}
@@ -262,12 +272,16 @@ public class GTuTiaoAction extends ActionSupport{
 		for(GTuTiao tuTiao : list)
 		{
 			tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+			tuTiao.setContent("");
 		}
 		print(JSONArray.fromObject(list).toString());
 	}
 	
 	public String add() {
 		return "add";
+	}
+	public String add2() {
+		return "add2";
 	}
 	
 	public String update() {
@@ -279,6 +293,7 @@ public class GTuTiaoAction extends ActionSupport{
 		
 		GTuTiao tuTiao = tuTiaoService.find(Long.parseLong(id));
 		tuTiao.setUnits(tiaoUnitService.findAll(tuTiao.getId()).getList());
+		tuTiao.setContent("");
 		ActionContext.getContext().put("tuTiao", tuTiao);
 		return "update";
 	}
@@ -331,6 +346,53 @@ public class GTuTiaoAction extends ActionSupport{
 				GTuTiaoUnit unit = new GTuTiaoUnit(tuTiao.getId(), tdescribe, picPath);
 				tiaoUnitService.add(unit);
 			}
+		}
+	}
+	
+	public void addTuTiao2()
+	{
+		String tutiao = ServletActionContext.getRequest().getParameter("tutiao");
+		if(StringTools.isEmpty(tutiao))
+		{
+			print(false);
+			return;
+		}
+		JSONObject obj = JSONObject.fromObject(tutiao);
+		String title = obj.getString("title");
+		String author = obj.getString("author");
+		String showNum = obj.getString("showNum");
+		String description = obj.getString("description");
+		String content = obj.getString("content");
+		String headPath = obj.getString("headPath");
+		String picNum = obj.getString("picNum");
+		boolean showed = obj.getBoolean("showed");
+				
+		if(!StringTools.isEmpty(title))
+		{
+			GTuTiao tuTiao = new GTuTiao(GTools.getRandomTid(),title,author,0);
+			tuTiao.setDescription(description);
+			tuTiao.setContent(content);
+			tuTiao.setChecked(false);
+			tuTiao.setShowed(showed);
+			if(!StringTools.isEmpty(showNum))
+				tuTiao.setShowNum(Long.parseLong(showNum));
+			if(!StringTools.isEmpty(picNum))
+				tuTiao.setPicNum(Integer.parseInt(picNum));
+			//判断是否更改头图片
+			String sourcePath = headPath.substring(headPath.indexOf("images"), headPath.length());
+			headPath = headPath.substring(headPath.indexOf("images"), headPath.lastIndexOf(".")-1)+"0.jpg";
+			if(!headPath.equals(tuTiao.getHeadPath()))
+			{
+				String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
+				String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
+				String waterPicPath = ServletActionContext.getServletContext().getRealPath("images/water.png");
+				GTools.tozipPic(pic_relpath, topic_relpath, waterPicPath, true);
+				
+				tuTiao.setHeadPath(headPath);
+			}
+			
+			tuTiaoService.add(tuTiao);
+			print(tuTiao.getId());
 		}
 	}
 	

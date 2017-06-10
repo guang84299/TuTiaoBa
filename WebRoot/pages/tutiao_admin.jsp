@@ -24,6 +24,7 @@
    
    <div class="pull-right" style="margin-top:-40px;">
         <button class="btn btn-primary add_btn">添加</button>
+        <button class="btn btn-primary add_btn2">添加2</button>
     </div>
    <hr/>
    
