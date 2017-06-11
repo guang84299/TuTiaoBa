@@ -204,12 +204,16 @@ $(document).ready(function() {
   			b.attr("style","");
   		}
   	}
-  	//为图片添加a标签
+  	//为图片添加a标签和响应式
   	var imgs = $("img",code);
   	var picNum = imgs.length;
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
+  		img.removeClass("img-responsive");
+  		img.removeClass("center-block");
+  		img.addClass("img-responsive");
+  		img.addClass("center-block");
   		var a = img.parent();
   		if(a.get(0).tagName.toLocaleLowerCase() == 'a')
   		{
