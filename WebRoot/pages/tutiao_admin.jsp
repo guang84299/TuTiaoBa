@@ -24,7 +24,6 @@
    
    <div class="pull-right" style="margin-top:-40px;">
         <button class="btn btn-primary add_btn">添加</button>
-        <button class="btn btn-primary add_btn2">添加2</button>
     </div>
    <hr/>
    
@@ -55,7 +54,6 @@
       <td>
       	<button class="btn btn-primary btn-xs pinglun_btn" title="${val.id }">评论管理</button>
         <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
-        <button class="btn btn-primary btn-xs update_btn2" title="${val.id }">更改2</button>
         <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
         <a class="btn btn-primary btn-xs" href="<%=basePath%>pre/${val.tid }" target="_blank">预览</a>
         <s:if test="#val.checked == true">

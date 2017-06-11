@@ -96,8 +96,8 @@ $(function() {
 				s += '<div class="'+col_num+' item"  style="padding:1px;">' 
 					+ '<a href="'+ baseUrl+ obj.tid +'" style="text-decoration:none ;">'
 					+ '<div class="thumbnail" style="margin:2px;">'
-					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.headPath + '" alt=" '+ obj.units[0].tdescribe + ' "></div>'
-					+ '<span class="pic-num pull-right">' + obj.units.length + '图</span>'
+					+ '<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="' + baseUrl+obj.headPath + '" alt=" '+ obj.description + ' "></div>'
+					+ '<span class="pic-num pull-right">' + obj.picNum + '图</span>'
 					+ '<div class="caption"><b>' + obj.title + '</b>'
 					+ '<div class="index-fontBottom">'+ obj.author + ' ⋅ ' + obj.showNum + '浏览 ⋅ '+ getDate(obj.cdate)
 					+ '</div></div></div></a></div>';

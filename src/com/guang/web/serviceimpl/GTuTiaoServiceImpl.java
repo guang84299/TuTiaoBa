@@ -53,6 +53,7 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 
 	public QueryResult<GTuTiao> findByNew(int firstindex,int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("checked =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, lhm);
@@ -60,6 +61,7 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 
 	public QueryResult<GTuTiao> findByHot(int firstindex,int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("checked =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("showNum", "desc");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, lhm);
@@ -68,6 +70,7 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 	public QueryResult<GTuTiao> findSearch(String val, int firstindex,
 			int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("checked =", true+"");
 		colvals.put("title like", "'%"+val+"%'");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, null);
 	}

@@ -16,85 +16,343 @@
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   <link href="<%=basePath%>styles/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=basePath%>styles/admin.css" rel="stylesheet">
+  <link href="<%=basePath%>styles/summernote.css" rel="stylesheet">
+  <style type="text/css">
+  .fengmian
+  {
+  	width:100px;
+  	height:80px;
+  	padding:0px;
+  	cursor:hand;
+  	text-align:center
+  }
+  .fengmian span
+  {
+  	line-height:80px;
+  }
+  .fengmian-sel-bg
+  {
+  	position:absolute;
+  	width:100%;
+  	height:100%;
+  	background:rgba(0,0,0,0.6);
+  	top:0%; left:0%;
+  	display:none;
+  }
+  .fengmian-sel
+  {
+  	width:50%;
+  	height:60%;
+  	position:absolute;
+  	top:10%; left:25%;
+  }
+  .fengmian-sel img
+  {
+  	cursor:hand;
+  }
+  .warning
+  {
+  	display: none;
+  }
+  </style>
  </head>
  <body>
   <div class="container-fluid">
-   <h3 class="col-sm-offset-1">后台管理页</h3>
-   <hr/>
-   <div class="row">
-    <div class="col-sm-6">
-     <div class="row">
+   <h5 class="col-sm-offset-1">后台管理页</h5>
   
+   <hr/>
+   
+   <div class="row">
+   
+   <div class="col-sm-1">
+   </div>
+   
+    <div class="col-sm-10">
+     <div class="row">
       <form class="form-horizontal">
-       <div class="form-group">
-        <label class="control-label col-sm-2 col-sm-offset-1">标题</label>
-        <div class="col-sm-8">
-         <input type="text" name="title" value="${requestScope.tuTiao.title }" title="${requestScope.tuTiao.id }" class="form-control">
-         <p class="bg-warning warning"></p>
+  		<div class="form-group">
+        <label class="control-label col-sm-1">标题</label>
+        <div class="col-sm-4">
+         <input type="text" name="title" value="${tuTiao.title }" title="${tuTiao.id }" class="form-control">
+         <p class="bg-warning warning" id="title-warn">标题不能为空！</p>
         </div>
-        <label class="control-label col-sm-2 col-sm-offset-1">作者</label>
-        <div class="col-sm-8">
-         <input type="text" name="author" value="${requestScope.tuTiao.author }" class="form-control">
-         <p class="bg-warning warning"></p>
+        <label class="control-label col-sm-1">作者</label>
+        <div class="col-sm-2">
+         <input type="text" name="author" value="${tuTiao.author }" class="form-control">
+         <p class="bg-warning warning" id="author-warn">作者不能为空！</p>
         </div>
-         <label class="control-label col-sm-2 col-sm-offset-1">阅读量</label>
-        <div class="col-sm-8">
-         <input type="text" name="showNum" value="${requestScope.tuTiao.showNum }" class="form-control">
-         <p class="bg-warning warning"></p>
+        <label class="control-label col-sm-1">阅读量</label>
+        <div class="col-sm-2">
+         <input type="text" name="showNum" value="${tuTiao.showNum }" class="form-control">
         </div>
        </div>
-
-        <hr/>
-
-       <div class="hotGames">
-       
-       <s:iterator value="#tuTiao.units" var="val" status="sta">
-       
-        <div class="game-group col-sm-offset-1">
-         <div class="form-group">
-          <label class="control-label col-sm-3 col-sm-offset-1">图<s:property value="#sta.index + 1" /></label>
-          <div class="col-sm-5">
-           <button class="btn btn-danger del-btn">删除</button>
-          </div>
-         </div>
-         <div class="form-group">
-          <label class="control-label col-sm-3 col-sm-offset-1">图片说明</label>
-          <div class="col-sm-8">
-           <textarea  name="tdescribe"  title="<s:property value="#val.id" />" class="form-control"><s:property value="#val.tdescribe" /></textarea>
-          </div>
-         </div>
-
-         <div class="form-group">
-            <label class="control-label col-sm-3 col-sm-offset-1">图片路径</label>
-            <div class="col-sm-5">
-            <input type="text" class="form-control gameIcon" name="picPath" value="<s:property value="#val.picPath" />" disabled="disabled"/>
-            </div>
-         </div>
-         
-         <div class="form-group">
-          <label class="control-label col-sm-3 col-sm-offset-1">图片</label>
-          <div class="col-sm-8">
-           <img src="<%=basePath%><s:property value="#val.picPath" />" class="img-responsive" />
-           <button class="btn btn-warning changeIcon" title="1">更改图片</button>
-          </div>
-          
-          
-         </div>
+       </form>
+  	  
+  	  <div id="summernote">${tuTiao.content }</div>  
+	      
+       <div class="form-horizontal">
+  		<div class="form-group">
+        <label class="control-label col-sm-1">描述</label>
+        <div class="col-sm-6">
+         <textarea name="description" rows="3" class="form-control">${tuTiao.description }</textarea>    
+         <p class="bg-warning warning" id="description-warn">描述不能为空！</p>    
         </div>
         
-        </s:iterator>
-        
-        <button class="btn btn-primary col-sm-offset-1 add_hot">新增图片</button>
+        <div class="col-sm-2">
+	        <div class="well well-lg fengmian" data-headPath="${tuTiao.headPath }"><span class="glyphicon glyphicon-plus">封面</span></div>
+	       	<p class="bg-warning warning" id="headPath-warn">请选择一个封面！</p>  
+       	</div>
+       	
+        <div class="col-sm-3">
+         <div class="btn-group pull-right">
+		     <button class="btn btn-warning save">保存</button>
+		     <a class="btn btn-warning" href="<%=basePath%>pre/${tuTiao.tid }" target="_blank">预览</a>
+		     <button class="btn btn-warning showed">发布</button>
+		     <p class="bg-warning warning" id="btn-tishi"></p> 
+	      </div>
+        </div>
        </div>
-
-      </form>
-      <button class="btn btn-warning col-sm-offset-1 sub_btn2">更改</button>
+       </div>
+   
      </div>
     </div>
+    
+    <div class="col-sm-1">
+   </div>
+    
    </div>
   </div>
+  
+  <div class="fengmian-sel-bg">
+  		<div class="well fengmian-sel">
+  
+  		</div>
+  </div>
+  
   <script src="<%=basePath%>scripts/jquery.min.js"></script>
   <script src="<%=basePath%>scripts/bootstrap.min.js"></script>
-  <script src="<%=basePath%>scripts/admin.js"></script>
+  <script src="<%=basePath%>scripts/summernote.min.js"></script>
+  <script src="<%=basePath%>scripts/lang/summernote-zh-CN.min.js"></script>
+
+<script type="text/javascript">  
+var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
+//加载编辑器  
+$(document).ready(function() {  
+    $('#summernote').summernote({  
+    	toolbar: [
+		    // [groupName, [list of button]]
+		    ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
+		    ['para', ['style','ul', 'ol', 'paragraph','height']],
+		    ['insert', ['link', 'picture','video','table','hr']],
+		    ['misc', ['fullscreen', 'codeview','undo','redo','help']]
+		  ],
+		 height:800,
+        minHeight: 800,             
+        maxHeight: 800,        
+        focus: true,   
+        lang:'zh-CN',
+        // 重写图片上传  
+    	callbacks: {  
+            onImageUpload: function(files) 
+            { //the onImageUpload API  
+                sendFile(files[0]);  
+        	}  
+        }
+  });  
+  
+  
+  $(".save,.showed").click(function(){
+  	var str = $('#summernote').summernote('code');
+  	var code = $(str);
+  	
+  	var showed = false;
+  	if($(this).attr("class") == $(".showed").attr("class"))
+  		showed = true;
+  	
+  	//清除带外链的图片
+  	var imgs = $("img",code);
+  	for(var i=0;i< imgs.length;i++)
+  	{
+  		var img = $(imgs[i]);
+  		var src = img.attr("src");
+  		if(src.indexOf(baseUrl) == -1)
+  		{
+  			var p = baseUrl+"images/water.png";
+  			img.after('<img src="'+p+'">')
+  			img.remove();
+  		}
+  	}
+  	//清除带外链a标签
+  	var as = $("[href]",code);
+  	for(var i=0;i< as.length;i++)
+  	{
+  		var a = $(as[i]);
+  		var href = a.attr("href");
+  		if(href.indexOf(baseUrl) == -1 && href.length > 5)
+  		{
+  			a.attr("href","");
+  		}
+  	}
+  	//清除带背景图片和外链的标签
+  	var bs = $("[style]",code);
+  	for(var i=0;i< bs.length;i++)
+  	{
+  		var b = $(bs[i]);
+  		var style = b.attr("style");
+  		if(style.indexOf("image") != -1 || style.indexOf("url") != -1)
+  		{
+  			b.attr("style","");
+  		}
+  	}
+  	//为图片添加a标签
+  	var imgs = $("img",code);
+  	var picNum = imgs.length;
+  	for(var i=0;i< imgs.length;i++)
+  	{
+  		var img = $(imgs[i]);
+  		var a = img.parent();
+  		if(a.get(0).tagName.toLocaleLowerCase() == 'a')
+  		{
+  			if(href.indexOf(baseUrl) == -1)
+  				a.attr("href",img.attr("src"));
+  		}
+  		else
+  		{
+  			img.wrap('<a href="'+img.attr("src")+'"></a>');
+  		}
+  	}
+  	$('#summernote').summernote('code',code);
+  	
+    var tutiaos = {};
+	tutiaos.title = $("[name='title']").val();
+	tutiaos.author = $("[name='author']").val();
+	tutiaos.showNum = $("[name='showNum']").val();
+	tutiaos.id = $("[name='title']")[0].title;
+	tutiaos.description =  $("[name='description']").val();
+	tutiaos.content = $('#summernote').summernote('code');
+	tutiaos.headPath = $("#headPath").attr("src");
+	tutiaos.picNum = picNum; 
+	tutiaos.showed = showed;
+	
+	//alert($(code).text());
+	if(tutiaos.title == "" || tutiaos.title == null || tutiaos.title == undefined)
+	{
+		$("#title-warn").show();
+		$("[name='title']").focus();
+		return;
+	}
+	if(tutiaos.author == "" || tutiaos.author == null || tutiaos.author == undefined)
+	{
+		$("#author-warn").show();
+		$("[name='author']").focus();
+		return;
+	}
+	if(tutiaos.description == "" || tutiaos.description == null || tutiaos.description == undefined)
+	{
+		$("#description-warn").show();
+		$("[name='description']").focus();
+		return;
+	}
+	if(tutiaos.headPath == "" || tutiaos.headPath == null || tutiaos.headPath == undefined)
+	{
+		$("#headPath-warn").show();
+		return;
+	}
+	
+    var data = JSON.stringify(tutiaos);
+    $.ajax({
+			type: "post",
+			data: {tutiao: data},
+			url: baseUrl + "tutiao_updateTuTiao"
+			}).done(function(res) {
+				if(res == 'true')
+				{
+					if(showed)
+						$("#btn-tishi").text("发布成功！");
+					else
+						$("#btn-tishi").text("保存成功！");
+					$("#btn-tishi").show();
+					setTimeout(function(){
+						$("#btn-tishi").hide();
+					},2000);
+				}
+				else
+				{
+					if(showed)
+						$("#btn-tishi").text("发布失败！");
+					else
+						$("#btn-tishi").text("保存失败！");
+					$("#btn-tishi").show();
+				}
+	});
+  });
+  
+  $("[name='title']").blur(function(){
+  	$("#title-warn").hide();
+  });
+  $("[name='author']").blur(function(){
+  	$("#author-warn").hide();
+  });
+  $("[name='description']").blur(function(){
+  	$("#description-warn").hide();
+  });
+
+
+  
+  var headPath = $(".fengmian").attr("data-headPath");
+  if(headPath != "" && headPath != null && headPath != undefined)
+  {
+  		$(".fengmian").html("");
+  		var s = '<img id="headPath" width=100 height=80 src="'+ headPath +'">'
+  		$(".fengmian").append(s);
+  }
+  
+  $(".fengmian").click(function(){
+  	$(".fengmian-sel-bg").show();
+  	$(".fengmian-sel").html("");
+  	var str = $('#summernote').summernote('code');
+  	var code = $(str);
+  	var imgs = $("img",code);
+  	for(var i=0;i< imgs.length;i++)
+  	{
+  		var img = $(imgs[i]);
+  		var s = '<img width=80 height=80 style="margin:10px;" src="'+ img.attr("src") +'">'
+  		$(".fengmian-sel").append(s);
+  	}
+  	$(".fengmian-sel img").unbind("click");
+  	$(".fengmian-sel img").click(function(){
+  		$(".fengmian span").hide();
+  		$(".fengmian").html("");
+  		var s = '<img id="headPath" width=100 height=80 src="'+ $(this).attr("src") +'">'
+  		$(".fengmian").append(s);
+  		$("#headPath-warn").hide();
+  	});
+  });
+  
+  $(".fengmian-sel-bg").click(function(){
+  	$(this).hide();
+  });
+  
+  
+});  
+//上传图片
+function sendFile(file) {  
+    var data = new FormData();  
+    data.append("pic", file);
+   
+    $.ajax({  
+        data: data,  
+        type: "POST",  
+        url: baseUrl+'tutiao_upload',
+        cache: false,  
+        contentType: false,  
+        processData: false,  
+        success: function(url) {  
+              $("#summernote").summernote('insertImage', baseUrl+url); // the insertImage API  
+        }  
+    });  
+}  
+
+  
+</script>  
 </body></html>

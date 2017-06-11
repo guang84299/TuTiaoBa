@@ -33,7 +33,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.guang.web.mode.GTuTiao;
-import com.guang.web.mode.GTuTiaoUnit;
 import com.guang.web.mode.GUser;
 import com.guang.web.tools.ApkTools;
 import com.guang.web.tools.GAutoTool;

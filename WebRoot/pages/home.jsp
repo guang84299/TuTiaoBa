@@ -63,8 +63,8 @@
 		<div class="col-xs-3 item"  style="padding:1px;">
 			<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 			<div class="thumbnail" style="margin:2px;">
-				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath}" alt="图吧-${val.units[0].tdescribe}"></div>
-					<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+				<div style="overflow:hidden;"><img class="img-thumbnail" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath}" alt="图吧-${val.description}"></div>
+					<span class="pic-num pull-right"><s:property value="#val.picNum" />图</span>
 					<div class="caption">
 						<b> ${val.title} </b>
 						<div class="index-fontBottom">${val.author} ⋅ ${val.showNum}浏览 ⋅ <s:date name="#val.cdate" format="yyyy-MM-dd" /></div>

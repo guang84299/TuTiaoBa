@@ -16,7 +16,6 @@ import com.guang.web.mode.GTuTiao;
 import com.guang.web.mode.GUser;
 import com.guang.web.service.GCommentService;
 import com.guang.web.service.GTuTiaoService;
-import com.guang.web.service.GTuTiaoUnitService;
 import com.guang.web.service.GUserService;
 import com.guang.web.tools.StringTools;
 import com.opensymphony.xwork2.ActionContext;
@@ -26,7 +25,6 @@ public class GCommentAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
 	@Resource private GTuTiaoService tuTiaoService;
-	@Resource private GTuTiaoUnitService tiaoUnitService;
 	@Resource private GCommentService commentService;
 	@Resource private  GUserService userService;
 	

@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "g_tutiao")
 //alter table g_tutiao add index index_tid(tid)
+//alter table g_tutiao add index index_checked(checked)
 public class GTuTiao {
 	private long id;
 	private String tid;
@@ -30,7 +31,6 @@ public class GTuTiao {
 	
 	private Date cdate;
 	
-	private List<GTuTiaoUnit> units;
 	private List<GComment> comments;
 	private long commentNum;
 	
@@ -140,14 +140,6 @@ public class GTuTiao {
 		this.content = content;
 	}
 
-
-	@Transient
-	public List<GTuTiaoUnit> getUnits() {
-		return units;
-	}
-	public void setUnits(List<GTuTiaoUnit> units) {
-		this.units = units;
-	}
 	public Date getCdate() {
 		return cdate;
 	}
@@ -176,12 +168,6 @@ public class GTuTiao {
 	}
 
 	
-	@Override
-	public String toString() {
-		return "GTuTiao [id=" + id + ", title=" + title + ", author=" + author
-				+ ", showNum=" + showNum + ", cdate=" + cdate + ", units="
-				+ units + "]";
-	}
 	
 	
 	

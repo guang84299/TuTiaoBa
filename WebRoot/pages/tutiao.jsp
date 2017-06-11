@@ -104,19 +104,11 @@ var _hmt = _hmt || [];
 	<div class="col-xs-1" ></div>
 	<div class="col-xs-8" id="tutiao_col" data-tid="${tuTiao.tid }">
 		<p>
-			<b style="font-size:2em;">${tuTiao.title }</b><br>
-			<small>${tuTiao.author } <s:date name="#tuTiao.cdate" format="yyyy-MM-dd HH:mm" /></small>
-			<br><br>
+			<b style="font-size:2em;">${tuTiao.title }</b><br><br>
+			<small><b>${tuTiao.author } <s:date name="#tuTiao.cdate" format="yyyy-MM-dd HH:mm" /></b></small>
+			<hr>
 		</p>
-		
-		<s:iterator value="#tuTiao.units" var="val" status="sta">
-             <p class="text-center">
-            	<a href="${val.picPath }"><img src="${val.picPath }" alt="${val.tdescribe }"  class="img-responsive center-block" style="max-height:500px;"></a>
-             </p>
-             <p class="text-center" style="font-size:16px;">
-				<br>${val.tdescribe }<br><br>
-			</p>
-         </s:iterator>
+		${tuTiao.content }
 	</div>
 	<div class="col-xs-3" id="tutiao_col2">
 		<div class="list-group">
@@ -129,9 +121,9 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.description }">
 		       		</div>
-		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		       		<span class="pic-num pull-right"><s:property value="#val.picNum" />图</span>
 		        </div>
 		        <p class="list-group-item-text">
 		            ${val.title }
@@ -151,9 +143,9 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.description }">
 		       		</div>
-		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		       		<span class="pic-num pull-right"><s:property value="#val.picNum" />图</span>
 		        </div>
 		        <p class="list-group-item-text">
 		            ${val.title }
@@ -178,8 +170,8 @@ var _hmt = _hmt || [];
                 	 	<div class="col-xs-2 item" style="padding:2px;">
                 	 		<a href="<%=basePath%>${val.tid}" style="text-decoration:none ;">
 					    	<div class="thumbnail" style="margin:2px;">
-								<div class="thumbnail about_wrap" style="overflow:hidden;max-height:120px;margin-bottom:0px;"><img style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.units[0].tdescribe }"></div>
-								<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+								<div class="thumbnail about_wrap" style="overflow:hidden;max-height:120px;margin-bottom:0px;"><img style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="图吧-${val.description }"></div>
+								<span class="pic-num pull-right"><s:property value="#val.picNum" />图</span>
 								<div class="caption"><b style="font-size:12px;">  ${val.title } </b></div>
 							</div>
 							</a>
@@ -235,9 +227,9 @@ var _hmt = _hmt || [];
 		    <a href="<%=basePath%>${val.tid}" class="list-group-item">
 		        <div class="list-group-item-heading" >
 		        	<div style="overflow:hidden;max-height:200px;">
-		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="${val.units[0].tdescribe }">
+		            <img class="img-responsive" style="padding:0px;width:100%;" src="<%=basePath%>${val.headPath }" alt="${val.description }">
 		       		</div>
-		       		<span class="pic-num pull-right"><s:property value="#val.units.size()" />图</span>
+		       		<span class="pic-num pull-right"><s:property value="#val.picNum" />图</span>
 		        </div>
 		        <p class="list-group-item-text">
 		            ${val.title }

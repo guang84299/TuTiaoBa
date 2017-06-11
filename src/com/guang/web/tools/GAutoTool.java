@@ -26,7 +26,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.guang.web.mode.GTuTiao;
-import com.guang.web.mode.GTuTiaoUnit;
 
 public class GAutoTool {
 
@@ -63,7 +62,6 @@ public class GAutoTool {
 		      String author = "图条吧";
 		      
 		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
-    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
     		  
 		      elements = document.select("#content figure,#content p");
 		      String text = null;
@@ -104,9 +102,9 @@ public class GAutoTool {
 		      }
 		      for(int i=0;i<pics.size();i++)
 		      {
-		    	  units.add(new GTuTiaoUnit(0, texts.get(i),pics.get(i)));
+//		    	  units.add(new GTuTiaoUnit(0, texts.get(i),pics.get(i)));
 		      }
-			tuTiao.setUnits(units);
+//			tuTiao.setUnits(units);
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }
@@ -126,7 +124,7 @@ public class GAutoTool {
 		      String author = "图条吧";
 		      
 		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
-    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+//    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
     		  
 		      elements = document.select("#content figure");
 		      for(Element ele : elements)
@@ -134,9 +132,9 @@ public class GAutoTool {
 		    	  String text = ele.select("figcaption").get(0).text();
 		    	  String url = ele.select("a").get(0).attr("href");
 		    		  
-		    	  units.add(new GTuTiaoUnit(0, text,url));
+//		    	  units.add(new GTuTiaoUnit(0, text,url));
 		      }
-			tuTiao.setUnits(units);
+//			tuTiao.setUnits(units);
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }
@@ -192,12 +190,12 @@ public class GAutoTool {
 		    		  String title = obj.getJSONArray("sub_titles").get(0).toString();
 		    		  
 		    		  tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
-		    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
-		    		  for(int i=0;i<list_url.size();i++)
-		    		  {
-		    			  units.add(new GTuTiaoUnit(0, list_desc.get(i).getCon(), list_url.get(i).getCon()));
-		    		  }
-		    		  tuTiao.setUnits(units);
+//		    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+//		    		  for(int i=0;i<list_url.size();i++)
+//		    		  {
+//		    			  units.add(new GTuTiaoUnit(0, list_desc.get(i).getCon(), list_url.get(i).getCon()));
+//		    		  }
+//		    		  tuTiao.setUnits(units);
 		    		  break;
 		    	  }
 		      }
@@ -226,7 +224,7 @@ public class GAutoTool {
 		      
 		      tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
 		      
-		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+//		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
 		      //内容
 		      elements = document.select(".article-content p");
 		      //1：搞笑类-> 说明和图片在一个p标签内 
@@ -263,20 +261,20 @@ public class GAutoTool {
 	    			  text += "<br><br>"+tele2.getCon();
 	    		  }
 	    		  
-		    	  if(tele.isPic())
-		    	  {
-		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, text, tele.getCon());
-			    	  units.add(unit);
-		    	  }
-		    	  else
-		    	  {
-		    		  TouTiaoElement tele3 = list.get(0);
-		    		  list.remove(0);
-		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, tele.getCon()+text, tele3.getCon());
-			    	  units.add(unit);
-		    	  }
+//		    	  if(tele.isPic())
+//		    	  {
+//		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, text, tele.getCon());
+//			    	  units.add(unit);
+//		    	  }
+//		    	  else
+//		    	  {
+//		    		  TouTiaoElement tele3 = list.get(0);
+//		    		  list.remove(0);
+//		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, tele.getCon()+text, tele3.getCon());
+//			    	  units.add(unit);
+//		    	  }
 		      }
-		      tuTiao.setUnits(units);
+//		      tuTiao.setUnits(units);
 		      
 
 		 } catch (IOException e) {
