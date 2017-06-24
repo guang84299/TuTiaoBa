@@ -330,6 +330,23 @@ function sendFile(file) {
         }  
     });  
 }  
+//上传gif图片
+function sendGifFile(file) {  
+    var data = new FormData();  
+    data.append("pic", file);
+   		
+    var data = $.ajax({  
+        data: data,  
+        type: "POST",  
+        url: baseUrl+'tutiao_upload',
+        cache: false,  
+        contentType: false,  
+        processData: false, 
+        async:false 
+        }); 
+        
+     data = data.responseText; 
+}  
 
   
 </script>  

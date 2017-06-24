@@ -153,7 +153,9 @@ public class GTuTiaoAction extends ActionSupport{
 				tuTiao3.setContent("");
 			}
 			//推荐 带广告
-			List<GTuTiao> tuijians = tuTiaoService.findByHot(0,6).getList();
+			long num = tuTiaoService.findNum() - 10;
+			int start = (int) ((int)(Math.random()*100)%num);
+			List<GTuTiao> tuijians = tuTiaoService.findByHot(start,6).getList();
 			for(GTuTiao tuTiao4 : tuijians)
 			{
 				tuTiao4.setContent("");
