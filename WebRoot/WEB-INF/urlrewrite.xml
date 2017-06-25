@@ -16,8 +16,8 @@
     </rule>
     
     <rule>
-        <from>^/mm/$</from>  
-        <to>/tutiao_mm</to> 
+        <from>^/mm/([0-9]+)$</from>  
+        <to>/tutiao_mm?id=$1</to> 
     </rule>
     
     <rule>
@@ -28,6 +28,11 @@
     <rule>
         <from>^/life/$</from>  
         <to>/tutiao_life</to> 
+    </rule>
+    
+    <rule>
+        <from>^/life/([0-9]+)$</from>  
+        <to>/tutiao_life?id=$1</to> 
     </rule>
     
     <rule>
@@ -47,7 +52,7 @@
     
     <rule>
         <from>^/life/([0-9]+)_([0-9]+).html$</from>  
-        <to>/tutiao_showlife?id=$1page=$2</to> 
+        <to>/tutiao_showlife?id=$1&amp;page=$2</to> 
     </rule>
     
     <rule>

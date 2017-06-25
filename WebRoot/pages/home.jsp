@@ -30,7 +30,7 @@
           	<s:iterator value="#lunbos" var="val" status="sta">
               <div class="item <s:if test="#sta.index == 0">active</s:if>">
                   <img src="<%=basePath%>${val.headPath }" alt="${val.title }">
-                  <a href="<%=basePath%>mm/${val.id }.html" class="carousel-caption">${val.title }</a>
+                  <a href="<%=basePath%>mm/${val.id }.html" class="carousel-caption" target="_blank">${val.title }</a>
               </div>
           	</s:iterator>
           </div>
@@ -44,7 +44,7 @@
         <div class="g-title">
           <h4 class="notice">
           <s:iterator value="#zhu" var="val" status="sta">
-          <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+          <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
           </s:iterator>
           </h4>
         </div>
@@ -56,7 +56,7 @@
             <s:iterator value="#fu_left" var="val" status="sta">
               <div class="list-group-item notice">
                 <span class="glyphicon glyphicon-heart pull-left"></span>
-                <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+                <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
               </div>
              </s:iterator>  
             </div>
@@ -68,7 +68,7 @@
 			<s:iterator value="#fu_right" var="val" status="sta">
               <div class="list-group-item notice">
                 <span class="glyphicon glyphicon-heart pull-left"></span>
-                <a href="<%=basePath%>life/${val.id }.html">${val.title }</a>
+                <a href="<%=basePath%>life/${val.id }.html" target="_blank">${val.title }</a>
               </div>
              </s:iterator> 
             </div>
@@ -90,7 +90,7 @@
         <s:iterator value="#rank_mm" var="val" status="sta">
            <div class="list-group-item notice">
             <span class="badge pull-left"><s:property value="#sta.index+1" /></span>
-            <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
           </div>
           </s:iterator> 
       </div>
@@ -120,9 +120,9 @@
     <s:iterator value="#tutiao_mm" var="val" status="sta">
     <div class="col-sm-8 col-md-6 col-xs-12">
       <div class="thumbnail">
-        <a href="<%=basePath%>mm/${val.id }.html"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
+        <a href="<%=basePath%>mm/${val.id }.html" target="_blank"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
         <div class="caption notice">
-          <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+          <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
         </div>
       </div>
     </div>
@@ -140,9 +140,9 @@
     <s:iterator value="#tutiao_life" var="val" status="sta">
     <div class="col-sm-8 col-md-6 col-xs-12">
       <div class="thumbnail">
-        <a href="<%=basePath%>life/${val.id }.html"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
+        <a href="<%=basePath%>life/${val.id }.html" target="_blank"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
         <div class="caption notice">
-          <a href="<%=basePath%>life/${val.id }.html">${val.title }</a>
+          <a href="<%=basePath%>life/${val.id }.html" target="_blank">${val.title }</a>
         </div>
       </div>
     </div>
@@ -165,7 +165,7 @@
 		<s:iterator value="#tuijian_mm" var="val" status="sta">
            <div class="list-group-item notice">
             <span class="glyphicon glyphicon-heart pull-left"></span>
-            <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
           </div>
          </s:iterator>
       </div>
@@ -179,7 +179,7 @@
 		<s:iterator value="#rank_life" var="val" status="sta">
           <div class="list-group-item notice">
             <span class="badge pull-left"><s:property value="#sta.index+1" /></span>
-            <a href="<%=basePath%>life/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>life/${val.id }.html" target="_blank">${val.title }</a>
           </div>
         </s:iterator> 
       </div>
@@ -193,7 +193,7 @@
 		<s:iterator value="#tuijian_life" var="val" status="sta">
            <div class="list-group-item notice">
             <span class="glyphicon glyphicon-heart pull-left"></span>
-            <a href="<%=basePath%>life/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>life/${val.id }.html" target="_blank">${val.title }</a>
           </div>
         </s:iterator>  
       </div>
@@ -217,9 +217,9 @@
       <div  class="g-box-6">
           <div class="g-title-3">
               <h6>热搜: 
-              <a href="#">美女</a>
-              <a href="#">美女图片</a>
-              <a href="#">性感</a>
+              <a href="#" target="_blank">美女</a>
+              <a href="#" target="_blank">美女图片</a>
+              <a href="#" target="_blank">性感</a>
               </h6>
           </div>
       </div>

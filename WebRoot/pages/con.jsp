@@ -16,9 +16,9 @@
   <title>${tuTiao.title } 图条吧</title>
   <meta name="keywords" content="${tuTiao.keywords },图条吧">
   <meta name="description" content="${tuTiao.title } 图条吧www.tutiaoba.com">
-  <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
-  <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
+  <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
   <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/docs.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/common.css" rel="stylesheet">
@@ -142,8 +142,8 @@
       <a class="g-title6-a-1 hidden-xs" href="#">没有了</a>
       </s:if>
       <s:else>
-      	<a href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html" class="btn btn-info">上一组</a>
-      	<a class="g-title6-a-1 hidden-xs" href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html">${pre.title}</a>
+      	<a href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html" target="_blank" class="btn btn-info">上一组</a>
+      	<a class="g-title6-a-1 hidden-xs" href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html" target="_blank">${pre.title}</a>
       </s:else>
       </h5>
     </div>
@@ -154,8 +154,8 @@
       <a class="btn btn-info" href="#">下一组</a>
       </s:if>
       <s:else>
-      	<a class="g-title6-a-2 hidden-xs" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html">${next.title}</a>
-      	<a class="btn btn-info" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html">下一组</a>
+      	<a class="g-title6-a-2 hidden-xs" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html" target="_blank">${next.title}</a>
+      	<a class="btn btn-info" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html" target="_blank">下一组</a>
       </s:else>
       </h5>
     </div>
@@ -167,9 +167,9 @@
  	<s:iterator value="#tuijian" var="val" status="sta">
     <div class="col-sm-8 col-md-4 col-xs-12">
       <div class="thumbnail">
-        <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
+        <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html" target="_blank"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
         <div class="caption notice">
-          <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html">${val.title }</a>
+          <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html" target="_blank">${val.title }</a>
         </div>
       </div>
     </div>

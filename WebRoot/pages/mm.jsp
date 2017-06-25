@@ -27,15 +27,15 @@
     <s:iterator value="#tutiao_mm" var="val" status="sta">
     <div class="col-sm-8 col-md-6 col-xs-12">
       <div class="thumbnail">
-        <a href="<%=basePath%>mm/${val.id }.html"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
+        <a href="<%=basePath%>mm/${val.id }.html" target="_blank"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
         <div class="caption notice">
-          <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+          <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
         </div>
       </div>
     </div>
     </s:iterator>
     <div class="g-title col-xs-24">
-          <h5><a href="<%=basePath%>mm/">查看更多...</a></h5>
+          <h5><a href="<%=basePath%>mm/${page}">查看更多...</a></h5>
     </div>
 
   </div>
@@ -53,7 +53,7 @@
 		<s:iterator value="#rank_mm" var="val" status="sta">
           <div class="list-group-item notice">
             <span class="badge pull-left"><s:property value="#sta.index+1" /></span>
-            <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
           </div>
          </s:iterator> 
 
@@ -68,7 +68,7 @@
 		<s:iterator value="#new_mm" var="val" status="sta">
           <div class="list-group-item notice">
             <span class="glyphicon glyphicon-heart pull-left"></span>
-            <a href="<%=basePath%>mm/${val.id }.html">${val.title }</a>
+            <a href="<%=basePath%>mm/${val.id }.html" target="_blank">${val.title }</a>
           </div>
          </s:iterator> 
       </div>

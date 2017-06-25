@@ -99,31 +99,51 @@ public class GTuTiaoAction extends ActionSupport{
 	
 	public String mm()
 	{
+		String id = ServletActionContext.getRequest().getParameter("id");
+		int page = 0;
+		if(!StringTools.isEmpty(id))
+			page = Integer.parseInt(id);
 		//浏览排行/生活排行
 		List<GTuTiao> list_rank_mm = tuTiaoService.findByHot(1,0,14).getList();
 		//最近更新
 		List<GTuTiao> list_new_mm = tuTiaoService.findByNew(1,0,25).getList();
 		//生活图条
-		List<GTuTiao> list_tutiao_mm = tuTiaoService.findByNew(1,25,12).getList();
+		List<GTuTiao> list_tutiao_mm = tuTiaoService.findByNew(1,25+page,12).getList();
 		
+		page += list_tutiao_mm.size();
+		if(list_tutiao_mm.size() < 12)
+		{
+			page = 0;
+		}
 		ActionContext.getContext().put("rank_mm", list_rank_mm);
 		ActionContext.getContext().put("new_mm", list_new_mm);
 		ActionContext.getContext().put("tutiao_mm", list_tutiao_mm);
+		ActionContext.getContext().put("page", page);
 		return "mm";
 	}
 	
 	public String life()
 	{
+		String id = ServletActionContext.getRequest().getParameter("id");
+		int page = 0;
+		if(!StringTools.isEmpty(id))
+			page = Integer.parseInt(id);
 		//浏览排行/排行
 		List<GTuTiao> list_rank_life = tuTiaoService.findByHot(2,0,14).getList();
 		//最近更新
 		List<GTuTiao> list_new_life = tuTiaoService.findByNew(2,0,25).getList();
 		//美女图条
-		List<GTuTiao> list_tutiao_life = tuTiaoService.findByNew(2,25,12).getList();
+		List<GTuTiao> list_tutiao_life = tuTiaoService.findByNew(2,25+page,12).getList();
 		
+		page += list_tutiao_life.size();
+		if(list_tutiao_life.size() < 12)
+		{
+			page = 0;
+		}
 		ActionContext.getContext().put("rank_life", list_rank_life);
 		ActionContext.getContext().put("new_life", list_new_life);
 		ActionContext.getContext().put("tutiao_life", list_tutiao_life);
+		ActionContext.getContext().put("page", page);
 		return "life";
 	}
 	
@@ -165,24 +185,44 @@ public class GTuTiaoAction extends ActionSupport{
 		return "con";
 	}
 	
-	
-	public String preTuTiao()
+	public String showlife()
 	{
-		String tid = ServletActionContext.getRequest().getParameter("tid");
-		if(StringTools.isEmpty(tid))
-			return "error";
-		ActionContext.getContext().put("tid", tid);
-		GTuTiao tuTiao = null;//tuTiaoService.findByTid(tid);
-		if(tuTiao != null)
-		{
-			ActionContext.getContext().put("tuTiao", tuTiao);
-		}
-		else
-		{
-			return "error";
-		}
-		return "pretutiao";
+		String id = ServletActionContext.getRequest().getParameter("id");
+		String page = ServletActionContext.getRequest().getParameter("page");
+		if(StringTools.isEmpty(id))
+			return home();
+		
+		int currPage = 1;
+		if(!StringTools.isEmpty(page))
+			currPage = Integer.parseInt(page);
+		
+		long tid = Long.parseLong(id);
+		GTuTiao tuTiao = tuTiaoService.find(tid);
+		if(tuTiao == null)
+			return home();
+		List<GTuTiaoUnit> units = unitService.findAll(tuTiao.getId()).getList();
+		tuTiao.setUnit(units.get(currPage-1));
+		
+		//上一个
+		GTuTiao pre = tuTiaoService.findPre(2, tid);
+		//下一个
+		GTuTiao next = tuTiaoService.findNext(2, tid);
+		
+		//推荐
+		int n = (int) tuTiaoService.findNum();
+		int r = (int) (Math.random()*100%(n-6));
+		List<GTuTiao> list_tuijian = tuTiaoService.findAll(r, 6).getList();
+		
+		ActionContext.getContext().put("tuTiao", tuTiao);
+		ActionContext.getContext().put("pre", pre);
+		ActionContext.getContext().put("next", next);
+		ActionContext.getContext().put("tuijian", list_tuijian);
+		ActionContext.getContext().put("page", currPage);
+		ActionContext.getContext().put("count", units.size());
+		ActionContext.getContext().put("url", "life/"+id+"_");
+		return "con";
 	}
+	
 	
 	
 	public void getSearch()
