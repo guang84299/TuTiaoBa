@@ -7,61 +7,39 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
 @Entity
 @Table(name = "g_tutiao")
-//alter table g_tutiao add index index_tid(tid)
-//alter table g_tutiao add index index_checked(checked)
+//alter table g_tutiao add index index_type(type)
 public class GTuTiao {
 	private long id;
-	private String tid;
+	private int type;//1:美女 2:生活
 	private String title;
-	private String author;
 	private long showNum;
+	private int picNum;
 	private String headPath;
-	
-	private Integer picNum = 0;
-	private String description;
-	private Boolean checked = false;
-	private Boolean showed = false;
-	private String content;
-	
+	private String keywords;
 	private Date cdate;
 	
-	private List<GComment> comments;
-	private long commentNum;
+	private List<GTuTiaoUnit> units;
+	private GTuTiaoUnit unit;
 	
 	public GTuTiao(){}
 	
 	
-	public GTuTiao(String tid,String title, String author, long showNum) {
+	public GTuTiao(int type,String title,long showNum,int picNum,String headPath,String keywords) {
 		super();
-		this.tid = tid;
+		this.type = type;
 		this.title = title;
-		this.author = author;
 		this.showNum = showNum;
-		this.cdate = new Date();
-	}
-
-	public GTuTiao(String tid, String title, String author, long showNum,
-			String headPath, int picNum, String description,
-			boolean checked, boolean showed) {
-		super();
-		this.tid = tid;
-		this.title = title;
-		this.author = author;
-		this.showNum = showNum;
-		this.headPath = headPath;
 		this.picNum = picNum;
-		this.description = description;
-		this.checked = checked;
-		this.showed = showed;
+		this.headPath = headPath;
+		this.keywords = keywords;
 		this.cdate = new Date();
 	}
-
 
 	@Id
 	@GeneratedValue
@@ -71,12 +49,11 @@ public class GTuTiao {
 	public void setId(long id) {
 		this.id = id;
 	}
-	@Column(nullable=false,length=32)
-	public String getTid() {
-		return tid;
+	public int getType() {
+		return type;
 	}
-	public void setTid(String tid) {
-		this.tid = tid;
+	public void setType(int type) {
+		this.type = type;
 	}
 	@Column(nullable=false,length=256)
 	public String getTitle() {
@@ -85,14 +62,6 @@ public class GTuTiao {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Column(length=64)
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
 	public long getShowNum() {
 		return showNum;
 	}
@@ -106,70 +75,53 @@ public class GTuTiao {
 	public void setHeadPath(String headPath) {
 		this.headPath = headPath;
 	}
-
-	public Integer getPicNum() {
+	public int getPicNum() {
 		return picNum;
 	}
-	public void setPicNum(Integer picNum) {
+	public void setPicNum(int picNum) {
 		this.picNum = picNum;
 	}
-	@Column(length=256)
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Boolean getChecked() {
-		return checked;
-	}
-	public void setChecked(Boolean checked) {
-		this.checked = checked;
-	}
-	public Boolean getShowed() {
-		return showed;
-	}
-	public void setShowed(Boolean showed) {
-		this.showed = showed;
-	}
-	@Lob
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public Date getCdate() {
 		return cdate;
 	}
 	public void setCdate(Date cdate) {
 		this.cdate = cdate;
 	}
+	@Column(length=128)
+	public String getKeywords() {
+		return keywords;
+	}
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
 
 	@Transient
-	public List<GComment> getComments() {
-		return comments;
+	public List<GTuTiaoUnit> getUnits() {
+		return units;
 	}
-
-
-	public void setComments(List<GComment> comments) {
-		this.comments = comments;
+	public void setUnits(List<GTuTiaoUnit> units) {
+		this.units = units;
 	}
 
 	@Transient
-	public long getCommentNum() {
-		return commentNum;
+	public GTuTiaoUnit getUnit() {
+		return unit;
 	}
 
 
-	public void setCommentNum(long commentNum) {
-		this.commentNum = commentNum;
+	public void setUnit(GTuTiaoUnit unit) {
+		this.unit = unit;
 	}
 
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "GTuTiao [id=" + id + ", type=" + type + ", title=" + title
+				+ ", showNum=" + showNum + ", picNum=" + picNum + ", headPath="
+				+ headPath + ", keywords=" + keywords + ", cdate=" + cdate
+				+ ", units=" + units + "]";
+	}
 	
 	
 }

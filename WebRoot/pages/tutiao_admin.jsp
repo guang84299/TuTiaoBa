@@ -15,12 +15,12 @@
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-  <link href="<%=basePath%>styles/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=basePath%>styles/admin.css" rel="stylesheet">
+  <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=basePath%>css/admin.css" rel="stylesheet">
  </head>
  <body>
   <div class="container-fluid">
-   <h3 class="col-sm-offset-1">后台管理页</h3>
+   <h3 class="col-sm-offset-2">后台管理页</h3>
    
    <div class="pull-right" style="margin-top:-40px;">
         <button class="btn btn-primary add_btn">添加</button>
@@ -32,9 +32,7 @@
   <thead>
     <tr>
       <th>标题</th>
-      <th>作者</th>
       <th>浏览量</th>
-      <th>评论量</th>
       <th>时间</th>
       <th>操作</th>
     </tr>
@@ -43,26 +41,13 @@
   <s:iterator value="#list" var="val" status="sta">
     <tr>
       <td>
-      	<s:if test="#val.showed == true">
-        	<button class="btn btn-primary btn-xs">已发布</button>
-        </s:if>${val.title }
+      	${val.title }
        </td>
-      <td>${val.author }</td>
       <td>${val.showNum }</td>
-      <td>${val.commentNum }</td>
       <td><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></td>
       <td>
-      	<button class="btn btn-primary btn-xs pinglun_btn" title="${val.id }">评论管理</button>
         <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
         <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
-        <a class="btn btn-primary btn-xs" href="<%=basePath%>pre/${val.tid }" target="_blank">预览</a>
-        <s:if test="#val.checked == true">
-        	<button class="btn btn-primary btn-xs check_btn" title="${val.id }" data-check="${val.checked }">已审核</button>
-        </s:if>
-        <s:else>
-        	<button class="btn btn-primary btn-warning btn-xs check_btn" title="${val.id }" data-check="${val.checked }">审核</button>
-        </s:else>
-        
       </td>
     </tr>
 	</s:iterator>
@@ -85,8 +70,8 @@
    
    
   </div>
-  <script src="<%=basePath%>scripts/jquery.min.js"></script>
-  <script src="<%=basePath%>scripts/bootstrap.min.js"></script>
-  <script src="<%=basePath%>scripts/admin.js"></script>
+  <script src="<%=basePath%>js/jquery.min.js"></script>
+  <script src="<%=basePath%>js/bootstrap.min.js"></script>
+  <script src="<%=basePath%>js/admin.js"></script>
 
 </body></html>

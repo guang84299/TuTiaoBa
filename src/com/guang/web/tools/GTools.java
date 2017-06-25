@@ -1,5 +1,6 @@
 package com.guang.web.tools;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -196,11 +197,10 @@ public class GTools {
 	}
 	
 	//压缩图片
-	public static void tozipPic(String picPath,String toPicPath,String waterPicPath,boolean head)
+	public static void tozipPic(String picPath,String toPicPath,boolean head)
 	{
 		File fromPic = new File(picPath); 
 		File toPic=new File(toPicPath); 
-		File waterPic=new File(waterPicPath); 
 		try {
 			if(head)
 			{
@@ -214,24 +214,28 @@ public class GTools {
 //				{
 //					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
 //				}
-				Thumbnails.of(fromPic).size(400,400).outputQuality(0.3f).toFile(toPic);
-//				Thumbnails.of(fromPic).size(400,400).outputQuality(0.3f).sourceRegion(Positions.TOP_LEFT,400,400).toFile(toPic);
+				String pic = toPicPath.substring(0, toPicPath.lastIndexOf("tutiao")) + "tmp.jpg";
+				File tmpPic=new File(pic); 
+				Thumbnails.of(fromPic).size(400,400).outputQuality(1f).toFile(tmpPic);
+				Thumbnails.of(tmpPic).scale(1f).sourceRegion(Positions.CENTER,254,335).toFile(toPic);
 			}
 			else
 			{
-				float w = ImageIO.read(fromPic).getWidth();
-				int hw = (int) (w/5);
-				String wp = waterPicPath.substring(0, waterPicPath.lastIndexOf("."));
-				wp = wp + hw + ".png";
-				File waterPic2=new File(wp); 
-				if(!waterPic2.exists())
-				{
-					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
-				}
-				if(w > 1024)
-					Thumbnails.of(fromPic).size(1024,1024).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
+				BufferedImage buff = ImageIO.read(fromPic);
+				float w = buff.getWidth();
+				float h = buff.getHeight();
+//				int hw = (int) (w/5);
+//				String wp = waterPicPath.substring(0, waterPicPath.lastIndexOf("."));
+//				wp = wp + hw + ".png";
+//				File waterPic2=new File(wp); 
+//				if(!waterPic2.exists())
+//				{
+//					Thumbnails.of(waterPic).size(hw,hw).outputQuality(1f).toFile(waterPic2);
+//				}
+				if(w > 1024 || h > 1024)
+					Thumbnails.of(fromPic).size(1024,1024).outputQuality(0.8f).toFile(toPic);
 				else
-					Thumbnails.of(fromPic).scale(1f).watermark(Positions.BOTTOM_RIGHT,ImageIO.read(waterPic2),1f).outputQuality(0.8f).toFile(toPic);
+					Thumbnails.of(fromPic).scale(1f).outputQuality(0.8f).toFile(toPic);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

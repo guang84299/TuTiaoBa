@@ -11,13 +11,13 @@ public interface GTuTiaoService {
 	void delete(long id);
 	void update(GTuTiao tuTiao);
 	GTuTiao find(long id);
-	GTuTiao findByTid(String tid);
-	void deleteByTid(String tid);//最好用delete(long id);
 	QueryResult<GTuTiao> find(String title);
 	QueryResult<GTuTiao> findAll();
-	QueryResult<GTuTiao> findAll(int firstindex);
-	QueryResult<GTuTiao> findByNew(int firstindex,int maxNum);
-	QueryResult<GTuTiao> findByHot(int firstindex,int maxNum);
+	QueryResult<GTuTiao> findAll(int firstindex,int maxNum);
+	QueryResult<GTuTiao> findByNew(int type,int firstindex,int maxNum);
+	QueryResult<GTuTiao> findByHot(int type,int firstindex,int maxNum);
+	GTuTiao findNext(int type,long id);
+	GTuTiao findPre(int type,long id);
 	QueryResult<GTuTiao> findSearch(String val,int firstindex,int maxNum);
 	long findNum();
 }

@@ -9,10 +9,45 @@
         <from>^/$</from>  
         <to>/tutiao_home</to> 
     </rule>
+
+    <rule>
+        <from>^/mm$</from>  
+        <to>/tutiao_mm</to> 
+    </rule>
     
     <rule>
-        <from>^/([A-Za-z0-9]+)$</from>  
-        <to>/tutiao_findTuTiao?tid=$1</to> 
+        <from>^/mm/$</from>  
+        <to>/tutiao_mm</to> 
+    </rule>
+    
+    <rule>
+        <from>^/life$</from>  
+        <to>/tutiao_life</to> 
+    </rule>
+    
+    <rule>
+        <from>^/life/$</from>  
+        <to>/tutiao_life</to> 
+    </rule>
+    
+    <rule>
+        <from>^/mm/([0-9]+).html$</from>  
+        <to>/tutiao_showmm?id=$1</to> 
+    </rule>
+    
+    <rule>
+        <from>^/mm/([0-9]+)_([0-9]+).html$</from>  
+        <to>/tutiao_showmm?id=$1&amp;page=$2</to> 
+    </rule>
+    
+    <rule>
+        <from>^/life/([0-9]+).html$</from>  
+        <to>/tutiao_showlife?id=$1</to> 
+    </rule>
+    
+    <rule>
+        <from>^/life/([0-9]+)_([0-9]+).html$</from>  
+        <to>/tutiao_showlife?id=$1page=$2</to> 
     </rule>
     
     <rule>
@@ -20,4 +55,9 @@
         <to>/tutiao_preTuTiao?tid=$1</to> 
     </rule>
 
+	<rule>
+        <from>^/([0-9]+)$</from>  
+        <to>/tutiao_home</to> 
+    </rule>
+    
 </urlrewrite>

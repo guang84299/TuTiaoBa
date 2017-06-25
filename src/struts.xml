@@ -21,9 +21,10 @@
 	      <result name="index" >/pages/tutiao_admin.jsp</result>
 	      <result name="add" >/pages/tutiao_add.jsp</result>
 	      <result name="update" >/pages/tutiao_update.jsp</result>
-	      <result name="tutiao" >/pages/tutiao.jsp</result>
-	      <result name="pretutiao" >/pages/pretutiao.jsp</result>
 	      <result name="home" >/pages/home.jsp</result>
+	      <result name="mm" >/pages/mm.jsp</result>
+	      <result name="life" >/pages/life.jsp</result>
+	      <result name="con" >/pages/con.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
 	   </action>
 	   

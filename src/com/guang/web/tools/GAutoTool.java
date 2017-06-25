@@ -26,6 +26,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.guang.web.mode.GTuTiao;
+import com.guang.web.mode.GTuTiaoUnit;
 
 public class GAutoTool {
 
@@ -61,7 +62,7 @@ public class GAutoTool {
 		      String title = elements.get(0).text();
 		      String author = "图条吧";
 		      
-		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
+//		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
     		  
 		      elements = document.select("#content figure,#content p");
 		      String text = null;
@@ -123,7 +124,7 @@ public class GAutoTool {
 		      String title = elements.get(0).text();
 		      String author = "图条吧";
 		      
-		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
+//		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
 //    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
     		  
 		      elements = document.select("#content figure");
@@ -149,57 +150,33 @@ public class GAutoTool {
 			//获取指定网址的页面内容
 		      document = Jsoup.connect(strUrl).timeout(50000).get();
 		      
-		      Elements elements = document.select("script");
-		      String author = "图条吧";
-		      for(Element ele : elements)
+		      Elements elements = document.select("title");
+		      String title = elements.get(0).text();
+		      title = title.substring(0,title.indexOf("_")-1);
+		      elements = document.select("meta[name=keywords]");
+		      String keywords = elements.get(0).attr("content");
+		      
+		      elements = document.select(".content-pic img");
+		      String src = elements.get(0).attr("src");
+		      
+		      elements = document.select(".page-ch");
+		      String pagenum = elements.get(0).text();
+		      pagenum = pagenum.substring(1, pagenum.length()-1);
+		      
+		      int picNum = Integer.parseInt(pagenum);
+		      
+		      tuTiao = new GTuTiao(2, title, 0, picNum, null, keywords);
+		      
+		      String pre_src = src.substring(0,src.lastIndexOf(".")-1);
+		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+		      for(int i=1;i<=picNum;i++)
 		      {
-		    	  String html = ele.html();
-		    	  if(html != null && html.contains("mediaInfo ="))
-		    	  {
-		    		  String mediaInfo = html.split("mediaInfo =")[1].trim();
-		    		  mediaInfo = mediaInfo.substring(0, mediaInfo.indexOf("};")) + "}";
-		    		  JSONObject obj = JSONObject.fromObject(mediaInfo);
-		    		  author = obj.getString("name");
-		    	  }
-		    	  if(html != null && html.contains("gallery ="))
-		    	  {
-		    		  html = html.split("gallery =")[1].trim();
-		    		  html = html.substring(0, html.indexOf("};")) + "}";
-		    		  
-		    		  JSONObject obj = JSONObject.fromObject(html);
-		    		  
-		    		  //获取图片链接
-		    		  List<TouTiaoElement> list_url = new ArrayList<GAutoTool.TouTiaoElement>();
-		    		  JSONArray arr_url = obj.getJSONArray("sub_images");
-		    		 
-		    		  for(int i=0;i<arr_url.size();i++)
-		    		  {
-		    			  String url = arr_url.getJSONObject(i).getJSONArray("url_list").getJSONObject(0).getString("url");
-		    			  list_url.add(new TouTiaoElement(true, url));
-		    		  }
-		    		  //获取图片描述
-		    		  List<TouTiaoElement> list_desc = new ArrayList<GAutoTool.TouTiaoElement>();
-		    		  JSONArray arr_desc = obj.getJSONArray("sub_abstracts");
-		    		 
-		    		  for(int i=0;i<arr_desc.size();i++)
-		    		  {
-		    			  String desc = arr_desc.get(i).toString();
-		    			  list_desc.add(new TouTiaoElement(false, desc));
-		    		  }
-		    		  //获取标题
-		    		  String title = obj.getJSONArray("sub_titles").get(0).toString();
-		    		  
-		    		  tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
-//		    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
-//		    		  for(int i=0;i<list_url.size();i++)
-//		    		  {
-//		    			  units.add(new GTuTiaoUnit(0, list_desc.get(i).getCon(), list_url.get(i).getCon()));
-//		    		  }
-//		    		  tuTiao.setUnits(units);
-		    		  break;
-		    	  }
+		    	  GTuTiaoUnit unit = new GTuTiaoUnit();
+		    	  unit.setPicPath(pre_src+i+".jpg");
+		    	  units.add(unit);
 		      }
-
+		      
+		      tuTiao.setUnits(units);
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }
@@ -214,69 +191,33 @@ public class GAutoTool {
 			//获取指定网址的页面内容
 		      document = Jsoup.connect(strUrl).timeout(50000).get();
 		      
-		      Elements elements = document.select(".article-title");
-		    //得到结点的第一个对象
-		      Element element = elements.get(0);
-		    //获取想要的属性值
-//		      String href = element.attr("href");
-		      String title = element.text();
-		      String author = document.select(".src").get(0).text();
+		      Elements elements = document.select("title");
+		      String title = elements.get(0).text();
+		      title = title.substring(0,title.indexOf("_")-1);
+		      elements = document.select("meta[name=keywords]");
+		      String keywords = elements.get(0).attr("content");
 		      
-		      tuTiao = new GTuTiao(GTools.getRandomTid(),title, author, 0);
+		      elements = document.select(".content-pic img");
+		      String src = elements.get(0).attr("src");
 		      
-//		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
-		      //内容
-		      elements = document.select(".article-content p");
-		      //1：搞笑类-> 说明和图片在一个p标签内 
-		      //2：类似搞笑类，比较混乱，说明和图片可能不在一个p标签，但说明总是在前面
-		      //3：图文类，说明和图片不在一个p标签，但说明总是在图片后面
+		      elements = document.select(".page-ch");
+		      String pagenum = elements.get(0).text();
+		      pagenum = pagenum.substring(1, pagenum.length()-1);
 		      
-		      List<TouTiaoElement> list = new ArrayList<GAutoTool.TouTiaoElement>();
+		      int picNum = Integer.parseInt(pagenum);
 		      
-		      for(int i=0;i<elements.size();i++)
+		      tuTiao = new GTuTiao(1, title, 0, picNum, null, keywords);
+		      
+		      String pre_src = src.substring(0,src.lastIndexOf(".")-1);
+		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+		      for(int i=1;i<=picNum;i++)
 		      {
-		    	  Element ele = elements.get(i);
-		    	  String text = ele.text();
-		    	  Elements eles = ele.select("img");
-		    	  if(!StringTools.isEmpty(text))
-		    		  list.add(new TouTiaoElement(false, text));
-		    	  if(eles.size()>0)
-		    		  list.add(new TouTiaoElement(true, eles.get(0).attr("src")));
+		    	  GTuTiaoUnit unit = new GTuTiaoUnit();
+		    	  unit.setPicPath(pre_src+i+".jpg");
+		    	  units.add(unit);
 		      }
 		      
-		      while(list.size() > 0)
-		      {
-		    	  TouTiaoElement tele = list.get(0);
-		    	  String text = "";
-		    	  
-		    	  list.remove(0);
-		    	  //找到下面所有文字
-	    		  while(list.size() > 0)
-	    		  {
-	    			  TouTiaoElement tele2 = list.get(0);
-	    			  if(tele2.isPic())
-	    				  break;
-	    			  list.remove(0);
-	    			  
-	    			  text += "<br><br>"+tele2.getCon();
-	    		  }
-	    		  
-//		    	  if(tele.isPic())
-//		    	  {
-//		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, text, tele.getCon());
-//			    	  units.add(unit);
-//		    	  }
-//		    	  else
-//		    	  {
-//		    		  TouTiaoElement tele3 = list.get(0);
-//		    		  list.remove(0);
-//		    		  GTuTiaoUnit unit = new GTuTiaoUnit(0, tele.getCon()+text, tele3.getCon());
-//			    	  units.add(unit);
-//		    	  }
-		      }
-//		      tuTiao.setUnits(units);
-		      
-
+		      tuTiao.setUnits(units);
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }

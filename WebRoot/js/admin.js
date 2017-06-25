@@ -172,7 +172,7 @@ $(function() {
 	
 	$("#auto-caiji").keydown(function() {
         if (event.keyCode == "13") {//keyCode=13是回车键
-        	var dtype = 1;//今日头条
+        	var dtype = 1;//mm131
         	var durl = $("#auto-caiji").val();
         	if(durl == null || durl == '' || !durl)
         		return;

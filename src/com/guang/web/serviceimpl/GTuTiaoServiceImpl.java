@@ -44,24 +44,24 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 		return daoTools.findNum(GTuTiao.class, null);
 	}
 
-	public QueryResult<GTuTiao> findAll(int firstindex) {
+	public QueryResult<GTuTiao> findAll(int firstindex,int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
-		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
-		lhm.put("id", "desc");
-		return daoTools.find(GTuTiao.class, colvals, firstindex, 100, lhm);
-	}
-
-	public QueryResult<GTuTiao> findByNew(int firstindex,int maxNum) {
-		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
-		colvals.put("checked =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, lhm);
 	}
 
-	public QueryResult<GTuTiao> findByHot(int firstindex,int maxNum) {
+	public QueryResult<GTuTiao> findByNew(int type,int firstindex,int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
-		colvals.put("checked =", true+"");
+		colvals.put("type =", type+"");
+		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
+		lhm.put("id", "desc");
+		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, lhm);
+	}
+
+	public QueryResult<GTuTiao> findByHot(int type,int firstindex,int maxNum) {
+		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("type =", type+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("showNum", "desc");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, lhm);
@@ -70,24 +70,30 @@ public class GTuTiaoServiceImpl implements GTuTiaoService{
 	public QueryResult<GTuTiao> findSearch(String val, int firstindex,
 			int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
-		colvals.put("checked =", true+"");
 		colvals.put("title like", "'%"+val+"%'");
 		return daoTools.find(GTuTiao.class, colvals, firstindex, maxNum, null);
 	}
 
-	public GTuTiao findByTid(String tid) {
-		List<GTuTiao> list = daoTools.find(GTuTiao.class, "tid", tid, 0, 1, null).getList();
+	public GTuTiao findNext(int type, long id) {
+		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("type =", type+"");
+		colvals.put("id >", id+"");
+		List<GTuTiao> list = daoTools.find(GTuTiao.class, colvals, 0, 1, null).getList();
 		if(list.size() > 0)
 			return list.get(0);
 		return null;
 	}
 
-	public void deleteByTid(String tid) {
-		GTuTiao tuTiao = findByTid(tid);
-		if(tuTiao!=null)
-		{
-			delete(tuTiao.getId());
-		}
+	public GTuTiao findPre(int type, long id) {
+		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("type =", type+"");
+		colvals.put("id <", id+"");
+		List<GTuTiao> list = daoTools.find(GTuTiao.class, colvals, 0, 1, null).getList();
+		if(list.size() > 0)
+			return list.get(0);
+		return null;
 	}
+
+	
 
 }

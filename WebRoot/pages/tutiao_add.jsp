@@ -15,20 +15,20 @@
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
   <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-  <link href="<%=basePath%>styles/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=basePath%>styles/summernote.css" rel="stylesheet">
+  <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=basePath%>css/summernote.css" rel="stylesheet">
   <style type="text/css">
   .fengmian
   {
-  	width:100px;
-  	height:80px;
+  	width:50px;
+  	height:50px;
   	padding:0px;
   	cursor:hand;
   	text-align:center
   }
   .fengmian span
   {
-  	line-height:80px;
+  	line-height:50px;
   }
   .fengmian-sel-bg
   {
@@ -58,60 +58,60 @@
  </head>
  <body>
   <div class="container-fluid">
-   <h5 class="col-sm-offset-1">后台管理页</h5>
+   <h5 class="col-sm-offset-2">后台管理页</h5>
+     <div class="pull-right" style="margin-top:-30px;margin-right:100px">
+   		<input type="text" class="form-control" id="auto-caiji" placeholder="自动采集">
+   </div>
   
    <hr/>
    
    <div class="row">
    
-   <div class="col-sm-1">
+   <div class="col-sm-2">
    </div>
    
-    <div class="col-sm-10">
+    <div class="col-sm-20">
      <div class="row">
-      <form class="form-horizontal">
+      <div class="form-horizontal">
   		<div class="form-group">
-        <label class="control-label col-sm-1">标题</label>
-        <div class="col-sm-4">
+        <label class="control-label col-sm-2">标题</label>
+        <div class="col-sm-6">
          <input type="text" name="title" value="" title="" class="form-control">
          <p class="bg-warning warning" id="title-warn">标题不能为空！</p>
         </div>
-        <label class="control-label col-sm-1">作者</label>
+        
+        <label class="control-label col-sm-2">类型</label>
         <div class="col-sm-2">
-         <input type="text" name="author" value="图条吧" class="form-control">
-         <p class="bg-warning warning" id="author-warn">作者不能为空！</p>
+         <input type="text" name="type" value="" title="" class="form-control">
+         <p class="bg-warning warning" id="type-warn">类型不能为空！</p>
         </div>
-       </div>
-       </form>
-  	  
-  	  <div id="summernote"></div>  
-	      
-       <div class="form-horizontal">
-  		<div class="form-group">
-        <label class="control-label col-sm-1">描述</label>
-        <div class="col-sm-6">
-         <textarea name="description" rows="3" class="form-control"></textarea>    
-         <p class="bg-warning warning" id="description-warn">描述不能为空！</p>    
+        
+        <label class="control-label col-sm-2">关键词</label>
+        <div class="col-sm-2">
+         <input type="text" name="keywords" value="" title="" class="form-control">
+         <p class="bg-warning warning" id="keywords-warn">关键词不能为空！</p>
         </div>
         
         <div class="col-sm-2">
 	        <div class="well well-lg fengmian"><span class="glyphicon glyphicon-plus">封面</span></div>
 	       	<p class="bg-warning warning" id="headPath-warn">请选择一个封面！</p>  
        	</div>
-       	
-        <div class="col-sm-3">
-         <div class="btn-group pull-right">
+        
+        <div class="col-sm-3 pull-right">
 		     <button class="btn btn-warning save">保存</button>
 		     <p class="bg-warning warning" id="btn-tishi"></p> 
 	      </div>
-        </div>
+	      
        </div>
        </div>
+  	  
+  	  <div id="summernote"></div>  
+	      
    
      </div>
     </div>
     
-    <div class="col-sm-1">
+    <div class="col-sm-2">
    </div>
     
    </div>
@@ -123,10 +123,10 @@
   		</div>
   </div>
   
-  <script src="<%=basePath%>scripts/jquery.min.js"></script>
-  <script src="<%=basePath%>scripts/bootstrap.min.js"></script>
-  <script src="<%=basePath%>scripts/summernote.min.js"></script>
-  <script src="<%=basePath%>scripts/lang/summernote-zh-CN.min.js"></script>
+  <script src="<%=basePath%>js/jquery.min.js"></script>
+  <script src="<%=basePath%>js/bootstrap.min.js"></script>
+  <script src="<%=basePath%>js/summernote.min.js"></script>
+  <script src="<%=basePath%>js/lang/summernote-zh-CN.min.js"></script>
 
 <script type="text/javascript">  
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
@@ -135,14 +135,16 @@ $(document).ready(function() {
     $('#summernote').summernote({  
     	toolbar: [
 		    // [groupName, [list of button]]
-		    ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
-		    ['para', ['style','ul', 'ol', 'paragraph','height']],
-		    ['insert', ['link', 'picture','video','table','hr']],
-		    ['misc', ['fullscreen', 'codeview','undo','redo','help']]
+		  //  ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
+		 //   ['para', ['style','ul', 'ol', 'paragraph','height']],
+		   // ['insert', ['link', 'picture','video','table','hr']],
+		   // ['misc', ['fullscreen', 'codeview','undo','redo','help']]
+		   ['insert', ['picture']],
+		   ['misc', ['codeview']]
 		  ],
-		 height:800,
-        minHeight: 800,             
-        maxHeight: 800,        
+		 height:500,
+        minHeight: 400,             
+        maxHeight: 500,        
         focus: true,   
         lang:'zh-CN',
         // 重写图片上传  
@@ -158,94 +160,42 @@ $(document).ready(function() {
   $(".save").click(function(){
   	var str = $('#summernote').summernote('code');
   	var code = $(str);
-  	
-  	var showed = false;
-  	
-  	//清除带外链的图片
+  	  	
+  	//得到所有图片
   	var imgs = $("img",code);
+  	var picNum = imgs.length;
+  	var units = [];
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
   		var src = img.attr("src");
-  		if(src.indexOf(baseUrl) == -1)
-  		{
-  			var p = baseUrl+"images/water.png";
-  			img.after('<img src="'+p+'">')
-  			img.remove();
-  		}
-  	}
-  	//清除带外链a标签
-  	var as = $("[href]",code);
-  	for(var i=0;i< as.length;i++)
-  	{
-  		var a = $(as[i]);
-  		var href = a.attr("href");
-  		if(href.indexOf(baseUrl) == -1 && href.length > 5)
-  		{
-  			a.attr("href","");
-  		}
-  	}
-  	//清除带背景图片和外链的标签
-  	var bs = $("[style]",code);
-  	for(var i=0;i< bs.length;i++)
-  	{
-  		var b = $(bs[i]);
-  		var style = b.attr("style");
-  		if(style.indexOf("image") != -1 || style.indexOf("url") != -1)
-  		{
-  			b.attr("style","");
-  		}
-  	}
-  	//为图片添加a标签和响应式
-  	var imgs = $("img",code);
-  	var picNum = imgs.length;
-  	for(var i=0;i< imgs.length;i++)
-  	{
-  		var img = $(imgs[i]);
-  		img.removeClass("img-responsive");
-  		img.removeClass("center-block");
-  		img.addClass("img-responsive");
-  		img.addClass("center-block");
-  		var a = img.parent();
-  		if(a.get(0).tagName.toLocaleLowerCase() == 'a')
-  		{
-  			if(href.indexOf(baseUrl) == -1)
-  				a.attr("href",img.attr("src"));
-  		}
-  		else
-  		{
-  			img.wrap('<a href="'+img.attr("src")+'"></a>');
-  		}
-  	}
-  	$('#summernote').summernote('code',code);
-  	
+  		units[i] = {"pic":src};
+  	}  	
     var tutiaos = {};
 	tutiaos.title = $("[name='title']").val();
-	tutiaos.author = $("[name='author']").val();
+	tutiaos.type = $("[name='type']").val();
+	tutiaos.keywords = $("[name='keywords']").val();
 	tutiaos.showNum = 0;
-	tutiaos.description =  $("[name='description']").val();
-	tutiaos.content = $('#summernote').summernote('code');
 	tutiaos.headPath = $("#headPath").attr("src");
 	tutiaos.picNum = picNum; 
-	tutiaos.showed = showed;
+	tutiaos.units = units;
 	
-	//alert($(code).text());
 	if(tutiaos.title == "" || tutiaos.title == null || tutiaos.title == undefined)
 	{
 		$("#title-warn").show();
 		$("[name='title']").focus();
 		return;
 	}
-	if(tutiaos.author == "" || tutiaos.author == null || tutiaos.author == undefined)
+	if(tutiaos.type == "" || tutiaos.type == null || tutiaos.type == undefined)
 	{
-		$("#author-warn").show();
-		$("[name='author']").focus();
+		$("#type-warn").show();
+		$("[name='type']").focus();
 		return;
 	}
-	if(tutiaos.description == "" || tutiaos.description == null || tutiaos.description == undefined)
+	if(tutiaos.keywords == "" || tutiaos.keywords == null || tutiaos.keywords == undefined)
 	{
-		$("#description-warn").show();
-		$("[name='description']").focus();
+		$("#keywords-warn").show();
+		$("[name='keywords']").focus();
 		return;
 	}
 	if(tutiaos.headPath == "" || tutiaos.headPath == null || tutiaos.headPath == undefined)
@@ -278,11 +228,11 @@ $(document).ready(function() {
   $("[name='title']").blur(function(){
   	$("#title-warn").hide();
   });
-  $("[name='author']").blur(function(){
-  	$("#author-warn").hide();
+  $("[name='type']").blur(function(){
+  	$("#type-warn").hide();
   });
-  $("[name='description']").blur(function(){
-  	$("#description-warn").hide();
+   $("[name='keywords']").blur(function(){
+  	$("#keywords-warn").hide();
   });
   
   $(".fengmian").click(function(){
@@ -294,14 +244,14 @@ $(document).ready(function() {
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
-  		var s = '<img width=80 height=80 style="margin:10px;" src="'+ img.attr("src") +'">'
+  		var s = '<img width=50 height=50 style="margin:10px;" src="'+ img.attr("src") +'">'
   		$(".fengmian-sel").append(s);
   	}
   	$(".fengmian-sel img").unbind("click");
   	$(".fengmian-sel img").click(function(){
   		$(".fengmian span").hide();
   		$(".fengmian").html("");
-  		var s = '<img id="headPath" width=100 height=80 src="'+ $(this).attr("src") +'">'
+  		var s = '<img id="headPath" width=50 height=50 src="'+ $(this).attr("src") +'">'
   		$(".fengmian").append(s);
   		$("#headPath-warn").hide();
   	});
@@ -311,6 +261,35 @@ $(document).ready(function() {
   	$(this).hide();
   });
   
+  
+  $("#auto-caiji").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+        	var dtype = 1;//mm131
+        	var durl = $("#auto-caiji").val();
+        	if(durl == null || durl == '' || !durl)
+        		return;
+        	
+        	if(durl.indexOf("chemo") != -1)
+        		dtype = 2;//mm131 chemo
+        	
+        	if(durl.indexOf("eastday.com/pictures") != -1)
+        		dtype = 3;//头条新闻 图片
+        	
+        	if(durl.indexOf("eastday.com/mobile") != -1)
+        		dtype = 4;//头条新闻 图文
+        	
+        	$("#auto-caiji").attr("disabled","disabled");
+        	$("#auto-caiji").val("信息采集中...");
+        	
+        	$.ajax({
+				type: "post",
+				data: {type: dtype,url: durl},
+				url: baseUrl + "tutiao_autoAddTuTiao"
+			}).done(function(results) {
+				location.href = baseUrl + "tutiao_list";
+			})
+        }
+    });
   
 });  
 //上传图片
@@ -330,24 +309,6 @@ function sendFile(file) {
         }  
     });  
 }  
-//上传gif图片
-function sendGifFile(file) {  
-    var data = new FormData();  
-    data.append("pic", file);
-   		
-    var data = $.ajax({  
-        data: data,  
-        type: "POST",  
-        url: baseUrl+'tutiao_upload',
-        cache: false,  
-        contentType: false,  
-        processData: false, 
-        async:false 
-        }); 
-        
-     data = data.responseText; 
-}  
-
   
 </script>  
 </body></html>
