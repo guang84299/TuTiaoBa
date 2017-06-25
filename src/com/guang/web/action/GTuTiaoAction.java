@@ -225,10 +225,12 @@ public class GTuTiaoAction extends ActionSupport{
 	
 	
 	
-	public void getSearch()
+	public String search()
 	{
 		String val = ServletActionContext.getRequest().getParameter("val");
 		String index = ServletActionContext.getRequest().getParameter("index");
+		String vals = val;
+		
 		int num = 0;
 		if(index != null)
 		{
@@ -236,17 +238,29 @@ public class GTuTiaoAction extends ActionSupport{
 		}
 		if(StringTools.isEmpty(val))
 		{
-			return;
+			return home();
 		}
 		try {
-			val = URLDecoder.decode(val, "utf-8");
+//			val = URLDecoder.decode(val, "utf-8");
+			val = new String(val.getBytes("ISO-8859-1"), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-			
-		List<GTuTiao> list = tuTiaoService.findSearch(val, num, 24).getList();
+		List<GTuTiao> list = tuTiaoService.findSearch(val, num, 12).getList();
+		//浏览排行/排行
+		List<GTuTiao> list_rank = tuTiaoService.findByHot(1,0,14).getList();
+		//最近更新
+		List<GTuTiao> list_new = tuTiaoService.findByNew(2,0,25).getList();
 		
-		print(JSONArray.fromObject(list).toString());
+		num = num+list.size();
+		if(list.size() < 12)
+			num = 0;
+		ActionContext.getContext().put("list", list);
+		ActionContext.getContext().put("rank", list_rank);
+		ActionContext.getContext().put("list_new", list_new);
+		ActionContext.getContext().put("vals", val);
+		ActionContext.getContext().put("page", num);
+		return "search";
 	}
 	
 	public String add() {

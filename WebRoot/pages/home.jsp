@@ -217,9 +217,9 @@
       <div  class="g-box-6">
           <div class="g-title-3">
               <h6>热搜: 
-              <a href="#" target="_blank">美女</a>
-              <a href="#" target="_blank">美女图片</a>
-              <a href="#" target="_blank">性感</a>
+              <a href="<%=basePath%>tutiao_search?val=美女" target="_blank">美女</a>
+              <a href="<%=basePath%>tutiao_search?val=巨乳" target="_blank">巨乳</a>
+              <a href="<%=basePath%>tutiao_search?val=性感" target="_blank">性感</a>
               </h6>
           </div>
       </div>

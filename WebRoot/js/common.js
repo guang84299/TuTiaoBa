@@ -31,4 +31,26 @@ $(function() {
 	{
 		$(".navbar-nav li:eq(1)").addClass("active");
 	}
+	
+	var search = function()
+	{
+		var link = baseUrl + "tutiao_search";
+		var val = $(".glyphicon-search:first").val();
+		if(val == null || val == '' || val == undefined)
+		{
+			alert("不能为空！");
+			return;
+		}
+		var link = baseUrl + "tutiao_search?val="+val+"&index=0";
+		window.open(link);
+//		pdata.val = encodeURI(val);
+	}
+	$(".glyphicon-search").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+        	search();
+        }
+    });
+	$(".glyphicon-search:last").click(function(){
+		search();
+	});
 });

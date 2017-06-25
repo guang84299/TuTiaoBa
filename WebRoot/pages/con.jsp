@@ -71,12 +71,12 @@
           <a href="<%=basePath%>life">生活图条</a>
         </li>
       </ul>
-      <form class="nav navbar-nav navbar-form navbar-right">
+      <div class="nav navbar-nav navbar-form navbar-right">
         <div class="input-group">
           <input type="text" class="form-control glyphicon glyphicon-search" placeholder="搜索">
           <span class="glyphicon glyphicon-search input-group-addon"></span>
         </div>
-      </form>
+      </div>
     </nav>
   </div>
 </header>

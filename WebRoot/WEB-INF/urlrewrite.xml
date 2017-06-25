@@ -55,6 +55,7 @@
         <to>/tutiao_showlife?id=$1&amp;page=$2</to> 
     </rule>
     
+    
     <rule>
         <from>^/pre/([A-Za-z0-9]+)$</from>  
         <to>/tutiao_preTuTiao?tid=$1</to> 

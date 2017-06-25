@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "g_tutiao")
 //alter table g_tutiao add index index_type(type)
+//alter table g_tutiao add index index_title(title)
 public class GTuTiao {
 	private long id;
 	private int type;//1:美女 2:生活

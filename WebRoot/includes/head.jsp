@@ -16,9 +16,9 @@
   <title>图条吧</title>
   <meta name="keywords" content="图条吧,美女图片,生活图片,mm,mm图片,美女,图片,写真">
   <meta name="description" content="《图条吧》(www.tutiaoba.com)收集精美的美女图片，生活图片，包括明星美女写真图片专辑，大学校花美女贴图，性感车模写真等各类最新最好看的性感美女图片。">
-  <link rel="icon" type="image/png" href="favicon.png" sizes="48x48" />
-  <link rel="bookmark" type="image/x-icon" href="favicon.ico" />
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
+  <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
   <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/docs.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/common.css" rel="stylesheet">
@@ -71,12 +71,12 @@
           <a href="<%=basePath%>life">生活图条</a>
         </li>
       </ul>
-      <form class="nav navbar-nav navbar-form navbar-right">
+      <div class="nav navbar-nav navbar-form navbar-right">
         <div class="input-group">
           <input type="text" class="form-control glyphicon glyphicon-search" placeholder="搜索">
           <span class="glyphicon glyphicon-search input-group-addon"></span>
         </div>
-      </form>
+      </div>
     </nav>
   </div>
 </header>

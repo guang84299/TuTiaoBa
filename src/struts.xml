@@ -25,6 +25,7 @@
 	      <result name="mm" >/pages/mm.jsp</result>
 	      <result name="life" >/pages/life.jsp</result>
 	      <result name="con" >/pages/con.jsp</result>
+	      <result name="search" >/pages/search.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
 	   </action>
 	   

@@ -10,28 +10,9 @@
 			+ request.getServerName() + ":"+ port + path + "/";
 	}
 %><jsp:include page="/includes/head.jsp" />
-	<div class="error-logo-wrap">
-    <a href="<%=basePath%>"><img src="<%=basePath%>images/logo.png"  class="img-responsive"></a>
-  </div>
   <div class="well error-content">
      <div><h3 >404错误 </h3></div> 
 	<h3 >哎呀！图条君找不到您想要的界面！</h3>
  </div>
   <jsp:include page="/includes/foot.jsp" /> 
-<script >
-var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
-		
-  $(function(){
-
-      $('#particles').particleground({
-    dotColor: '#faeaea',
-    lineColor: '#faeaea'
-    });
-
-	 $(".error-logo-wrap").click(function(){
-		location.href = baseUrl;
-	 });
-
-  });
-</script>
-</html>
+ </html>
