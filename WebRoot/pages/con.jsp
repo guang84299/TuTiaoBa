@@ -59,11 +59,9 @@
     </nav>
   </div>
 </header>
-
+<div class="g-sc-2">
 <div class="row">
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
-
-  <div class="content-2 col-md-20 col-xs-24">
+  <div class="content-2 col-md-24 col-xs-24">
 
   <div class="row">
 
@@ -165,9 +163,7 @@
   </div> 
 <!-- row end -->
   </div>
-
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
 </div>
-
+</div>
 <jsp:include page="/includes/foot.jsp" />
 </html>

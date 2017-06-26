@@ -10,11 +10,9 @@
 			+ request.getServerName() + ":"+ port + path + "/";
 	}
 %><jsp:include page="/includes/head.jsp" />
-
+<div class="g-sc-2">
 <div class="row">
-<div class="hidden-xs col-md-2 col-xs-2"></div>   
-
-<div class="content visible-md-block visible-lg-block col-md-20 col-xs-20">
+<div class="content visible-md-block visible-lg-block col-md-24 col-xs-24">
     <div class="row">
 
         <div class="col-md-6 col-xs-6">
@@ -100,14 +98,10 @@
 
     </div>
 </div>  <!-- content end -->
-
-<div class="hidden-xs col-md-2 col-xs-2"></div>     
 </div><!-- row end -->
 
 <div class="row">
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
-
-  <div class="content-2 col-md-20 col-xs-24">
+  <div class="content-2 col-md-24 col-xs-24">
 
   <div class="row">
 
@@ -205,15 +199,12 @@
   </div> 
 <!-- row end -->
   </div>
-
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
 </div>
 
 
 
 <div class="row">
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
-   <div class="content-3 col-md-20 col-xs-24">
+   <div class="content-3 col-md-24 col-xs-24">
       <div  class="g-box-6">
           <div class="g-title-3">
               <h6>热搜: 
@@ -225,9 +216,8 @@
       </div>
       
    </div>
-  <div class="visible-md-block visible-lg-block col-md-2 col-xs-2"></div> 
 </div>
-
+<div class="g-sc-2">
 <jsp:include page="/includes/foot.jsp" />
 <script type="text/javascript">
         $('.carousel').carousel();
