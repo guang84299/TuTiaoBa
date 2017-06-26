@@ -162,6 +162,9 @@ public class GTuTiaoAction extends ActionSupport{
 		GTuTiao tuTiao = tuTiaoService.find(tid);
 		if(tuTiao == null)
 			return home();
+		tuTiao.setShowNum(tuTiao.getShowNum()+1);
+		tuTiaoService.update(tuTiao);
+		
 		List<GTuTiaoUnit> units = unitService.findAll(tuTiao.getId()).getList();
 		tuTiao.setUnit(units.get(currPage-1));
 		
@@ -200,6 +203,9 @@ public class GTuTiaoAction extends ActionSupport{
 		GTuTiao tuTiao = tuTiaoService.find(tid);
 		if(tuTiao == null)
 			return home();
+		tuTiao.setShowNum(tuTiao.getShowNum()+1);
+		tuTiaoService.update(tuTiao);
+		
 		List<GTuTiaoUnit> units = unitService.findAll(tuTiao.getId()).getList();
 		tuTiao.setUnit(units.get(currPage-1));
 		
