@@ -13,9 +13,9 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>图条吧</title>
-  <meta name="keywords" content="图条吧,美女图片,生活图片,mm,mm图片,美女,图片,写真">
-  <meta name="description" content="《图条吧》(www.tutiaoba.com)收集精美的美女图片，生活图片，包括明星美女写真图片专辑，大学校花美女贴图，性感车模写真等各类最新最好看的性感美女图片。">
+  <title>图条吧_美女图片大全_美好生活图片_mm图片网_人体艺术写真</title>
+  <meta name="keywords" content="美女图片大全,美好生活图片,mm图片网,人体艺术写真,图条吧">
+  <meta name="description" content="《图条吧》(www.tutiaoba.com)收集最新最美的美女图片，生活图片，热点图片，包括明星美女写真图片专辑，大学校花美女贴图，性感车模写真等各类最新最好看的性感美女图片。">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>

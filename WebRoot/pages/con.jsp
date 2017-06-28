@@ -13,9 +13,9 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>${tuTiao.title } 图条吧</title>
+  <title>${tuTiao.title }_图条吧</title>
   <meta name="keywords" content="${tuTiao.keywords },图条吧">
-  <meta name="description" content="${tuTiao.title } 图条吧www.tutiaoba.com">
+  <meta name="description" content="${tuTiao.title }_图条吧_www.tutiaoba.com">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
