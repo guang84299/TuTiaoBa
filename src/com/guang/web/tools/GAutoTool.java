@@ -122,20 +122,31 @@ public class GAutoTool {
 		      
 		      Elements elements = document.select("title");
 		      String title = elements.get(0).text();
-		      String author = "图条吧";
+		      title = title.substring(0,title.indexOf(" - ")-1);
+		      elements = document.select("meta[name=keywords]");
+		      String keywords = elements.get(0).attr("content");
 		      
-//		      tuTiao = new GTuTiao(GTools.getRandomTid(), title, author, 0);
-//    		  List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
-    		  
-		      elements = document.select("#content figure");
-		      for(Element ele : elements)
+		      elements = document.select("#big-pic img");
+		      String src = elements.get(0).attr("src");
+		      
+		      elements = document.select(".pages a");
+		      String pagenum = elements.get(0).text();
+		      pagenum = pagenum.substring(1, 2);
+		      
+		      int picNum = Integer.parseInt(pagenum);
+		      
+		      tuTiao = new GTuTiao(2, title, 0, picNum, null, keywords);
+		      
+		      String pre_src = src.substring(0,src.lastIndexOf(".")-1);
+		      List<GTuTiaoUnit> units = new ArrayList<GTuTiaoUnit>();
+		      for(int i=1;i<=picNum;i++)
 		      {
-		    	  String text = ele.select("figcaption").get(0).text();
-		    	  String url = ele.select("a").get(0).attr("href");
-		    		  
-//		    	  units.add(new GTuTiaoUnit(0, text,url));
+		    	  GTuTiaoUnit unit = new GTuTiaoUnit();
+		    	  unit.setPicPath(pre_src+i+".jpg");
+		    	  units.add(unit);
 		      }
-//			tuTiao.setUnits(units);
+		      
+		      tuTiao.setUnits(units);
 		 } catch (IOException e) {
 		      e.printStackTrace();
 		  }

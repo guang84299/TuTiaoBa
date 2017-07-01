@@ -53,11 +53,7 @@ public class GTest {
 //		GTools.tozipPic("/Users/guang/Downloads/admin_update_files/112.jpg", 
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
 		
-		for(int i=0;i<30;i++)
-		{
-			int r = (int) (Math.random()*100%(100-6));
-			System.out.println(r);
-		}
+		System.out.println(GTools.sqlValidate("LIKE"));
 			
 	}
 	

@@ -252,6 +252,8 @@ public class GTuTiaoAction extends ActionSupport{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		if(GTools.sqlValidate(val))
+			return home();
 		List<GTuTiao> list = tuTiaoService.findSearch(val, num, 12).getList();
 		//浏览排行/排行
 		List<GTuTiao> list_rank = tuTiaoService.findByHot(1,0,14).getList();

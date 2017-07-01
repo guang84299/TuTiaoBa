@@ -22,6 +22,8 @@
   <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/docs.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/common.css" rel="stylesheet">
+  <meta property="og:type" content="image"/>
+  <meta property="og:image" content="<%=basePath%>img/360.jpg"/>
   <style type="text/css">
       .notice{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
       .g-sc{overflow:auto;overflow-x: hidden;}
