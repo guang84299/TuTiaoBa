@@ -6,6 +6,7 @@
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
      <constant name="struts.objectFactory" value="spring"></constant>
      <constant name="struts.multipart.maxSize" value="200000000"/> 
+     <constant name="struts.devMode" value="false" />
     
 	<package name="game_user" namespace="/" extends="struts-default">
     
