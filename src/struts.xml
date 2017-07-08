@@ -18,15 +18,16 @@
 	       <result name="error" >/pages/error.jsp</result>
 	   </action>	   
 	      
-	    <action name="tutiao_*" class="com.guang.web.action.GTuTiaoAction" method="{1}">
+	    <action name="article_*" class="com.guang.web.action.GArticleAction" method="{1}">
 	      <result name="index" >/pages/tutiao_admin.jsp</result>
 	      <result name="add" >/pages/tutiao_add.jsp</result>
 	      <result name="update" >/pages/tutiao_update.jsp</result>
 	      <result name="home" >/pages/home.jsp</result>
-	      <result name="mm" >/pages/mm.jsp</result>
-	      <result name="life" >/pages/life.jsp</result>
-	      <result name="con" >/pages/con.jsp</result>
-	      <result name="search" >/pages/search.jsp</result>
+	      <result name="mm" >/pages/home.jsp</result>
+	      <result name="duanzi" >/pages/home.jsp</result>
+	      <result name="tag" >/pages/home.jsp</result>
+	      <result name="show" >/pages/con.jsp</result>
+	      <result name="search" >/pages/home.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
 	   </action>
 	   

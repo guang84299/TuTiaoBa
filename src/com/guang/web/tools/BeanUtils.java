@@ -13,7 +13,8 @@ public class BeanUtils implements BeanFactoryAware {
     public void setBeanFactory(BeanFactory factory) throws BeansException {
         beanFactory=factory;
     }
-    public static<T> T getBean(String beanName){
+    @SuppressWarnings("unchecked")
+	public static<T> T getBean(String beanName){
            return (T) beanFactory.getBean(beanName);
     }
 }

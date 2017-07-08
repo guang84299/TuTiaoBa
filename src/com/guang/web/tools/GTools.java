@@ -5,12 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -217,7 +218,7 @@ public class GTools {
 				String pic = toPicPath.substring(0, toPicPath.lastIndexOf("tutiao")) + "tmp.jpg";
 				File tmpPic=new File(pic); 
 				Thumbnails.of(fromPic).size(400,400).outputQuality(1f).toFile(tmpPic);
-				Thumbnails.of(tmpPic).scale(1f).sourceRegion(Positions.CENTER,254,335).toFile(toPic);
+				Thumbnails.of(tmpPic).scale(1f).sourceRegion(Positions.CENTER,375,300).toFile(toPic);
 			}
 			else
 			{
@@ -242,19 +243,55 @@ public class GTools {
 		}
 	}
 	
-	
-	 //效验    
+
+	//效验    
     public static boolean sqlValidate(String str) {    
         str = str.toLowerCase();//统一转为小写    
-        String badStr = "'|select|update|and|or|delete|insert|truncate|char|into"  
-                + "|substr|declare|exec|master|drop|execute|"  
-                + "union|;|--|+|,|like|//|/|%|#|*|$|@|\"|http|cr|lf|<|>|(|)";//过滤掉的sql关键字，可以手动添加    
-        String[] badStrs = badStr.split("|");    
-        for (int i = 0; i < badStrs.length; i++) {    
+      //过滤掉的sql关键字，可以手动添加  
+        String[] badStrs = new String[]{
+        		"'","select","update","and","or","delete","insert","truncate","char","into",
+        		"substr","declare","exec","master","drop","execute","union",";","--","+",",",
+        		"like","//","/","%","#","*","$","@","\"","http","cr","lf","<",">","(",")"
+        }; 
+        
+        for (int i = 0; i < badStrs.length; i++) {   
             if (str.indexOf(badStrs[i]) >= 0) {    
                 return true;    
             }    
         }    
         return false;    
-    }    
+    }  
+    
+    //搜索关键字
+    public static List<String> searchKeywords(String val)
+    {
+    	List<String> vals = new ArrayList<String>();
+		int len = val.length();
+		if(len > 30)
+			val = val.substring(0,30);
+		len = val.length();
+		//2
+		for(int i=0;i<len-1;i++)
+		{
+			vals.add(val.substring(i,i+2));
+		}
+//		//3
+//		for(int i=0;i<len-2;i++)
+//		{
+//			vals.add(val.substring(i,i+3));
+//		}
+//		//4
+//		for(int i=0;i<len-3;i++)
+//		{
+//			vals.add(val.substring(i,i+4));
+//		}
+//		//5
+//		for(int i=0;i<len-4;i++)
+//		{
+//			vals.add(val.substring(i,i+5));
+//		}
+		if(len > 2)
+			vals.add(val);
+		return vals;
+    }
 }

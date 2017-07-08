@@ -13,24 +13,19 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>${tuTiao.title }_图条吧</title>
-  <meta name="keywords" content="${tuTiao.keywords },图条吧">
-  <meta name="description" content="${tuTiao.title }_图条吧_www.tutiaoba.com">
+  <title>${article.title }_春光博客</title>
+  <meta name="keywords" content="${article.keywords },春光博客">
+  <meta name="description" content="${article.title }_春光博客_www.tutiaoba.com">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
   <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
-  <link href="<%=basePath%>css/docs.min.css" rel="stylesheet">
   <link href="<%=basePath%>css/common.css" rel="stylesheet">
-  <style type="text/css">
-      .notice{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-      .g-sc{overflow:auto;overflow-x: hidden;}
-  </style>
  </head>
  <body>
 <div class="g-sc">
    <!-- Docs master nav -->
-<header class="navbar navbar-static-top bs-docs-nav" id="top">
+<header class="navbar navbar-static-top" id="top">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
@@ -39,131 +34,119 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="<%=basePath%>" class="navbar-brand">图条吧</a>
+      <a href="<%=basePath%>" class="navbar-brand">春光博客</a>
     </div>
     <nav id="bs-navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="<%=basePath%>mm">美女图条</a>
+        <li class="active">
+          <a href="<%=basePath%>">技术</a>
         </li>
-        <li>
-          <a href="<%=basePath%>life">生活图条</a>
+        <li  class="active">
+          <a href="<%=basePath%>duanzi">段子</a>
+        </li>
+        <li  class="active">
+          <a href="<%=basePath%>mm">美女</a>
         </li>
       </ul>
-      <div class="nav navbar-nav navbar-form navbar-right">
+      <form class="nav navbar-nav navbar-form navbar-right">
         <div class="input-group">
           <input type="text" class="form-control glyphicon glyphicon-search" placeholder="搜索">
           <span class="glyphicon glyphicon-search input-group-addon"></span>
         </div>
-      </div>
+      </form>
     </nav>
   </div>
 </header>
-<div class="g-sc-2">
-<div class="row">
-  <div class="content-2 col-md-24 col-xs-24">
 
-  <div class="row">
-
-  <div class="col-md-24 col-xs-24">
-
-  <div class="row g-thumbnail g-box-4">
-    <div class="g-title g-title5">
-          <h4>${tuTiao.title }<s:if test="#page > 1">(${page })</s:if></h4>
-          <p><small>更新时间：<s:date name="#tuTiao.cdate" format="yyyy-MM-dd HH:mm:ss" /> <a href="<%=basePath%>">图条吧图片</a></small></p>
+<div class="g-sc-3 row">
+    <h2>${article.title }</h2>
+    <div class="row g-hot g-con-head">
+      <div class="col-xs-4 col-sm-3 col-md-2 g-hot-head">
+        <img src="<%=basePath%>img/head.jpg" alt="${article.title }" class="img-circle">
+      </div>
+      <div class="col-xs-20 col-sm-21 col-md-22 g-hot-con">
+        <strong>春光</strong>
+        <p class="wrapper2"><small class="text-muted"><s:date name="#article.cdate" format="yyyy.MM.dd"/> 阅读 ${article.showNum } 评论 <span class="commentNum">${article.commentNum }</span> 喜欢 <span class="loveNum">${article.loveNum }</span></small></p>
+      </div>
     </div>
-    <div class="col-xs-24">
-        <a href="<%=basePath%>${tuTiao.unit.picPath }"><img class="img-responsive center-block" src="<%=basePath%>${tuTiao.unit.picPath }" alt="${tuTiao.title }"></a>
+
+    <div class="g-con-con">
+    ${article.content }
+    </div>
+
+    <div class="g-con-exp">
+      <a href="<%=basePath%>tag/${article.tag.id}.html"><span class="glyphicon glyphicon-bookmark"></span><small> ${article.tag.name }</small></a>
+      <span class="pull-right"><span class="glyphicon glyphicon-warning-sign"></span><small> 转载请联系作者，并注明出处。</small></span>
     </div>
     
-    <div class="g-title col-xs-24">
-          <nav aria-label="Page navigation">
-            <ul class="pagination pagination-sm">
-            <s:if test="#page > 1">
-              <li>
-                <a href="<%=basePath%>${url }<s:property value="#page-1" />.html" aria-label="Previous">
-                  <span aria-hidden="true">上一页</span>
-                </a>
-              </li>
-              </s:if>
-              <s:bean name="org.apache.struts2.util.Counter" id="counter" >       
-				  <s:param name="first"  value="1"  />       
-				  <s:param name="last"  value="5"  />       
-				  <s:iterator>  
-				  	<s:if test="current-1+#page-1 <= #count">
-				    <li class="<s:if test="current-1+#page-1 == #page">active</s:if>">
-				    <a href="<%=basePath%>${url }<s:property value="current-1+#page-1"/>.html"><s:property value="current-1+#page-1"/></a>
-				    </li>
-				    </s:if>    
-				  </s:iterator>       
-				</s:bean>     
-              <s:if test="#page < #count">
-              <li>
-                <a href="<%=basePath%>${url }<s:property value="#page+1" />.html" aria-label="Next">
-                  <span aria-hidden="true">下一页</span>
-                </a>
-              </li>
-              </s:if>
-            </ul>
-          </nav>
-    </div>
-
-
-  </div>
-
-  <div class="row g-box-7">
-    <div class="g-title6 col-xs-12">
-      <h5>
-      <s:if test="#pre==null">
-      <a href="#" class="btn btn-info">上一组</a>
-      <a class="g-title6-a-1 hidden-xs" href="#">没有了</a>
-      </s:if>
-      <s:else>
-      	<a href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html" target="_blank" class="btn btn-info">上一组</a>
-      	<a class="g-title6-a-1 hidden-xs" href="<%=basePath%><s:if test="#pre.type==1">mm</s:if><s:else>life</s:else>/${pre.id}.html" target="_blank">${pre.title}</a>
-      </s:else>
-      </h5>
-    </div>
-    <div class="g-title6 col-xs-12">
-      <h5 class="text-right">
-      <s:if test="#next==null">
-      <a class="g-title6-a-2 hidden-xs" href="#">没有了</a>
-      <a class="btn btn-info" href="#">下一组</a>
-      </s:if>
-      <s:else>
-      	<a class="g-title6-a-2 hidden-xs" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html" target="_blank">${next.title}</a>
-      	<a class="btn btn-info" href="<%=basePath%><s:if test="#next.type==1">mm</s:if><s:else>life</s:else>/${next.id}.html" target="_blank">下一组</a>
-      </s:else>
-      </h5>
-    </div>
-  </div>
-
-  <div class="row g-box-7">
-    
-    <div class="row g-thumbnail-2 g-box-4">
- 	<s:iterator value="#tuijian" var="val" status="sta">
-    <div class="col-sm-8 col-md-4 col-xs-12">
-      <div class="thumbnail">
-        <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html" target="_blank"><img src="<%=basePath%>${val.headPath }" alt="${val.title }"></a>
-        <div class="caption notice">
-          <a href="<%=basePath%><s:if test="#val.type==1">mm</s:if><s:else>life</s:else>/${val.id}.html" target="_blank">${val.title }</a>
+    <div class="g-con-appreciate">
+      <p>如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！</p>
+      <button type="button" class="btn btn-danger g-btn-appreciate">赞赏支持</button>
+      <div class="row g-con-appreciate-show">
+        <div class="col-xs-12">
+             <img src="<%=basePath%>img/pay_zhi.jpg" alt="春光支付宝" class="img-responsive">
+             <h4>支付宝</h4>
+        </div>
+        <div class="col-xs-12">
+             <img src="<%=basePath%>img/pay_wei.jpg" alt="春光微信" class="img-responsive">
+             <h4>微信</h4>
         </div>
       </div>
     </div>
-    </s:iterator>
+    <hr>
+    <div class="g-con-share">
+      <span class="g-con-share-heart <s:if test="#love == true">g-con-share-heart-love</s:if>" data-id="${article.id }">
+        <span class="glyphicon glyphicon-heart-empty"></span> 喜欢  &nbsp;|&nbsp; <span class="loveNum">${article.loveNum }</span>
+      </span>
+      <div class="bdsharebuttonbox pull-right"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></div>
     </div>
 
-  </div>
+    <div class="g-con-prenext row">
+    <s:if test="#pre != null">
+    	<div class="col-xs-12 text-left notice"><a href="<%=basePath%>${pre.id}.html"><span class="glyphicon glyphicon-step-backward"></span> ${pre.title }</a></div>
+    </s:if>
+    <s:else>
+    	<div class="col-xs-12 text-left notice"><a href="#"><span class="glyphicon glyphicon-step-backward"></span> 没有啦</a></div>
+    </s:else>
+    <s:if test="#next != null">
+    	<div class="col-xs-12 text-right notice"><a href="<%=basePath%>${next.id}.html">${next.title }&nbsp;<span class="glyphicon glyphicon-step-forward"></span></a></div>
+    </s:if>
+    <s:else>
+    	<div class="col-xs-12 text-right notice"><a href="#" class="pull-right"><span class="glyphicon glyphicon-step-forward"></span> 没有啦</a></div>
+    </s:else>
+    </div>
 
-  </div>
+    <div class="g-con-pinglun">
+      <textarea class="col-xs-24" id="ta_pinglun" data-id="${article.id }" rows="3" placeholder="写下您的评论..."></textarea> 
+      <label>IP:${ip }</label>
+      <button type="button" class="btn btn-warning pull-right g-btn-pinglun">发表</button>
+    </div>
 
+    <div class="g-con-pinglun-con">
+      <h4><span class="commentNum">${article.commentNum }</span>条评论</h4>
+      <hr>
+	 <div id="commets">
+<s:iterator value="#comments" var="val" status="sta">	 
+      <div>
+        <p><strong>${val.xip }</strong>&nbsp;&nbsp;&nbsp;<small class="text-muted">${val.floor }楼 · <s:date name="#val.cdate" format="yyyy.MM.dd HH:mm"/></small></p>
+        <p>${val.content }</p>
+        <div class="text-right g-con-pinglun-con-zan <s:if test="#val.love == true">g-con-pinglun-con-zan-love</s:if>" data-id="${val.id }"><span class="glyphicon glyphicon-thumbs-up"></span> <span class="commentloveNum">${val.loveNum }</span>人赞</div>
+        <hr>
+      </div>
+ </s:iterator>     
+	</div>
+      <s:if test="#more == true"><span class="g-label"><div class="g-label-bg">更多评论</div></span></s:if>
 
-  </div>
+    </div>
 
-  </div> 
-<!-- row end -->
-  </div>
 </div>
+
+
 </div>
-<jsp:include page="/includes/foot.jsp" />
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>js/jquery.dotdotdot.min.js"></script>
+    <script src="<%=basePath%>js/common.js"></script>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+  </body>
 </html>

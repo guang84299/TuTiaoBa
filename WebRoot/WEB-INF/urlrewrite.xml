@@ -7,63 +7,68 @@
 
 	<rule>
         <from>^/$</from>  
-        <to>/tutiao_home</to> 
+        <to>/article_home</to> 
+    </rule>
+    
+    <rule>
+        <from>^/home/([0-9]+)$</from>  
+        <to>/article_home?index=$1</to> 
     </rule>
 
     <rule>
         <from>^/mm$</from>  
-        <to>/tutiao_mm</to> 
+        <to>/article_mm</to> 
+    </rule>
+    
+    <rule>
+        <from>^/mm/$</from>  
+        <to>/article_mm</to> 
     </rule>
     
     <rule>
         <from>^/mm/([0-9]+)$</from>  
-        <to>/tutiao_mm?id=$1</to> 
+        <to>/article_mm?index=$1</to> 
     </rule>
     
     <rule>
-        <from>^/life$</from>  
-        <to>/tutiao_life</to> 
+        <from>^/duanzi$</from>  
+        <to>/article_duanzi</to> 
     </rule>
     
     <rule>
-        <from>^/life/$</from>  
-        <to>/tutiao_life</to> 
+        <from>^/duanzi/$</from>  
+        <to>/article_duanzi</to> 
     </rule>
     
     <rule>
-        <from>^/life/([0-9]+)$</from>  
-        <to>/tutiao_life?id=$1</to> 
+        <from>^/duanzi/([0-9]+)$</from>  
+        <to>/article_duanzi?index=$1</to> 
     </rule>
     
     <rule>
-        <from>^/mm/([0-9]+).html$</from>  
-        <to>/tutiao_showmm?id=$1</to> 
+        <from>^/tag/([0-9]+).html$</from>  
+        <to>/article_tag?id=$1</to> 
     </rule>
     
     <rule>
-        <from>^/mm/([0-9]+)_([0-9]+).html$</from>  
-        <to>/tutiao_showmm?id=$1&amp;page=$2</to> 
+        <from>^/tag/([0-9]+)_([0-9]+).html$</from>  
+        <to>/article_tag?id=$1&amp;index=$2</to> 
     </rule>
     
-    <rule>
-        <from>^/life/([0-9]+).html$</from>  
-        <to>/tutiao_showlife?id=$1</to> 
-    </rule>
-    
-    <rule>
-        <from>^/life/([0-9]+)_([0-9]+).html$</from>  
-        <to>/tutiao_showlife?id=$1&amp;page=$2</to> 
-    </rule>
+   <rule>
+        <from>^/([0-9]+).html$</from>  
+        <to>/article_show?id=$1</to> 
+   </rule>
     
     
     <rule>
         <from>^/pre/([A-Za-z0-9]+)$</from>  
-        <to>/tutiao_preTuTiao?tid=$1</to> 
+        <to>/article_preTuTiao?tid=$1</to> 
     </rule>
 
 	<rule>
-        <from>^/([0-9]+)$</from>  
-        <to>/tutiao_home</to> 
+        <from>^/([A-Za-z0-9]+)$</from>  
+        <to>/article_home</to> 
     </rule>
     
 </urlrewrite>

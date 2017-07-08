@@ -20,15 +20,15 @@
   <style type="text/css">
   .fengmian
   {
-  	width:50px;
-  	height:50px;
+  	width:70px;
+  	height:40px;
   	padding:0px;
   	cursor:hand;
   	text-align:center
   }
   .fengmian span
   {
-  	line-height:50px;
+  	line-height:40px;
   }
   .fengmian-sel-bg
   {
@@ -71,30 +71,43 @@
      <div class="row">
       <div class="form-horizontal">
   		<div class="form-group">
-        <label class="control-label col-sm-2">标题</label>
-        <div class="col-sm-4">
-         <input type="text" name="title" value="${tuTiao.title }" title="${tuTiao.id }" class="form-control">
+        <label class="control-label col-sm-1">标题</label>
+        <div class="col-sm-7">
+         <input type="text" name="title" value="${article.title }" title="${article.id }" class="form-control">
          <p class="bg-warning warning" id="title-warn">标题不能为空！</p>
         </div>
-        <label class="control-label col-sm-2">类型</label>
+        <label class="control-label col-sm-1">类型</label>
         <div class="col-sm-2">
-         <input type="text" name="type" value="${tuTiao.type }" class="form-control">
+         <input type="text" name="type" value="${article.type }" class="form-control">
          <p class="bg-warning warning" id="type-warn">类型不能为空！</p>
         </div>
         <label class="control-label col-sm-2">关键词</label>
-        <div class="col-sm-2">
-         <input type="text" name="keywords" value="${tuTiao.keywords }" title="" class="form-control">
+        <div class="col-sm-5">
+         <input type="text" name="keywords" value="${article.keywords }" title="" class="form-control">
          <p class="bg-warning warning" id="keywords-warn">关键词不能为空！</p>
         </div>
-        <label class="control-label col-sm-2">阅读量</label>
-        <div class="col-sm-2">
-         <input type="text" name="showNum" value="${tuTiao.showNum }" class="form-control">
+        
+        <label class="control-label col-sm-1">标签</label>
+        <div class="col-sm-3">
+		    <select name="tag" value="" class="form-control">
+		    <s:iterator value="#tags" var="val" status="sta">
+		      <option <s:if test="#article.tag.id == #val.id">selected="selected"</s:if>>${val.name }</option>
+		     </s:iterator>
+		    </select>
+         <p class="bg-warning warning" id="tag-warn">标签不能为空！</p>
         </div>
         
         <div class="col-sm-2">
-	        <div class="well well-lg fengmian" data-headPath="${tuTiao.headPath }"><span class="glyphicon glyphicon-plus">封面</span></div>
+	        <div class="well well-lg fengmian" data-headPath="${article.headPath }"><span class="glyphicon glyphicon-plus">封面</span></div>
 	       	<p class="bg-warning warning" id="headPath-warn">请选择一个封面！</p>  
        	</div>
+        
+        <label class="control-label col-sm-2">阅读量</label>
+        <div class="col-sm-2">
+         <input type="text" name="showNum" value="${article.showNum }" class="form-control">
+        </div>
+        
+        
        	
         <div class="col-sm-3">
 		     <button class="btn btn-warning save">保存</button>
@@ -104,7 +117,7 @@
        </div>
        </div>
   	  
-  	  <div id="summernote" data-units='${units }'></div>  
+  	  <div id="summernote">${article.content }</div>  
 	      
      </div>
     </div>
@@ -133,12 +146,14 @@ $(document).ready(function() {
     $('#summernote').summernote({  
     	toolbar: [
 		    // [groupName, [list of button]]
-		    ['insert', ['picture']],
-		    ['misc', ['codeview']]
+		    ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
+		    ['para', ['style','ul', 'ol', 'paragraph','height']],
+		    ['insert', ['link', 'picture','video','table','hr']],
+		    ['misc', ['fullscreen', 'codeview','undo','redo','help']]
 		  ],
 		 height:500,
         minHeight: 400,             
-        maxHeight: 500,        
+        maxHeight: 800,        
         focus: true,   
         lang:'zh-CN',
         // 重写图片上传  
@@ -150,19 +165,6 @@ $(document).ready(function() {
         }
   });  
   
-  var res = $('#summernote').attr("data-units");
-  var units = JSON.parse(res);
-  if(units.length > 0)
-  {
-  	var codes = '<p>';
-	  for(var i=0;i<units.length;i++)
-	  {
-	  		codes += '<img src="'+ units[i].picPath +'">';
-	  }
-	  codes += '</p>';
-	  $('#summernote').summernote('code',codes);
-  }
-  
   
   $(".save").click(function(){
   	var str = $('#summernote').summernote('code');
@@ -170,54 +172,59 @@ $(document).ready(function() {
 	
   	//为图片添加a标签和响应式
   	var imgs = $("img",code);
-  	var picNum = imgs.length;
-  	var units = [];
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
-  		var src = img.attr("src");
-  		units[i] = {"pic":src};
-  	}
+  		img.removeClass("center-block");
+  		img.addClass("center-block");
+  		img.removeClass("img-responsive");
+  		img.addClass("img-responsive");
+  	}  	
+  	$('#summernote').summernote('code',code); 
+  	var summary = code.text();
+  	if(summary.length > 150)
+  		summary = summary.substr(0,150);
   	
-    var tutiaos = {};
-	tutiaos.title = $("[name='title']").val();
-	tutiaos.type = $("[name='type']").val();
-	tutiaos.showNum = $("[name='showNum']").val();
-	tutiaos.id = $("[name='title']")[0].title;
-	tutiaos.keywords = $("[name='keywords']").val();
-	tutiaos.headPath = $("#headPath").attr("src");
-	tutiaos.picNum = picNum; 
-	tutiaos.units = units;
+  	var articles = {};
+  	articles.id = $("[name='title']")[0].title;
+    articles.type = $("[name='type']").val();
+	articles.title = $("[name='title']").val();
+	articles.content = $('#summernote').summernote('code');
+	articles.summary = summary;
+	articles.tag = $("[name='tag']").val();
+	articles.keywords = $("[name='keywords']").val();
+	articles.showNum = $("[name='showNum']").val();; 
+	articles.headPath = $("#headPath").attr("src");
 	
-	if(tutiaos.title == "" || tutiaos.title == null || tutiaos.title == undefined)
+	if(articles.title == "" || articles.title == null || articles.title == undefined)
 	{
 		$("#title-warn").show();
 		$("[name='title']").focus();
 		return;
 	}
-	if(tutiaos.type == "" || tutiaos.type == null || tutiaos.type == undefined)
+	if(articles.type == "" || articles.type == null || articles.type == undefined)
 	{
 		$("#type-warn").show();
 		$("[name='type']").focus();
 		return;
 	}
-	if(tutiaos.keywords == "" || tutiaos.keywords == null || tutiaos.keywords == undefined)
+	if(articles.keywords == "" || articles.keywords == null || articles.keywords == undefined)
 	{
 		$("#keywords-warn").show();
 		$("[name='keywords']").focus();
 		return;
 	}
-	if(tutiaos.headPath == "" || tutiaos.headPath == null || tutiaos.headPath == undefined)
+	if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
 	{
 		$("#headPath-warn").show();
 		return;
 	}
 	
-    var data = JSON.stringify(tutiaos);
+    var data = JSON.stringify(articles);
     $.ajax({
 			type: "post",
-			data: {tutiao: data},
-			url: baseUrl + "tutiao_updateTuTiao"
+			data: {articles: data},
+			url: baseUrl + "article_updateArticle"
 			}).done(function(res) {
 				if(res == 'true')
 				{
@@ -291,7 +298,7 @@ function sendFile(file) {
     $.ajax({  
         data: data,  
         type: "POST",  
-        url: baseUrl+'tutiao_upload',
+        url: baseUrl+'article_upload',
         cache: false,  
         contentType: false,  
         processData: false,  

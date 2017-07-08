@@ -247,7 +247,6 @@ public class DaoToolsImpl implements DaoTools{
 		if(colvalssq != null && !"".equals(colvalssq))
 		{
 			sql = "select o from "+entityname+" o where "+colvalssq+orderbysq;
-			System.out.println(sql);
 			query = em.createQuery(sql);
 		}else{
 			sql = "select o from "+entityname+" o "+orderbysq;	

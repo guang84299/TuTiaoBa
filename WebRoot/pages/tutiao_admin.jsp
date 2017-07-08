@@ -72,6 +72,36 @@
   </div>
   <script src="<%=basePath%>js/jquery.min.js"></script>
   <script src="<%=basePath%>js/bootstrap.min.js"></script>
-  <script src="<%=basePath%>js/admin.js"></script>
+<script type="text/javascript"> 
+var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
+$(document).ready(function() {
 
+	$('.update_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "article_update?id="+$(this).attr("title");
+	});
+	
+	$('.delete_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "article_deleteArticle?id="+$(this).attr("title");
+	});
+
+	var curr_index = $("#a_curr").attr("title");
+    var c_index = parseInt(curr_index);
+    var p_index = c_index - 1;
+    if(p_index < 1)
+    	p_index = 1;
+    
+    var a_num = $("#a_num").attr("title");
+    var num = parseInt(a_num);
+    var n_index = c_index + 1;
+    if(n_index > num)
+    	n_index = num;
+    
+    $("#a_first").attr("href","article_list?index="+1);
+    $("#a_pre").attr("href","article_list?index="+p_index);
+    $("#a_next").attr("href","article_list?index="+n_index);
+    $("#a_end").attr("href","article_list?index="+num);
+});
+</script>
 </body></html>

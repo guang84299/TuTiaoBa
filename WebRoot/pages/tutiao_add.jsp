@@ -20,15 +20,15 @@
   <style type="text/css">
   .fengmian
   {
-  	width:50px;
-  	height:50px;
+  	width:70px;
+  	height:40px;
   	padding:0px;
   	cursor:hand;
   	text-align:center
   }
   .fengmian span
   {
-  	line-height:50px;
+  	line-height:40px;
   }
   .fengmian-sel-bg
   {
@@ -59,9 +59,7 @@
  <body>
   <div class="container-fluid">
    <h5 class="col-sm-offset-2">后台管理页</h5>
-     <div class="pull-right" style="margin-top:-30px;margin-right:100px">
-   		<input type="text" class="form-control" id="auto-caiji" placeholder="自动采集">
-   </div>
+     
   
    <hr/>
    
@@ -74,36 +72,58 @@
      <div class="row">
       <div class="form-horizontal">
   		<div class="form-group">
-        <label class="control-label col-sm-2">标题</label>
-        <div class="col-sm-6">
+        <label class="control-label col-sm-1">标题</label>
+        <div class="col-sm-7">
          <input type="text" name="title" value="" title="" class="form-control">
          <p class="bg-warning warning" id="title-warn">标题不能为空！</p>
         </div>
         
-        <label class="control-label col-sm-2">类型</label>
+        <label class="control-label col-sm-1">类型</label>
         <div class="col-sm-2">
          <input type="text" name="type" value="" title="" class="form-control">
          <p class="bg-warning warning" id="type-warn">类型不能为空！</p>
         </div>
         
         <label class="control-label col-sm-2">关键词</label>
-        <div class="col-sm-2">
+        <div class="col-sm-5">
          <input type="text" name="keywords" value="" title="" class="form-control">
          <p class="bg-warning warning" id="keywords-warn">关键词不能为空！</p>
+        </div>
+        
+        <label class="control-label col-sm-1">标签</label>
+        <div class="col-sm-3">
+		    <select name="tag" value="" class="form-control">
+		    <s:iterator value="#tags" var="val" status="sta">
+		      <option>${val.name }</option>
+		     </s:iterator>
+		    </select>
+         <p class="bg-warning warning" id="tag-warn">标签不能为空！</p>
         </div>
         
         <div class="col-sm-2">
 	        <div class="well well-lg fengmian"><span class="glyphicon glyphicon-plus">封面</span></div>
 	       	<p class="bg-warning warning" id="headPath-warn">请选择一个封面！</p>  
        	</div>
+       	 
+	    
+	    <label class="control-label col-sm-2">新增标签</label>
+        <div class="col-sm-3">
+         <input type="text" name="addTag" value="" title="" class="form-control">
+         <p class="bg-warning warning" id="addTag-warn">添加成功！</p>
+        </div>
+        <div class="col-sm-2">
+		     <button class="btn btn-warning addTag">添加</button>
+	    </div>
         
-        <div class="col-sm-3 pull-right">
+        
+        <div class="col-sm-4 pull-right">
 		     <button class="btn btn-warning save">保存</button>
 		     <p class="bg-warning warning" id="btn-tishi"></p> 
-	      </div>
+	    </div>
 	      
        </div>
        </div>
+       
   	  
   	  <div id="summernote"></div>  
 	      
@@ -135,16 +155,14 @@ $(document).ready(function() {
     $('#summernote').summernote({  
     	toolbar: [
 		    // [groupName, [list of button]]
-		  //  ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
-		 //   ['para', ['style','ul', 'ol', 'paragraph','height']],
-		   // ['insert', ['link', 'picture','video','table','hr']],
-		   // ['misc', ['fullscreen', 'codeview','undo','redo','help']]
-		   ['insert', ['picture']],
-		   ['misc', ['codeview']]
+		    ['fontstyle', ['bold', 'italic', 'underline', 'fontsize','color','fontname','clear','strikethrough', 'superscript', 'subscript']],
+		    ['para', ['style','ul', 'ol', 'paragraph','height']],
+		    ['insert', ['link', 'picture','video','table','hr']],
+		    ['misc', ['fullscreen', 'codeview','undo','redo','help']]
 		  ],
 		 height:500,
         minHeight: 400,             
-        maxHeight: 500,        
+        maxHeight: 800,        
         focus: true,   
         lang:'zh-CN',
         // 重写图片上传  
@@ -163,52 +181,58 @@ $(document).ready(function() {
   	  	
   	//得到所有图片
   	var imgs = $("img",code);
-  	var picNum = imgs.length;
-  	var units = [];
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
-  		var src = img.attr("src");
-  		units[i] = {"pic":src};
+  		img.removeClass("center-block");
+  		img.addClass("center-block");
+  		img.removeClass("img-responsive");
+  		img.addClass("img-responsive");
   	}  	
-    var tutiaos = {};
-	tutiaos.title = $("[name='title']").val();
-	tutiaos.type = $("[name='type']").val();
-	tutiaos.keywords = $("[name='keywords']").val();
-	tutiaos.showNum = 0;
-	tutiaos.headPath = $("#headPath").attr("src");
-	tutiaos.picNum = picNum; 
-	tutiaos.units = units;
+  	$('#summernote').summernote('code',code); 
+  	var summary = code.text();
+  	if(summary.length > 150)
+  		summary = summary.substr(0,150);
+  	
+    var articles = {};
+    articles.type = $("[name='type']").val();
+	articles.title = $("[name='title']").val();
+	articles.content = $('#summernote').summernote('code');
+	articles.summary = summary;
+	articles.tag = $("[name='tag']").val();
+	articles.keywords = $("[name='keywords']").val();
+	articles.showNum = 0; 
+	articles.headPath = $("#headPath").attr("src");
 	
-	if(tutiaos.title == "" || tutiaos.title == null || tutiaos.title == undefined)
+	if(articles.title == "" || articles.title == null || articles.title == undefined)
 	{
 		$("#title-warn").show();
 		$("[name='title']").focus();
 		return;
 	}
-	if(tutiaos.type == "" || tutiaos.type == null || tutiaos.type == undefined)
+	if(articles.type == "" || articles.type == null || articles.type == undefined)
 	{
 		$("#type-warn").show();
 		$("[name='type']").focus();
 		return;
 	}
-	if(tutiaos.keywords == "" || tutiaos.keywords == null || tutiaos.keywords == undefined)
+	if(articles.keywords == "" || articles.keywords == null || articles.keywords == undefined)
 	{
 		$("#keywords-warn").show();
 		$("[name='keywords']").focus();
 		return;
 	}
-	if(tutiaos.headPath == "" || tutiaos.headPath == null || tutiaos.headPath == undefined)
+	if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
 	{
 		$("#headPath-warn").show();
 		return;
 	}
 	
-    var data = JSON.stringify(tutiaos);
+    var data = JSON.stringify(articles);
     $.ajax({
 			type: "post",
-			data: {tutiao: data},
-			url: baseUrl + "tutiao_addTuTiao"
+			data: {articles: data},
+			url: baseUrl + "article_addArticle"
 			}).done(function(res) {
 				if(res == 'false')
 				{
@@ -220,7 +244,7 @@ $(document).ready(function() {
 				}
 				else
 				{
-					location.href = baseUrl + "tutiao_update?id=" + res;
+					location.href = baseUrl + "article_update?id=" + res;
 				}
 	});
   });
@@ -262,35 +286,34 @@ $(document).ready(function() {
   });
   
   
-  $("#auto-caiji").keydown(function() {
-        if (event.keyCode == "13") {//keyCode=13是回车键
-        	var dtype = 1;//mm131
-        	var durl = $("#auto-caiji").val();
-        	if(durl == null || durl == '' || !durl)
-        		return;
-        	
-        	if(durl.indexOf("chemo") != -1)
-        		dtype = 2;//mm131 chemo
-        	
-        	if(durl.indexOf("eastday.com/pictures") != -1)
-        		dtype = 3;//头条新闻 图片
-        	
-        	if(durl.indexOf("eastday.com/mobile") != -1)
-        		dtype = 4;//头条新闻 图文
-        	
-        	$("#auto-caiji").attr("disabled","disabled");
-        	$("#auto-caiji").val("信息采集中...");
-        	
-        	$.ajax({
+  //添加标签
+  $(".addTag").click(function(){
+  		var name = $("[name='addTag']").val();
+  		$.ajax({
 				type: "post",
-				data: {type: dtype,url: durl},
-				url: baseUrl + "tutiao_autoAddTuTiao"
+				data: {tagName: name},
+				url: baseUrl + "article_addTag"
 			}).done(function(results) {
-				location.href = baseUrl + "tutiao_list";
-			})
-        }
-    });
-  
+				if(results == "true")
+				{
+					var str = '<option>'+name+'</option>';
+					$("[name='tag']").append(str);
+					$("#addTag-warn").text("添加成功！");
+					$("#addTag-warn").show();
+					setTimeout(function(){
+						$("#addTag-warn").hide();
+					},2000);
+				}
+				else
+				{
+					$("#addTag-warn").text("添加失败！");
+					$("#addTag-warn").show();
+					setTimeout(function(){
+						$("#addTag-warn").hide();
+					},2000);
+				}
+			});
+  });
 });  
 //上传图片
 function sendFile(file) {  
@@ -300,7 +323,7 @@ function sendFile(file) {
     $.ajax({  
         data: data,  
         type: "POST",  
-        url: baseUrl+'tutiao_upload',
+        url: baseUrl+'article_upload',
         cache: false,  
         contentType: false,  
         processData: false,  

@@ -32,9 +32,7 @@ import org.jsoup.select.Elements;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.guang.web.mode.GTuTiao;
 import com.guang.web.mode.GUser;
-import com.guang.web.tools.ApkTools;
 import com.guang.web.tools.GAutoTool;
 import com.guang.web.tools.GTools;
 import com.guang.web.tools.StringTools;
@@ -53,7 +51,9 @@ public class GTest {
 //		GTools.tozipPic("/Users/guang/Downloads/admin_update_files/112.jpg", 
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
 		
-		System.out.println(GTools.sqlValidate("LIKE"));
+		
+		System.out.println(GTools.sqlValidate("aaabbbbcccccc"));
+		
 			
 	}
 	
