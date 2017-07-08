@@ -270,6 +270,8 @@ public class GTools {
 		if(len > 30)
 			val = val.substring(0,30);
 		len = val.length();
+		if(len == 1)
+			vals.add(val);
 		//2
 		for(int i=0;i<len-1;i++)
 		{

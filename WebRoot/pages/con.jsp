@@ -143,10 +143,37 @@
 
 
 </div>
-    <script src="<%=basePath%>js/jquery.min.js"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>js/jquery.dotdotdot.min.js"></script>
-    <script src="<%=basePath%>js/common.js"></script>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-  </body>
+<script src="<%=basePath%>js/jquery.min.js"></script>
+<script src="<%=basePath%>js/bootstrap.min.js"></script>
+<script src="<%=basePath%>js/jquery.dotdotdot.min.js"></script>
+<script src="<%=basePath%>js/common.js"></script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?71032e5a3071011e7d6b356b5fdfa901";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})(); 
+</script>
+<script>
+(function(){
+   var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?863ea6aea5af068f427679d3d0cbea97":"https://jspassport.ssl.qhimg.com/11.0.1.js?863ea6aea5af068f427679d3d0cbea97";
+   document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+</body>
 </html>
