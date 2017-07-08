@@ -31,8 +31,11 @@
    <table class="table table-hover">
   <thead>
     <tr>
+      <th>ID</th>
       <th>标题</th>
       <th>浏览量</th>
+      <th>喜欢</th>
+      <th>评论</th>
       <th>时间</th>
       <th>操作</th>
     </tr>
@@ -40,14 +43,23 @@
   <tbody>
   <s:iterator value="#list" var="val" status="sta">
     <tr>
-      <td>
-      	${val.title }
-       </td>
+      <td>${val.id }</td>
+      <td>${val.title }</td>
       <td>${val.showNum }</td>
+      <td>${val.loveNum }</td>
+      <td>${val.commentNum }</td>
       <td><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm:ss" /></td>
       <td>
+      <s:if test="#val.grelease">
+      	<button class="btn btn-primary btn-xs" title="${val.id }">已发布</button>
+      </s:if>
+      <s:else>
+      	<button class="btn btn-warning btn-xs release_btn" title="${val.id }">发布</button>
+      </s:else>
+      	
         <button class="btn btn-primary btn-xs update_btn" title="${val.id }">更改</button>
         <button class="btn btn-primary btn-xs delete_btn" title="${val.id }">删除</button>
+        <button class="btn btn-primary btn-xs comment_btn" title="${val.id }">评论</button>
       </td>
     </tr>
 	</s:iterator>
@@ -75,7 +87,11 @@
 <script type="text/javascript"> 
 var baseUrl =  window.location.protocol + "//" + window.location.host + "/";
 $(document).ready(function() {
-
+	$('.add_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "article_add";
+	});
+	
 	$('.update_btn').click(function(event) {
 		event.preventDefault();
 		location.href = baseUrl + "article_update?id="+$(this).attr("title");
@@ -84,6 +100,16 @@ $(document).ready(function() {
 	$('.delete_btn').click(function(event) {
 		event.preventDefault();
 		location.href = baseUrl + "article_deleteArticle?id="+$(this).attr("title");
+	});
+	
+	$('.release_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "article_releaseArticle?id="+$(this).attr("title");
+	});
+	
+	$('.comment_btn').click(function(event) {
+		event.preventDefault();
+		location.href = baseUrl + "comment_list?id="+$(this).attr("title");
 	});
 
 	var curr_index = $("#a_curr").attr("title");

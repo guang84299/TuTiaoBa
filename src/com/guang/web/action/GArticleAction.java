@@ -44,6 +44,10 @@ public class GArticleAction extends ActionSupport{
 	
 	
 	public String list() {
+		if(ActionContext.getContext().getSession().get("user")==null)
+		{
+			return "toLogin";
+		}
 		String index = ServletActionContext.getRequest().getParameter("index");
 		int page = 0;
 		if(index != null)
@@ -443,12 +447,20 @@ public class GArticleAction extends ActionSupport{
 	}
 	
 	public String add() {
+		if(ActionContext.getContext().getSession().get("user")==null)
+		{
+			return "toLogin";
+		}
 		List<GTag> tags = tagService.findAll(0, 100).getList();
 		ActionContext.getContext().put("tags", tags);
 		return "add";
 	}
 	
 	public String update() {
+		if(ActionContext.getContext().getSession().get("user")==null)
+		{
+			return "toLogin";
+		}
 		String id = ServletActionContext.getRequest().getParameter("id");
 		if(StringTools.isEmpty(id))
 		{
@@ -529,6 +541,7 @@ public class GArticleAction extends ActionSupport{
 			article.setContent(content);
 			article.setSummary(summary);
 			article.setKeywords(keywords);
+			article.setGrelease(false);
 			
 			if(!StringTools.isEmpty(type))
 				article.setType(Integer.parseInt(type));
@@ -560,6 +573,11 @@ public class GArticleAction extends ActionSupport{
 	
 	public String deleteArticle()
 	{
+		if(ActionContext.getContext().getSession().get("user")==null)
+		{
+			return "toLogin";
+		}
+		
 		String id = ServletActionContext.getRequest().getParameter("id");
 		if(StringTools.isEmpty(id))
 		{
@@ -584,6 +602,26 @@ public class GArticleAction extends ActionSupport{
 				loveService.delete(love.getId());
 			}
 			articleService.delete(article.getId());
+		}
+		return list();
+	}
+	
+	public String releaseArticle()
+	{
+		if(ActionContext.getContext().getSession().get("user")==null)
+		{
+			return "toLogin";
+		}
+		String id = ServletActionContext.getRequest().getParameter("id");
+		if(StringTools.isEmpty(id))
+		{
+			return list();
+		}
+		GArticle article = articleService.find(Long.parseLong(id));
+		if(article != null)
+		{
+			article.setGrelease(true);
+			articleService.update(article);
 		}
 		return list();
 	}

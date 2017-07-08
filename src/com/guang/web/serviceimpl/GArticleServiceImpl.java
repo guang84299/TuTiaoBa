@@ -50,6 +50,7 @@ public class GArticleServiceImpl implements GArticleService{
 	public QueryResult<GArticle> findByNew(int type, int firstindex, int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("type =", type+"");
+		colvals.put("grelease =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
 		return daoTools.find(GArticle.class, colvals, firstindex, maxNum, lhm);
@@ -58,6 +59,7 @@ public class GArticleServiceImpl implements GArticleService{
 	public QueryResult<GArticle> findByHot(int type, int firstindex, int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("type =", type+"");
+		colvals.put("grelease =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("showNum", "desc");
 		return daoTools.find(GArticle.class, colvals, firstindex, maxNum, lhm);
@@ -67,6 +69,7 @@ public class GArticleServiceImpl implements GArticleService{
 			int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("tagId =", tagId+"");
+		colvals.put("grelease =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
 		return daoTools.find(GArticle.class, colvals, firstindex, maxNum, lhm);
@@ -76,6 +79,7 @@ public class GArticleServiceImpl implements GArticleService{
 			int maxNum) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("tagId =", tagId+"");
+		colvals.put("grelease =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("showNum", "desc");
 		return daoTools.find(GArticle.class, colvals, firstindex, maxNum, lhm);
@@ -84,6 +88,7 @@ public class GArticleServiceImpl implements GArticleService{
 	public GArticle findNext(long id) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("id >", id+"");
+		colvals.put("grelease =", true+"");
 		List<GArticle> list = daoTools.find(GArticle.class, colvals, 0, 1, null).getList();
 		if(list.size() > 0)
 			return list.get(0);
@@ -93,6 +98,7 @@ public class GArticleServiceImpl implements GArticleService{
 	public GArticle findPre(long id) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 		colvals.put("id <", id+"");
+		colvals.put("grelease =", true+"");
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
 		List<GArticle> list = daoTools.find(GArticle.class, colvals, 0, 1, lhm).getList();

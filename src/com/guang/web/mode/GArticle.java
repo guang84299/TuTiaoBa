@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 //alter table g_article add index index_tagId(tagId);
 //alter table g_article add index index_title(title);
 //alter table g_article add index index_type(type);
+//alter table g_article add index index_grelease(grelease);
 public class GArticle {
 	private long id;
 	private int type;

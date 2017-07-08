@@ -72,4 +72,10 @@ public class GCommentServiceImpl implements GCommentService{
 		return 1;
 	}
 
+	public long findNum(long articleId) {
+		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("articleId =", articleId+"");
+		return daoTools.findNum(GComment.class, colvals);
+	}
+
 }

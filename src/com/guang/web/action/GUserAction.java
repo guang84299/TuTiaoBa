@@ -105,6 +105,36 @@ public class GUserAction extends ActionSupport{
 //		GSysVal sysVal = new GSysVal(0, false, 2, "", "", 0, 1.0f);
 //		sysValService.save(sysVal);
 		
+		GPermission permission = new GPermission();
+		permission.setAdmin(true);
+		permission.setActive(true);
+		permissionService.add(permission);
+		GUser user = new GUser(permission.getId(), "guang", "920616", "842997290@qq.com");
+		userService.add(user);
+	}
+	
+	public String toLogin()
+	{
+		String name = ServletActionContext.getRequest().getParameter("username");
+		String password = ServletActionContext.getRequest().getParameter("password");
+		
+		if(StringTools.isEmpty(name) || StringTools.isEmpty(password))
+		{
+			return "toLogin";
+		}
+		else
+		{
+			GUser user = userService.find(name,password);
+			if(user == null)
+			{
+				return "toLogin";
+			}
+			else
+			{
+				ActionContext.getContext().getSession().put("user", user);
+				return "loginSuccess";
+			}
+		}
 	}
 
 	

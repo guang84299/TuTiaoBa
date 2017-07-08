@@ -16,4 +16,5 @@ public interface GCommentService {
 	QueryResult<GComment> findAll(long articleId,int firstindex,int maxNum);
 	QueryResult<GComment> findByHot(long articleId,int firstindex,int maxNum);
 	long findFloor(long articleId);
+	long findNum(long articleId);
 }

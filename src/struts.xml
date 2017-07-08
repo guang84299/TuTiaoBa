@@ -14,14 +14,16 @@
 	       <result name="login" >/pages/login.jsp</result>
 	       <result name="register" >/pages/regist.jsp</result>
 	       <result name="loginOut" >/</result>
+	       <result name="loginSuccess" >/article_list</result>
 	       <result name="uninstall" type="redirect">http://www.baidu.com</result>
 	       <result name="error" >/pages/error.jsp</result>
+	       <result name="toLogin" >/pages/login.jsp</result>
 	   </action>	   
 	      
 	    <action name="article_*" class="com.guang.web.action.GArticleAction" method="{1}">
-	      <result name="index" >/pages/tutiao_admin.jsp</result>
-	      <result name="add" >/pages/tutiao_add.jsp</result>
-	      <result name="update" >/pages/tutiao_update.jsp</result>
+	      <result name="index" >/pages/admin.jsp</result>
+	      <result name="add" >/pages/add.jsp</result>
+	      <result name="update" >/pages/update.jsp</result>
 	      <result name="home" >/pages/home.jsp</result>
 	      <result name="mm" >/pages/home.jsp</result>
 	      <result name="duanzi" >/pages/home.jsp</result>
@@ -29,12 +31,12 @@
 	      <result name="show" >/pages/con.jsp</result>
 	      <result name="search" >/pages/home.jsp</result>
 	      <result name="error" >/pages/error.jsp</result>
+	      <result name="toLogin" >/pages/login.jsp</result>
 	   </action>
 	   
 	    <action name="comment_*" class="com.guang.web.action.GCommentAction" method="{1}">
-	      <result name="index" >/pages/comment_admin.jsp</result>
-	      <result name="add" >/pages/tutiao_add.jsp</result>
-	      <result name="error" >/pages/error.jsp</result>
+	      <result name="index" >/pages/admin_comment.jsp</result>
+	      <result name="toLogin" >/pages/login.jsp</result>
 	   </action>
 	  
 	   
