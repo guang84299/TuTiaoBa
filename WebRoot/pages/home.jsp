@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col-xs-14 col-sm-18">
           <h4><a href="<%=basePath%>${val.id}.html" class="g-con-a">${val.title}</a></h4>
-          <div class="wrapper"><p class="small">${val.summary}</p></div>
+          <div class="dot-ellipsis dot-resize-update dot-height-60"><p class="small">${val.summary}</p></div>
         </div>
         <div class="col-xs-10 col-sm-6">
           <a href="<%=basePath%>${val.id}.html"><img src="<%=basePath%>${val.headPath}" alt="${val.title}" class="img-responsive img-rounded g-con-img"></a>
@@ -114,7 +114,7 @@
       </div>
       <div class="col-xs-19 g-hot-con">
         <strong>春光</strong>
-        <p class="wrapper2"><small><a href="<%=basePath%>${val.id}.html">${val.title}</a></small></p>
+        <p class="dot-ellipsis dot-resize-update dot-height-20"><small><a href="<%=basePath%>${val.id}.html">${val.title}</a></small></p>
       </div>
     </div>
 </s:iterator>    
@@ -141,18 +141,6 @@
 <script src="<%=basePath%>js/bootstrap.min.js"></script>
 <script src="<%=basePath%>js/jquery.dotdotdot.min.js"></script>
 <script src="<%=basePath%>js/common.js"></script>
-<script type="text/javascript">
-     (function() {
-       $(".wrapper").dotdotdot({
-         ellipsis  : '... ',
-         height    : 60
-       });
-       $(".wrapper2").dotdotdot({
-         ellipsis  : '... ',
-         height    : 20
-       });
-    })();
-</script>
 <script>
 var _hmt = _hmt || [];
 (function() {
