@@ -169,12 +169,13 @@ $(document).ready(function() {
   $(".save").click(function(){
   	var str = $('#summernote').summernote('code');
   	var code = $(str);
-	
+	var alt = $("[name='title']").val();
   	//为图片添加a标签和响应式
   	var imgs = $("img",code);
   	for(var i=0;i< imgs.length;i++)
   	{
   		var img = $(imgs[i]);
+  		img.attr("alt",alt);
   		img.removeClass("center-block");
   		img.addClass("center-block");
   		img.removeClass("img-responsive");
