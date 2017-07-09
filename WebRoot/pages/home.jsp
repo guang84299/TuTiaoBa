@@ -130,8 +130,8 @@
   </div>
 
 <div class="col-xs-24 col-sm-16 col-md-16 col-lg-16 g-foot">
-  <p class="text-center"><small>本站内容多为原创。</small></p>
-  <p class="text-center"><small>© 2017 (<a href="www.tutiaoba.com">www.tutiaoba.com</a>) 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a></small></p>
+  <p class="text-center"><small>本站内容多为原创，转载请注明出处。</small></p>
+  <p class="text-center"><small>© 2017 (<a href="<%=basePath%>">www.tutiaoba.com</a>) 春光博客 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a></small></p>
 </div>
 
 </div>
@@ -142,7 +142,7 @@
 <script src="<%=basePath%>js/jquery.dotdotdot.min.js"></script>
 <script src="<%=basePath%>js/common.js"></script>
 <script type="text/javascript">
-     $(document).ready(function() {
+     (function() {
        $(".wrapper").dotdotdot({
          ellipsis  : '... ',
          height    : 60
@@ -151,7 +151,7 @@
          ellipsis  : '... ',
          height    : 20
        });
-     });
+    })();
 </script>
 <script>
 var _hmt = _hmt || [];

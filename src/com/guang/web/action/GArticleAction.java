@@ -190,6 +190,13 @@ public class GArticleAction extends ActionSupport{
 			page = Integer.parseInt(index);
 		}
 		
+		GTag tag = tagService.find(tagId);
+		if(tag != null)
+		{
+			tag.setShowNum(tag.getShowNum()+1);
+			tagService.update(tag);
+		}
+		
 		//最新文章
 		List<GArticle>  articles = articleService.findByNew(tagId, page, 20).getList();
 		for(GArticle article : articles)
