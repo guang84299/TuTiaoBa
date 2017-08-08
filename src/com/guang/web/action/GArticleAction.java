@@ -114,7 +114,7 @@ public class GArticleAction extends ActionSupport{
 		}
 		
 		//最新文章
-		List<GArticle>  articles = articleService.findByNew(2, 0, 20).getList();
+		List<GArticle>  articles = articleService.findByNew(2, page, 20).getList();
 		for(GArticle article : articles)
 		{
 			article.setTag(tagService.find(article.getTagId()));
