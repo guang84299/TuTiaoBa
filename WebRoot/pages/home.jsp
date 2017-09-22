@@ -67,23 +67,31 @@
 <s:iterator value="#articles" var="val" status="sta">
     <div>
       <div class="g-head">
-        <img src="<%=basePath%>img/head.jpg" alt="${val.title}" class="img-circle">
+        <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" alt="${val.title}" class="img-circle">
         <small>春光</small>
         <small class="text-muted"><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm" /></small>
       </div>
       <div class="row">
-        <div class="col-xs-14 col-sm-18">
-          <h4><a href="<%=basePath%>${val.id}.html" class="g-con-a">${val.title}</a></h4>
-          <div class="dot-ellipsis dot-resize-update dot-height-60"><p class="small">${val.summary}</p></div>
-        </div>
-        <div class="col-xs-10 col-sm-6">
-          <a href="<%=basePath%>${val.id}.html"><img src="<%=basePath%>${val.headPath}" alt="${val.title}" class="img-responsive img-rounded g-con-img"></a>
-        </div>
+      	<s:if test="#val.headPath==null">
+      		<div class="col-xs-24 col-sm-24">
+	          <h4><a href="<%=basePath%>${val.id}.html" target="_blank" class="g-con-a">${val.title}</a></h4>
+	          <div class="dot-ellipsis dot-resize-update dot-height-60"><p class="small">${val.summary}</p></div>
+	        </div>
+      	</s:if>
+      	<s:else>
+	        <div class="col-xs-14 col-sm-18">
+	          <h4><a href="<%=basePath%>${val.id}.html" target="_blank" class="g-con-a">${val.title}</a></h4>
+	          <div class="dot-ellipsis dot-resize-update dot-height-60"><p class="small">${val.summary}</p></div>
+	        </div>
+	        <div class="col-xs-10 col-sm-6">
+	          <a href="<%=basePath%>${val.id}.html" target="_blank" ><img src="<%=basePath%>${val.headPath}" alt="${val.title}" class="img-responsive img-rounded g-con-img"></a>
+	        </div>
+        </s:else>
       </div>
       <div>
-        <a class="btn btn-xs g-btn" href="<%=basePath%>tag/${val.tag.id}.html">${val.tag.name}</a>
+        <a class="btn btn-xs g-btn" href="<%=basePath%>tag/${val.tag.id}.html" target="_blank">${val.tag.name}</a>
         <strong class="g-bottom">
-        <a href="<%=basePath%>${val.id}.html"><span class="glyphicon glyphicon-eye-open"></span><small>${val.showNum}</small></a>
+        <a href="<%=basePath%>${val.id}.html" target="_blank"><span class="glyphicon glyphicon-eye-open"></span><small>${val.showNum}</small></a>
         <a><span class="glyphicon glyphicon-comment"></span><small>${val.commentNum}</small></a>
         <a><span class="glyphicon glyphicon-heart"></span><small>${val.loveNum}</small></a>
         </strong>
@@ -110,11 +118,11 @@
 <s:iterator value="#articlehots" var="val" status="sta">    
     <div class="row g-hot">
       <div class="col-xs-5 g-hot-head">
-        <img src="<%=basePath%>img/head.jpg" alt="${val.title}" class="img-circle">
+        <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" target="_blank" alt="${val.title}" class="img-circle">
       </div>
       <div class="col-xs-19 g-hot-con">
         <strong>春光</strong>
-        <p class="dot-ellipsis dot-resize-update dot-height-20"><small><a href="<%=basePath%>${val.id}.html">${val.title}</a></small></p>
+        <p class="dot-ellipsis dot-resize-update dot-height-20"><small><a href="<%=basePath%>${val.id}.html" target="_blank">${val.title}</a></small></p>
       </div>
     </div>
 </s:iterator>    
@@ -123,7 +131,7 @@
     <hr>
     <div>
 <s:iterator value="#tags" var="val" status="sta">
-    <a href="<%=basePath%>tag/${val.id}.html" class="label label-default">${val.name }</a>
+    <a href="<%=basePath%>tag/${val.id}.html" target="_blank" class="label label-default">${val.name }</a>
 </s:iterator>
     </div>
 
@@ -131,7 +139,7 @@
 
 <div class="col-xs-24 col-sm-16 col-md-16 col-lg-16 g-foot">
   <p class="text-center"><small>本站内容多为原创，转载请注明出处。</small></p>
-  <p class="text-center"><small>© 2017 (<a href="<%=basePath%>">www.tutiaoba.com</a>) 春光博客 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/">豫ICP备17017459号</a></small></p>
+  <p class="text-center"><small>© 2017 (<a href="<%=basePath%>">www.tutiaoba.com</a>) 春光博客 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/" target="_blank">豫ICP备17017459号</a></small></p>
 </div>
 
 </div>

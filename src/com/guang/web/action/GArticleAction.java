@@ -499,15 +499,20 @@ public class GArticleAction extends ActionSupport{
 		String tag = obj.getString("tag");
 		String keywords = obj.getString("keywords");
 		String showNum = obj.getString("showNum");
-		String headPath = obj.getString("headPath");
+		String headPath = null;
+		if(obj.containsKey("headPath"))
+			headPath = obj.getString("headPath");
 				
-		if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type) && !StringTools.isEmpty(headPath))
+		if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
 		{
-			String sourcePath = headPath.substring(headPath.indexOf("img"), headPath.length());
-			headPath = headPath.substring(headPath.indexOf("img"), headPath.lastIndexOf(".")-1)+"0.jpg";
-			String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
-			String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
-			GTools.tozipPic(pic_relpath, topic_relpath, true);
+			if(!StringTools.isEmpty(headPath))
+			{
+				String sourcePath = headPath.substring(headPath.indexOf("img"), headPath.length());
+				headPath = headPath.substring(headPath.indexOf("img"), headPath.lastIndexOf(".")-1)+"0.jpg";
+				String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
+				String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
+				GTools.tozipPic(pic_relpath, topic_relpath, true);
+			}
 			
 			long tagId = 0;
 			GTag gtag = tagService.find(tag);
@@ -539,7 +544,9 @@ public class GArticleAction extends ActionSupport{
 		String tag = obj.getString("tag");
 		String keywords = obj.getString("keywords");
 		String showNum = obj.getString("showNum");
-		String headPath = obj.getString("headPath");
+		String headPath = null;
+		if(obj.containsKey("headPath"))
+			headPath = obj.getString("headPath");
 				
 		if(!StringTools.isEmpty(id) && !StringTools.isEmpty(title))
 		{
@@ -556,15 +563,18 @@ public class GArticleAction extends ActionSupport{
 				article.setShowNum(Long.parseLong(showNum));
 			
 			//判断是否更改头图片
-			String sourcePath = headPath.substring(headPath.indexOf("img"), headPath.length());
-			headPath = headPath.substring(headPath.indexOf("img"), headPath.lastIndexOf(".")-1)+"0.jpg";
-			if(!headPath.equals(article.getHeadPath()))
+			if(!StringTools.isEmpty(headPath))
 			{
-				String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
-				String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
-				GTools.tozipPic(pic_relpath, topic_relpath, true);
-				
-				article.setHeadPath(headPath);
+				String sourcePath = headPath.substring(headPath.indexOf("img"), headPath.length());
+				headPath = headPath.substring(headPath.indexOf("img"), headPath.lastIndexOf(".")-1)+"0.jpg";
+				if(!headPath.equals(article.getHeadPath()))
+				{
+					String pic_relpath = ServletActionContext.getServletContext().getRealPath(sourcePath);
+					String topic_relpath = ServletActionContext.getServletContext().getRealPath(headPath);
+					GTools.tozipPic(pic_relpath, topic_relpath, true);
+					
+					article.setHeadPath(headPath);
+				}
 			}
 			
 			long tagId = 0;

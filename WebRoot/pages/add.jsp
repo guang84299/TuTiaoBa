@@ -223,11 +223,11 @@ $(document).ready(function() {
 		$("[name='keywords']").focus();
 		return;
 	}
-	if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
+	/* if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
 	{
 		$("#headPath-warn").show();
 		return;
-	}
+	} */
 	
     var data = JSON.stringify(articles);
     $.ajax({
