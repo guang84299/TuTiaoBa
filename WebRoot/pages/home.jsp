@@ -13,9 +13,9 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>春光博客_技术分享_程序员最喜欢的图条吧</title>
-  <meta name="keywords" content="春光博客,技术分享,精美段子,女神图片,图条吧">
-  <meta name="description" content="《春光博客》(www.tutiaoba.com)程序员的福利，分享日常开发的技术难题，提供精美段子和女神美女图片。">
+  <title>程序员网_程序员技术_程序员段子_程序员图片</title>
+  <meta name="keywords" content="程序员网,程序员段子,程序员技术,程序员图片,春光博客">
+  <meta name="description" content="《程序员网》分享开发中技术难题，提供程序员段子和程序员图片。">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="<%=basePath%>" class="navbar-brand">春光博客</a>
+      <a href="<%=basePath%>" class="navbar-brand">程序员网</a>
     </div>
     <nav id="bs-navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -68,7 +68,7 @@
     <div>
       <div class="g-head">
         <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" alt="${val.title}" class="img-circle">
-        <small>春光</small>
+        <small>程序员.春光</small>
         <small class="text-muted"><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm" /></small>
       </div>
       <div class="row">
@@ -121,7 +121,7 @@
         <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" target="_blank" alt="${val.title}" class="img-circle">
       </div>
       <div class="col-xs-19 g-hot-con">
-        <strong>春光</strong>
+        <strong>程序员.春光</strong>
         <p class="dot-ellipsis dot-resize-update dot-height-20"><small><a href="<%=basePath%>${val.id}.html" target="_blank">${val.title}</a></small></p>
       </div>
     </div>
@@ -139,7 +139,7 @@
 
 <div class="col-xs-24 col-sm-16 col-md-16 col-lg-16 g-foot">
   <p class="text-center"><small>本站内容多为原创，转载请注明出处。</small></p>
-  <p class="text-center"><small>© 2017 (<a href="<%=basePath%>">www.tutiaoba.com</a>) 春光博客 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/" target="_blank">豫ICP备17017459号</a></small></p>
+  <p class="text-center"><small>© 2017 (<a href="<%=basePath%>">www.tutiaoba.com</a>) 程序员网 春光博客 图条吧 版权所有 <a href="http://www.miitbeian.gov.cn/" target="_blank">豫ICP备17017459号</a></small></p>
 </div>
 
 </div>

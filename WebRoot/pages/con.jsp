@@ -13,9 +13,9 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>${article.title }_春光博客</title>
-  <meta name="keywords" content="${article.keywords },春光博客">
-  <meta name="description" content="${article.title }_春光博客_www.tutiaoba.com">
+  <title>【程序员网】${article.title }</title>
+  <meta name="keywords" content="${article.keywords },程序员网,程序员段子,程序员技术,程序员图片,春光博客">
+  <meta name="description" content="${article.title }_程序员段子_程序员技术_程序员图片">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="<%=basePath%>" class="navbar-brand">春光博客</a>
+      <a href="<%=basePath%>" class="navbar-brand">程序员网</a>
     </div>
     <nav id="bs-navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
@@ -65,7 +65,7 @@
         <img src="<%=basePath%>img/head.jpg" alt="${article.title }" class="img-circle">
       </div>
       <div class="col-xs-20 col-sm-21 col-md-22 g-hot-con">
-        <strong>春光</strong>
+        <strong>程序员.春光</strong>
         <p class="wrapper2"><small class="text-muted"><s:date name="#article.cdate" format="yyyy.MM.dd"/> 阅读 ${article.showNum } 评论 <span class="commentNum">${article.commentNum }</span> 喜欢 <span class="loveNum">${article.loveNum }</span></small></p>
       </div>
     </div>
