@@ -115,6 +115,11 @@
 		     <button class="btn btn-warning addTag">添加</button>
 	    </div>
         
+        <label class="control-label col-sm-2">作者</label>
+        <div class="col-sm-3">
+         <input type="text" name="author" value="程序员.春光" class="form-control">
+         <p class="bg-warning warning" id="author-warn">作者不能为空！</p>
+        </div>
         
         <div class="col-sm-4 pull-right">
 		     <button class="btn btn-warning save">保存</button>
@@ -203,6 +208,7 @@ $(document).ready(function() {
 	articles.tag = $("[name='tag']").val();
 	articles.keywords = $("[name='keywords']").val();
 	articles.showNum = 0; 
+	articles.author = $("[name='author']").val();
 	articles.headPath = $("#headPath").attr("src");
 	
 	if(articles.title == "" || articles.title == null || articles.title == undefined)
@@ -221,6 +227,12 @@ $(document).ready(function() {
 	{
 		$("#keywords-warn").show();
 		$("[name='keywords']").focus();
+		return;
+	}
+	if(articles.author == "" || articles.author == null || articles.author == undefined)
+	{
+		$("#author-warn").show();
+		$("[name='author']").focus();
 		return;
 	}
 	/* if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
@@ -258,6 +270,9 @@ $(document).ready(function() {
   });
    $("[name='keywords']").blur(function(){
   	$("#keywords-warn").hide();
+  });
+   $("[name='author']").blur(function(){
+  	$("#author-warn").hide();
   });
   
   $(".fengmian").click(function(){

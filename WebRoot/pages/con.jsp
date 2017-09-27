@@ -62,10 +62,10 @@
     <h2>${article.title }</h2>
     <div class="row g-hot g-con-head">
       <div class="col-xs-4 col-sm-3 col-md-2 g-hot-head">
-        <img src="<%=basePath%>img/head.jpg" alt="${article.title }" class="img-circle">
+        <img src="<%=basePath%><s:if test="#article.headPath==null">img/head.jpg</s:if><s:else>${article.headPath}</s:else>" alt="${article.title }" class="img-circle">
       </div>
       <div class="col-xs-20 col-sm-21 col-md-22 g-hot-con">
-        <strong>程序员.春光</strong>
+        <strong>${article.author}</strong>
         <p class="wrapper2"><small class="text-muted"><s:date name="#article.cdate" format="yyyy.MM.dd"/> 阅读 ${article.showNum } 评论 <span class="commentNum">${article.commentNum }</span> 喜欢 <span class="loveNum">${article.loveNum }</span></small></p>
       </div>
     </div>

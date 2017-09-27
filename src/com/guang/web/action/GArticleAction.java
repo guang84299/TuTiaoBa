@@ -499,6 +499,7 @@ public class GArticleAction extends ActionSupport{
 		String tag = obj.getString("tag");
 		String keywords = obj.getString("keywords");
 		String showNum = obj.getString("showNum");
+		String author = obj.getString("author");
 		String headPath = null;
 		if(obj.containsKey("headPath"))
 			headPath = obj.getString("headPath");
@@ -520,7 +521,7 @@ public class GArticleAction extends ActionSupport{
 				tagId = gtag.getId();
 			
 			GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
-					Long.parseLong(showNum),headPath);
+					Long.parseLong(showNum),headPath,author);
 			articleService.add(article);
 			
 			print(article.getId());
@@ -544,6 +545,7 @@ public class GArticleAction extends ActionSupport{
 		String tag = obj.getString("tag");
 		String keywords = obj.getString("keywords");
 		String showNum = obj.getString("showNum");
+		String author = obj.getString("author");
 		String headPath = null;
 		if(obj.containsKey("headPath"))
 			headPath = obj.getString("headPath");
@@ -556,6 +558,7 @@ public class GArticleAction extends ActionSupport{
 			article.setSummary(summary);
 			article.setKeywords(keywords);
 			article.setGrelease(false);
+			article.setAuthor(author);
 			
 			if(!StringTools.isEmpty(type))
 				article.setType(Integer.parseInt(type));

@@ -68,7 +68,7 @@
     <div>
       <div class="g-head">
         <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" alt="${val.title}" class="img-circle">
-        <small>程序员.春光</small>
+        <small>${val.author}</small>
         <small class="text-muted"><s:date name="#val.cdate" format="yyyy-MM-dd HH:mm" /></small>
       </div>
       <div class="row">
@@ -121,7 +121,7 @@
         <img src="<%=basePath%><s:if test="#val.headPath==null">img/head.jpg</s:if><s:else>${val.headPath}</s:else>" target="_blank" alt="${val.title}" class="img-circle">
       </div>
       <div class="col-xs-19 g-hot-con">
-        <strong>程序员.春光</strong>
+        <strong>${val.author}</strong>
         <p class="dot-ellipsis dot-resize-update dot-height-20"><small><a href="<%=basePath%>${val.id}.html" target="_blank">${val.title}</a></small></p>
       </div>
     </div>

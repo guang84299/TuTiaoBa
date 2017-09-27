@@ -107,6 +107,11 @@
          <input type="text" name="showNum" value="${article.showNum }" class="form-control">
         </div>
         
+        <label class="control-label col-sm-2">作者</label>
+        <div class="col-sm-3">
+         <input type="text" name="author" value="${article.author }" class="form-control">
+         <p class="bg-warning warning" id="author-warn">作者不能为空！</p>
+        </div>
         
        	
         <div class="col-sm-3">
@@ -195,6 +200,7 @@ $(document).ready(function() {
 	articles.tag = $("[name='tag']").val();
 	articles.keywords = $("[name='keywords']").val();
 	articles.showNum = $("[name='showNum']").val();; 
+	articles.author = $("[name='author']").val();
 	articles.headPath = $("#headPath").attr("src");
 	
 	if(articles.title == "" || articles.title == null || articles.title == undefined)
@@ -213,6 +219,12 @@ $(document).ready(function() {
 	{
 		$("#keywords-warn").show();
 		$("[name='keywords']").focus();
+		return;
+	}
+	if(articles.author == "" || articles.author == null || articles.author == undefined)
+	{
+		$("#author-warn").show();
+		$("[name='author']").focus();
 		return;
 	}
 	/* if(articles.headPath == "" || articles.headPath == null || articles.headPath == undefined)
@@ -252,7 +264,9 @@ $(document).ready(function() {
  $("[name='keywords']").blur(function(){
   	$("#keywords-warn").hide();
   });
-
+$("[name='author']").blur(function(){
+  	$("#author-warn").hide();
+  });
 
   
   var headPath = $(".fengmian").attr("data-headPath");

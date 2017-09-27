@@ -32,11 +32,13 @@ public class GArticle {
 	private long loveNum;
 	private long commentNum;
 	
+	private String author;
+	
 	private GTag tag;
 	
 	public GArticle(){}
 	public GArticle(int type,String title, String content, String summary, long tagId,
-			String keywords, long showNum, String headPath) {
+			String keywords, long showNum, String headPath,String author) {
 		super();
 		this.type = type;
 		this.title = title;
@@ -49,6 +51,7 @@ public class GArticle {
 		this.grelease = false;
 		this.loveNum = 0l;
 		this.commentNum = 0l;
+		this.author = author;
 		this.cdate = new Date();
 	}
 	@Id
@@ -136,6 +139,13 @@ public class GArticle {
 	}
 	public void setGrelease(boolean grelease) {
 		this.grelease = grelease;
+	}
+	@Column(length=128)
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	@Transient
 	public GTag getTag() {
