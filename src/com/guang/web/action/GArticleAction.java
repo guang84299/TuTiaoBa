@@ -678,7 +678,6 @@ public class GArticleAction extends ActionSupport{
 		if(url != null && dtype != null && channel != null)
 		{
 			JSONObject obj = GAutoTool.autoAdd(url, dtype, channel);
-			System.out.println(obj.toString());
 			if(obj != null)
 			{
 				String type = obj.getString("type");
