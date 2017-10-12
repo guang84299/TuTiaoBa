@@ -52,7 +52,7 @@ public class GTest {
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
 		
 		
-		System.out.println(GTools.sqlValidate("aaabbbbcccccc"));
+		GAutoTool.test("http://www.jianshu.com/p/a6e580dc90d4");
 		
 			
 	}

@@ -60,7 +60,13 @@
   <div class="container-fluid">
    <h5 class="col-sm-offset-2">后台管理页</h5>
      
-  
+    <div class="pull-right" style="margin-top:-30px;margin-right:100px;width:50px;">
+   		<input type="text" class="form-control" id="auto-caiji-type" value="1">
+   </div>
+   <div class="pull-right" style="margin-top:-30px;margin-right:10px">
+   		<input type="text" class="form-control" id="auto-caiji" placeholder="自动采集">
+   </div>
+   
    <hr/>
    
    <div class="row">
@@ -330,6 +336,29 @@ $(document).ready(function() {
 				}
 			});
   });
+  
+  //自动采集
+   	$("#auto-caiji").keydown(function() {
+       if (event.keyCode == "13") {//keyCode=13是回车键
+       	var dchannel = 'jianshu';//jianshu
+       	var durl = $("#auto-caiji").val();
+       	var dtype = $("#auto-caiji-type").val();
+       	if(durl == null || durl == '' || !durl)
+       		return;
+       	
+       	$("#auto-caiji").attr("disabled","disabled");
+       	$("#auto-caiji").val("信息采集中...");
+       	
+       	$.ajax({
+			type: "post",
+			data: {type: dtype,url: durl,channel: dchannel},
+			url: baseUrl + "article_autoAddArticle"
+		}).done(function(results) {
+			location.href = baseUrl + "article_list";
+		})
+       }
+   });
+   
 });  
 //上传图片
 function sendFile(file) {  
@@ -347,6 +376,7 @@ function sendFile(file) {
               $("#summernote").summernote('insertImage', baseUrl+url); // the insertImage API  
         }  
     });  
+
 }  
   
 </script>  

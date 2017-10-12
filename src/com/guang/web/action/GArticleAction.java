@@ -26,6 +26,7 @@ import com.guang.web.service.GCommentLoveService;
 import com.guang.web.service.GCommentService;
 import com.guang.web.service.GLoveService;
 import com.guang.web.service.GTagService;
+import com.guang.web.tools.GAutoTool;
 import com.guang.web.tools.GTools;
 import com.guang.web.tools.StringTools;
 import com.opensymphony.xwork2.ActionContext;
@@ -665,6 +666,45 @@ public class GArticleAction extends ActionSupport{
 		else
 		{
 			print(false);
+		}
+	}
+	
+	public void autoAddArticle()
+	{
+		String url = ServletActionContext.getRequest().getParameter("url");
+		String dtype = ServletActionContext.getRequest().getParameter("type");
+		String channel = ServletActionContext.getRequest().getParameter("channel");
+		
+		if(url != null && dtype != null && channel != null)
+		{
+			JSONObject obj = GAutoTool.autoAdd(url, dtype, channel);
+			System.out.println(obj.toString());
+			if(obj != null)
+			{
+				String type = obj.getString("type");
+				String title = obj.getString("title");
+				String content = obj.getString("content");
+				String summary = obj.getString("summary");
+				String tag = obj.getString("tag");
+				String keywords = obj.getString("keywords");
+				String showNum = obj.getString("showNum");
+				String author = obj.getString("author");
+				String headPath = null;
+				if(obj.containsKey("headPath"))
+					headPath = obj.getString("headPath");
+				
+				if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
+				{
+					long tagId = 0;
+					GTag gtag = tagService.find(tag);
+					if(gtag != null)
+						tagId = gtag.getId();
+					GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
+							Long.parseLong(showNum),headPath,author);
+					articleService.add(article);
+					print(article.getId());
+				}
+			}
 		}
 	}
 	
