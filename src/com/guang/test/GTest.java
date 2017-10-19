@@ -9,10 +9,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +31,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.tuckey.web.filters.urlrewrite.utils.URLDecoder;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -50,11 +54,11 @@ public class GTest {
 		
 //		GTools.tozipPic("/Users/guang/Downloads/admin_update_files/112.jpg", 
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
+	
 		
-		
-		GAutoTool.test("http://www.jianshu.com/p/a6e580dc90d4");
-		
-			
+		GAutoTool.test("http://www.swmt.cc/xgmn/4097020171018.html");
+//		List<String> list = GAutoTool.getMMList();
+//		System.out.println(list.toString());
 	}
 	
 	

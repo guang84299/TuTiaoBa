@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import javax.mail.Authenticator;
@@ -296,4 +298,19 @@ public class GTools {
 			vals.add(val);
 		return vals;
     }
+    
+    
+    public static String encode(String url)  
+	 {  
+	     try {  
+	          Matcher matcher = Pattern.compile("[\\u4e00-\\u9fa5]").matcher(url);  
+	          while (matcher.find()) {  
+	            String tmp=matcher.group();  
+	            url=url.replaceAll(tmp,java.net.URLEncoder.encode(tmp,"utf-8"));  
+	          }  
+	     } catch (UnsupportedEncodingException e) {  
+	         e.printStackTrace();  
+	     }  
+	     return url;  
+	 }  
 }

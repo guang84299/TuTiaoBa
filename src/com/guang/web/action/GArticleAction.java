@@ -698,6 +698,12 @@ public class GArticleAction extends ActionSupport{
 					GTag gtag = tagService.find(tag);
 					if(gtag != null)
 						tagId = gtag.getId();
+					else
+					{
+						tagService.add(new GTag(tag));
+						gtag = tagService.find(tag);
+						tagId = gtag.getId();
+					}
 					GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
 							Long.parseLong(showNum),headPath,author);
 					articleService.add(article);

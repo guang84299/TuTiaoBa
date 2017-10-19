@@ -345,6 +345,11 @@ $(document).ready(function() {
        	var dtype = $("#auto-caiji-type").val();
        	if(durl == null || durl == '' || !durl)
        		return;
+       		
+       	if(durl.indexOf("jokeji") != -1)
+       		dchannel = 'jokeji';
+       	else if(durl.indexOf("www.swmt.cc") != -1)
+       		dchannel = 'swmt';
        	
        	$("#auto-caiji").attr("disabled","disabled");
        	$("#auto-caiji").val("信息采集中...");
