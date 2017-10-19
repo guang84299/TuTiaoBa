@@ -150,6 +150,7 @@ public class GAutoTool {
 								String topic_relpath = ServletActionContext.getServletContext().getRealPath(toPicPath);
 								GTools.tozipPic(pic_relpath, topic_relpath, false);
 								e.attr("src",toPicPath);
+								e.attr("data-original-src",toPicPath);
 								
 								//设置头像
 								if(i == 0)

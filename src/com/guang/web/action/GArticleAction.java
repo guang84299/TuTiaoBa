@@ -86,7 +86,7 @@ public class GArticleAction extends ActionSupport{
 			article.setTag(tagService.find(article.getTagId()));
 		}
 		//热点推荐
-		List<GArticle>  articlehots = articleService.findByHot(1, 0, 6).getList();
+		List<GArticle>  articlehots = articleService.findByHot(1, 0, 12).getList();
 		for(GArticle article : articlehots)
 		{
 			article.setTag(tagService.find(article.getTagId()));
@@ -121,7 +121,7 @@ public class GArticleAction extends ActionSupport{
 			article.setTag(tagService.find(article.getTagId()));
 		}
 		//热点推荐
-		List<GArticle>  articlehots = articleService.findByHot(2, 0, 6).getList();
+		List<GArticle>  articlehots = articleService.findByHot(2, 0, 12).getList();
 		for(GArticle article : articlehots)
 		{
 			article.setTag(tagService.find(article.getTagId()));
@@ -156,7 +156,7 @@ public class GArticleAction extends ActionSupport{
 			article.setTag(tagService.find(article.getTagId()));
 		}
 		//热点推荐
-		List<GArticle>  articlehots = articleService.findByHot(3, 0, 6).getList();
+		List<GArticle>  articlehots = articleService.findByHot(3, 0, 12).getList();
 		for(GArticle article : articlehots)
 		{
 			article.setTag(tagService.find(article.getTagId()));
@@ -205,7 +205,7 @@ public class GArticleAction extends ActionSupport{
 			article.setTag(tagService.find(article.getTagId()));
 		}
 		//热点推荐
-		List<GArticle>  articlehots = articleService.findByHot(tagId, 0, 6).getList();
+		List<GArticle>  articlehots = articleService.findByHot(tagId, 0, 12).getList();
 		for(GArticle article : articlehots)
 		{
 			article.setTag(tagService.find(article.getTagId()));
@@ -434,7 +434,7 @@ public class GArticleAction extends ActionSupport{
 			article.setTag(tagService.find(article.getTagId()));
 		}
 		//热点推荐
-		List<GArticle>  articlehots = articleService.findByHot(1, 0, 6).getList();
+		List<GArticle>  articlehots = articleService.findByHot(1, 0, 12).getList();
 		for(GArticle article : articlehots)
 		{
 			article.setTag(tagService.find(article.getTagId()));
