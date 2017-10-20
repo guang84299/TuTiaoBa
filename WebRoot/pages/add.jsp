@@ -348,8 +348,8 @@ $(document).ready(function() {
        		
        	if(durl.indexOf("jokeji") != -1)
        		dchannel = 'jokeji';
-       	else if(durl.indexOf("www.swmt.cc") != -1)
-       		dchannel = 'swmt';
+       	else if(durl.indexOf("www.mmonly.cc") != -1) 
+       		dchannel = 'mmonly';
        	
        	$("#auto-caiji").attr("disabled","disabled");
        	$("#auto-caiji").val("信息采集中...");

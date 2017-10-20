@@ -56,7 +56,7 @@ public class GTest {
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
 	
 		
-		GAutoTool.test("http://www.swmt.cc/xgmn/4097020171018.html");
+		GAutoTool.test("http://www.jianshu.com/p/8d4396ce231f");
 //		List<String> list = GAutoTool.getMMList();
 //		System.out.println(list.toString());
 	}
