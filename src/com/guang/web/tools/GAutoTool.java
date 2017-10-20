@@ -55,6 +55,44 @@ public class GAutoTool {
 		return obj;
 	}
 	
+	public static void autoAdd(String type)
+	{
+		//技术
+		if("1".equals(type))
+		{
+			List<String> list = getJiShuList();
+			for(String url : list)
+			{
+				url = GTools.encode(url);
+				JSONObject obj = autoJianShu(url,1+"");
+				autoAddArticle(obj);
+			}
+		}
+		//段子
+		else if("2".equals(type))
+		{
+			List<String> list = getDuanziList();
+			for(String url : list)
+			{
+				url = GTools.encode(url);
+				JSONObject obj = autoJokeji(url,2+"");
+				autoAddArticle(obj);
+			}
+		}
+		//MM
+		else if("3".equals(type))
+		{
+			List<String> list = getMMList();
+			for(String url : list)
+			{
+				url = GTools.encode(url);
+				JSONObject obj = autoMmonly(url,3+"");
+				autoAddArticle(obj);
+			}
+		}
+		
+	}
+	
 	public static void test(String url)
 	{
 		Document document = null;
@@ -204,7 +242,7 @@ public class GAutoTool {
 					 header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8").
 					 timeout(50000).get();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			String nowTime = formatter.format(new Date().getTime()-0*24*60*60*1000);
+			String nowTime = formatter.format(new Date().getTime()-1*24*60*60*1000);
 			Elements elements = document.select("ul.note-list");
 			if(elements.size()>0)
 			{

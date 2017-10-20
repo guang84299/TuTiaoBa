@@ -677,41 +677,51 @@ public class GArticleAction extends ActionSupport{
 		
 		if(url != null && dtype != null && channel != null)
 		{
-			JSONObject obj = GAutoTool.autoAdd(url, dtype, channel);
-			if(obj != null)
+			if(url.equals("auto"))
 			{
-				String type = obj.getString("type");
-				String title = obj.getString("title");
-				String content = obj.getString("content");
-				String summary = obj.getString("summary");
-				String tag = obj.getString("tag");
-				String keywords = obj.getString("keywords");
-				String showNum = obj.getString("showNum");
-				String author = obj.getString("author");
-				String headPath = null;
-				if(obj.containsKey("headPath"))
-					headPath = obj.getString("headPath");
-				
-				if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
+				GAutoTool.autoAdd(dtype);
+			}
+			else
+			{
+				JSONObject obj = GAutoTool.autoAdd(url, dtype, channel);
+				if(obj != null)
 				{
-					long tagId = 0;
-					GTag gtag = tagService.find(tag);
-					if(gtag != null)
-						tagId = gtag.getId();
-					else
+					String type = obj.getString("type");
+					String title = obj.getString("title");
+					String content = obj.getString("content");
+					String summary = obj.getString("summary");
+					String tag = obj.getString("tag");
+					String keywords = obj.getString("keywords");
+					String showNum = obj.getString("showNum");
+					String author = obj.getString("author");
+					String headPath = null;
+					if(obj.containsKey("headPath"))
+						headPath = obj.getString("headPath");
+					
+					if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
 					{
-						tagService.add(new GTag(tag));
-						gtag = tagService.find(tag);
-						tagId = gtag.getId();
+						long tagId = 0;
+						GTag gtag = tagService.find(tag);
+						if(gtag != null)
+							tagId = gtag.getId();
+						else
+						{
+							tagService.add(new GTag(tag));
+							gtag = tagService.find(tag);
+							tagId = gtag.getId();
+						}
+						GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
+								Long.parseLong(showNum),headPath,author);
+						articleService.add(article);
+						print(article.getId());
 					}
-					GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
-							Long.parseLong(showNum),headPath,author);
-					articleService.add(article);
-					print(article.getId());
 				}
 			}
+			
 		}
+		
 	}
+	
 	
 	public void upload()
 	{

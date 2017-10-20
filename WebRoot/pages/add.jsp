@@ -205,6 +205,7 @@ $(document).ready(function() {
   	var summary = code.text();
   	if(summary.length > 150)
   		summary = summary.substr(0,150);
+  	summary = summary.replace(/<[^>]+>/g,"").replace(/\s/g,"");
   	
     var articles = {};
     articles.type = $("[name='type']").val();
