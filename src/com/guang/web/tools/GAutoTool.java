@@ -191,37 +191,40 @@ public class GAutoTool {
 	{		
 		if(obj != null)
 		{
-			GArticleService articleService = BeanUtils.getBean("GArticleServiceImpl");
-			GTagService tagService = BeanUtils.getBean("GTagServiceImpl");
-			
-			String type = obj.getString("type");
-			String title = obj.getString("title");
-			String content = obj.getString("content");
-			String summary = obj.getString("summary");
-			String tag = obj.getString("tag");
-			String keywords = obj.getString("keywords");
-			String showNum = obj.getString("showNum");
-			String author = obj.getString("author");
-			String headPath = null;
-			if(obj.containsKey("headPath"))
-				headPath = obj.getString("headPath");
-			
-			if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
-			{
-				long tagId = 0;
-				GTag gtag = tagService.find(tag);
-				if(gtag != null)
-					tagId = gtag.getId();
-				else
+			try {
+				GArticleService articleService = BeanUtils.getBean("GArticleServiceImpl");
+				GTagService tagService = BeanUtils.getBean("GTagServiceImpl");
+				
+				String type = obj.getString("type");
+				String title = obj.getString("title");
+				String content = obj.getString("content");
+				String summary = obj.getString("summary");
+				String tag = obj.getString("tag");
+				String keywords = obj.getString("keywords");
+				String showNum = obj.getString("showNum");
+				String author = obj.getString("author");
+				String headPath = null;
+				if(obj.containsKey("headPath"))
+					headPath = obj.getString("headPath");
+				
+				if(!StringTools.isEmpty(title) && !StringTools.isEmpty(type))
 				{
-					tagService.add(new GTag(tag));
-					gtag = tagService.find(tag);
-					tagId = gtag.getId();
+					long tagId = 0;
+					GTag gtag = tagService.find(tag);
+					if(gtag != null)
+						tagId = gtag.getId();
+					else
+					{
+						tagService.add(new GTag(tag));
+						gtag = tagService.find(tag);
+						tagId = gtag.getId();
+					}
+					GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
+							Long.parseLong(showNum),headPath,author);
+					article.setGrelease(true);
+					articleService.add(article);
 				}
-				GArticle article = new GArticle(Integer.parseInt(type),title,content,summary,tagId,keywords,
-						Long.parseLong(showNum),headPath,author);
-				article.setGrelease(true);
-				articleService.add(article);
+			} catch (Exception e) {
 			}
 		}
 	}
@@ -275,6 +278,9 @@ public class GAutoTool {
 			}
 
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 //        Collections.reverse(list); 
@@ -331,6 +337,9 @@ public class GAutoTool {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return list;
 	}
@@ -375,6 +384,9 @@ public class GAutoTool {
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -523,6 +535,10 @@ public class GAutoTool {
 			e.printStackTrace();
 			obj = null;
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+			obj = null;
+		}
 		
 		return obj;
 	}
@@ -638,7 +654,10 @@ public class GAutoTool {
 			e.printStackTrace();
 			obj = null;
 		}
-		
+		catch (Exception e) {
+			e.printStackTrace();
+			obj = null;
+		}
 		return obj;
 	}
 	
@@ -778,7 +797,10 @@ public class GAutoTool {
 			e.printStackTrace();
 			obj = null;
 		}
-		
+		catch (Exception e) {
+			e.printStackTrace();
+			obj = null;
+		}
 		return obj;
 	}
 	
@@ -899,6 +921,10 @@ public class GAutoTool {
 			}
 			
 		} catch (IOException e) {
+			e.printStackTrace();
+			obj = null;
+		}
+	     catch (Exception e) {
 			e.printStackTrace();
 			obj = null;
 		}
