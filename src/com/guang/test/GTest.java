@@ -57,7 +57,7 @@ public class GTest {
 	
 		
 		GAutoTool.test("http://www.jianshu.com/p/8d4396ce231f");
-//		List<String> list = GAutoTool.getMMList();
+//		List<String> list = GAutoTool.getJiShuList();
 //		System.out.println(list.toString());
 	}
 	

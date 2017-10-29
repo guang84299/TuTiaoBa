@@ -13,9 +13,9 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-  <title>程序员网_程序员技术_程序员段子_程序员图片</title>
-  <meta name="keywords" content="程序员网,程序员段子,程序员技术,程序员图片,春光博客">
-  <meta name="description" content="《程序员网》分享开发中技术难题，提供程序员段子和程序员图片。">
+  <title>程序员_技术_段子_美女</title>
+  <meta name="keywords" content="程序员,段子,技术,美女">
+  <meta name="description" content="《程序员网》程序员每天必看的网站，段子，技术，美女，有你想要。">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>

@@ -14,8 +14,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <title>【程序员网】${article.title }</title>
-  <meta name="keywords" content="${article.keywords },程序员网,程序员段子,程序员技术,程序员图片,春光博客">
-  <meta name="description" content="${article.summary }_程序员段子_程序员技术_程序员图片">
+  <meta name="keywords" content="${article.keywords },程序员,段子,技术,美女">
+  <meta name="description" content="${article.summary }_段子_技术_美女">
   <link rel="icon" type="image/png" href="<%=basePath%>favicon.png" sizes="48x48" />
   <link rel="bookmark" type="image/x-icon" href="<%=basePath%>favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>favicon.ico"/>
