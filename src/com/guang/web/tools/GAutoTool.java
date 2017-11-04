@@ -468,6 +468,7 @@ public class GAutoTool {
 					Document docimg = Jsoup.connect(iurl).timeout(50000).get();
 					Element elp = docimg.select("div#big-pic").get(0).select("p").get(0);
 					imgs.add(elp);
+					Thread.sleep(100);
 				}
 				elements.get(0).html("");
 				elements.get(0).html(imgs.toString());
