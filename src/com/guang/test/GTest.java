@@ -56,9 +56,11 @@ public class GTest {
 //				"/Users/guang/Downloads/admin_update_files/1121.jpg",false);
 	
 		
-		GAutoTool.test("http://www.jianshu.com/p/8d4396ce231f");
+//		GAutoTool.test("http://www.jianshu.com/p/8d4396ce231f");
 //		List<String> list = GAutoTool.getJiShuList();
 //		System.out.println(list.toString());
+		GAutoTool.downloadPic("http://t1.mmonly.cc/uploads/tu/201711/9999/99c9d4f6fb.jpg", "/Users/guang/Downloads/a.jpg");
+		System.out.println("ok");
 	}
 	
 	

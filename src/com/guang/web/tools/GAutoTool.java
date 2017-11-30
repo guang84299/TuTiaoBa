@@ -993,6 +993,8 @@ public class GAutoTool {
 		    con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
 		    if(urlString.contains("gaoxiao.jokeji.cn"))
 		    	con.setRequestProperty("Referer","http://gaoxiao.jokeji.cn/"); 
+		    else if(urlString.contains("mmonly"))
+		    	con.setRequestProperty("Referer","http://www.mmonly.cc");
 		    // 输入流
 		    is = con.getInputStream();
 		    // 1K的数据缓冲
