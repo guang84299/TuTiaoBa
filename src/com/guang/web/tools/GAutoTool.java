@@ -863,6 +863,15 @@ public class GAutoTool {
 			if(elements != null && elements.size()>0)
 			{
 				Element ele = elements.get(0);
+				//找到所有带 image-container-fill 标签，并去掉style
+				Elements divs = ele.select("div.image-container-fill");
+				if(divs != null && divs.size()>0)
+				{
+					for(Element e : divs)
+					{
+						e.attr("style","");
+					}
+				}
 				//找到所有img标签
 				Elements imgs = ele.select("img");
 				if(imgs != null && imgs.size()>0)
@@ -876,7 +885,11 @@ public class GAutoTool {
 				  		e.removeClass("img-responsive");
 				  		e.addClass("img-responsive");
 				  		
-						String imgsrc = e.attr("src");
+						String imgsrc = e.attr("data-original-src");
+						if(imgsrc == null)
+						{
+							imgsrc = e.attr("src");
+						}
 						if(imgsrc != null)
 						{
 							if(imgsrc.startsWith("//"))

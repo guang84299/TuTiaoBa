@@ -59,7 +59,7 @@ public class GTest {
 //		GAutoTool.test("http://www.jianshu.com/p/8d4396ce231f");
 //		List<String> list = GAutoTool.getJiShuList();
 //		System.out.println(list.toString());
-		GAutoTool.downloadPic("http://t1.mmonly.cc/uploads/tu/201711/9999/99c9d4f6fb.jpg", "/Users/guang/Downloads/a.jpg");
+		GAutoTool.downloadPic("http://upload-images.jianshu.io/upload_images/1898394-e8ce7bccc9bad57c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700", "/Users/guang/Downloads/a.jpg");
 		System.out.println("ok");
 	}
 	
